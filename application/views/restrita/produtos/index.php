@@ -52,7 +52,7 @@
                             <th>Código</th>
                             <th>Nome do Produto</th>
                             <th>Marca</th>
-							<th>Categoria</th>
+							<th>Subcategoria</th>
 							<th>Valor</th> 
                             <th>Ativa</th> 							
                             <th class="nosort">Ação</th>

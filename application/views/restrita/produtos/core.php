@@ -56,7 +56,7 @@
 					  </div> 
 					  
 					  <div class="form-group col-md-3">
-							<label>Categoria</label>
+							<label>Subcategoria</label>
 							<select name="produto_categoria_id" class="form-control">
 							<option value="">Escolha...</option>
 							<?php foreach($categorias as $categoria): ?>
