@@ -1,19 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+	defined('BASEPATH') OR exit('Ação não permitida');
 
-class Subcat_model extends CI_Model{
-
-     public function get_categorias_filha($categoria_pai_id = NULL)
-    {
-        $this->db->select([
-            'categorias.*',
-            'categoria_id.categoria_pai_id',
-
-        ]);
-
-        $this->db->where('categorias.categoria_pai_id', $categoria_pai_id);
-
-        $this->db->where('categorias.categoria_ativa', 1);          
-
-        return $this->db->get('categorias')->result();
-    }
+	class Subcat_model extends CI_Model {
+		
+		public function get_all() {
+			$this->db->select([
+				'categorias.categoria_id',
+				'categorias.categoria_nome',
+				'categorias.categoria_ativa',	
+				'categorias.categoria_meta_link',	
+				'categorias.categoria_data_criacao',
+				'categorias_pai.categoria_pai_id',
+				'categorias_pai.categoria_pai_nome',						
+			]);
+			
+			$this->db->join('categorias_pai', 'categorias.categoria_pai_id = categorias_pai.categoria_pai_id', 'LEFT');			
+			
+			return $this->db->get('categorias')->result();
+		}		
+	}	
