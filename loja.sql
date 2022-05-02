@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 01-Maio-2022 às 01:06
+-- Generation Time: 02-Maio-2022 às 02:17
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.0.33
 
@@ -179,7 +179,14 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(1, '127.0.0.1', 'admin@admin.com', 1651429166);
 
 -- --------------------------------------------------------
 
@@ -239,6 +246,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `produto_id` int(11) NOT NULL AUTO_INCREMENT,
   `produto_codigo` varchar(45) DEFAULT NULL,
   `produto_data_cadastro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `produto_categoria_pai_id` int(11) DEFAULT NULL,
   `produto_categoria_id` int(11) DEFAULT NULL,
   `produto_marca_id` int(11) DEFAULT NULL,
   `produto_nome` varchar(255) DEFAULT NULL,
@@ -256,15 +264,16 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `produto_data_alteracao` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`produto_id`),
   KEY `produto_categoria_id` (`produto_categoria_id`),
-  KEY `produto_marca_id` (`produto_marca_id`)
+  KEY `produto_marca_id` (`produto_marca_id`),
+  KEY `produto_categoria_pai_id` (`produto_categoria_pai_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produtos`
 --
 
-INSERT INTO `produtos` (`produto_id`, `produto_codigo`, `produto_data_cadastro`, `produto_categoria_id`, `produto_marca_id`, `produto_nome`, `produto_meta_link`, `produto_peso`, `produto_altura`, `produto_largura`, `produto_comprimento`, `produto_valor`, `produto_destaque`, `produto_controlar_estoque`, `produto_quantidade_estoque`, `produto_ativo`, `produto_descricao`, `produto_data_alteracao`) VALUES
-(1, '19650278', '2022-05-01 00:49:20', 29, 2, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', 'smartphone-motorola-moto-g-3ª-geracao-edicao-especial-cabernet-dual-chip-desbloqueado-android-51-tela-hd-5', 1, 20, 10, 11, '1500', 1, 1, 5, 1, 'Smartphone para o que der e vier:\r\nPrepare-se para as surpresas maravilhosas que o novo Moto G 3ª Geração apresenta para você: ele está redesenhado, melhorado e mais completo!\r\nCom uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.\r\nQuer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da Motorola!\r\nÀ prova de preocupações: o Novo Moto G não te deixa na mão:\r\nA gente sabe que a água é o pior inimigo do seu smartphone. Por isso, a proteção com certificação IPX7¹ mantém seu aparelho seguro contra respingos e quedas acidentais na água.\r\nDuas câmeras:\r\nTire fotos excepcionais: o flash LED duplo e a tecnologia CCT (Correlated Color Temperature) ajustam automaticamente a intensidade do flash, mesmo com pouca luz. Além disso, com uma câmera frontal de 5 MP, você sempre vai sair bem ao tirar uma selfie ou conversar em uma chamada de vídeo.\r\nCâmera instantânea:\r\nNão perca um só momento: inicie a câmera com dois giros do pulso. Toque em qualquer lugar da tela para tirar uma foto, fazer panorâmicas ou gravar um vídeo. Em seguida, compartilhe as melhores com apenas três toques. Veja suas fotos ganharem vida em detalhes deslumbrantes na tela HD de 5 polegadas.', NULL);
+INSERT INTO `produtos` (`produto_id`, `produto_codigo`, `produto_data_cadastro`, `produto_categoria_pai_id`, `produto_categoria_id`, `produto_marca_id`, `produto_nome`, `produto_meta_link`, `produto_peso`, `produto_altura`, `produto_largura`, `produto_comprimento`, `produto_valor`, `produto_destaque`, `produto_controlar_estoque`, `produto_quantidade_estoque`, `produto_ativo`, `produto_descricao`, `produto_data_alteracao`) VALUES
+(1, '19650278', '2022-05-01 00:49:20', 6, 29, 2, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', 'smartphone-motorola-moto-g-3ª-geracao-edicao-especial-cabernet-dual-chip-desbloqueado-android-51-tela-hd-5', 1, 20, 10, 11, '1500', 1, 1, 5, 1, 'Smartphone para o que der e vier:\r\nPrepare-se para as surpresas maravilhosas que o novo Moto G 3ª Geração apresenta para você: ele está redesenhado, melhorado e mais completo!\r\nCom uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.\r\nQuer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da Motorola!\r\nÀ prova de preocupações: o Novo Moto G não te deixa na mão:\r\nA gente sabe que a água é o pior inimigo do seu smartphone. Por isso, a proteção com certificação IPX7¹ mantém seu aparelho seguro contra respingos e quedas acidentais na água.\r\nDuas câmeras:\r\nTire fotos excepcionais: o flash LED duplo e a tecnologia CCT (Correlated Color Temperature) ajustam automaticamente a intensidade do flash, mesmo com pouca luz. Além disso, com uma câmera frontal de 5 MP, você sempre vai sair bem ao tirar uma selfie ou conversar em uma chamada de vídeo.\r\nCâmera instantânea:\r\nNão perca um só momento: inicie a câmera com dois giros do pulso. Toque em qualquer lugar da tela para tirar uma foto, fazer panorâmicas ou gravar um vídeo. Em seguida, compartilhe as melhores com apenas três toques. Veja suas fotos ganharem vida em detalhes deslumbrantes na tela HD de 5 polegadas.', NULL);
 
 -- --------------------------------------------------------
 
@@ -365,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `cliente_user_id`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2y$12$68J1neG25LgjkJl.yf5YT.hG1OuQ0GQV71SqsoqJLHRrpOjRqKvHC', 'admin@admin.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1651092268, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1651364798, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
+(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1651442918, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
 (9, '', 'fulanodetal', '$2y$10$xrj6p/LQUnIvzZ0SxbmU4euDHjN4a73EEU3kTwfsUS2hGLHC/kY92', 'fulano@fulano.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, NULL, 1, 'Fulano', 'de Tal', NULL, NULL),
 (10, '127.0.0.1', 'cicranodetal', '$2y$10$X.7BF9FNaLxGBiByutXMruQhA4yinC9Om/SdGXSdtPTpR9k2CebAi', 'cicrano@cicrano.com', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651196948, NULL, 1, 'Cicrano', 'de Tal', NULL, '(00) 00000-0000');
 
