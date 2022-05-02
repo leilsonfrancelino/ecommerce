@@ -52,6 +52,7 @@
                             <th>Código</th>
                             <th>Nome do Produto</th>
                             <th>Marca</th>
+							<th>Categoria</th>
 							<th>Subcategoria</th>
 							<th>Valor</th> 
                             <th>Ativa</th> 							
@@ -64,6 +65,7 @@
 								 <td><?php echo $produto->produto_codigo; ?></td>
 								 <td><?php echo $produto->produto_nome; ?></td>	
 								 <td><?php echo $produto->marca_nome; ?></td>
+								 <td><?php echo $produto->categoria_pai_nome; ?></td>
 								 <td><?php echo $produto->categoria_nome; ?></td>
 								 <td><?php echo 'R$&nbsp'.number_format($produto->produto_valor, 2, ',', '.'); ?></td>
 								 <td><?php echo ($produto->produto_ativo == 1 ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'); ?></td>                           
