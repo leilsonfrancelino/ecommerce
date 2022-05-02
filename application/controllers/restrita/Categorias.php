@@ -26,7 +26,7 @@ class Categorias extends CI_Controller {
 				'bundles/jquery-ui/jquery-ui.min.js',
 				'js/page/datatables.js',
 			),
-			'categorias' => $this->core_model->get_all('categorias'),
+			'categorias' => $this->subcat_model->get_all(),
 		);
 		
 	
