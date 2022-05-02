@@ -50,9 +50,10 @@
                         <thead>
                           <tr>
                             <th class="text-center">#</th>
-                            <th>Nome da Subcategoria</th>							
+                            <th>Nome da Subcategoria</th>
+		            <th>Categoria</th>
                             <th>Meta link da Subcategoria</th>
-							<th>Data de Cadastro</th>
+			    <th>Data de Cadastro</th>
                             <th>Ativa</th> 							
                             <th class="nosort">Ação</th>
                           </tr>
@@ -61,7 +62,8 @@
 							<?php foreach ($categorias as $categoria): ?>
                           <tr>						
 								 <td><?php echo $categoria->categoria_id; ?></td>
-								 <td><?php echo $categoria->categoria_nome; ?></td>								 
+								 <td><?php echo $categoria->categoria_nome; ?></td>	
+				  				 <td><?php echo $categoria->categoria_pai_nome; ?></td>
 								 <td><?php echo $categoria->categoria_meta_link; ?></td>	
 								 <td><?php echo formata_data_banco_sem_hora($categoria->categoria_data_criacao); ?></td>								 
 								 <td><?php echo ($categoria->categoria_ativa == 1 ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'); ?></td>                           
