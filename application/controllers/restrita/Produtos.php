@@ -40,7 +40,8 @@ class Produtos extends CI_Controller {
 		if(!$produto_id) {
 			//cadastrando
 				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[240]|callback_valida_nome_produto');
-				$this->form_validation->set_rules('produto_categoria_id', 'Categoria do Produto', 'trim|required');
+				$this->form_validation->set_rules('produto_categoria_pai_id', 'Categoria do Produto', 'trim|required');				
+				$this->form_validation->set_rules('produto_categoria_id', 'Subcategoria do Produto', 'trim|required');
 				$this->form_validation->set_rules('produto_marca_id', 'Marca do Produto', 'trim|required');       			
        			$this->form_validation->set_rules('produto_valor', 'Valor de venda do produto', 'trim|required');       			
        			$this->form_validation->set_rules('produto_peso', 'Peso do Produto', 'trim|required|integer');       			
@@ -60,7 +61,8 @@ class Produtos extends CI_Controller {
 					$data = elements(
        					array(
        						'produto_nome',
-       						'produto_categoria_id',
+							'produto_categoria_pai_id',
+       						'produto_categoria_id',							
        						'produto_marca_id',
        						'produto_valor',
        						'produto_peso',
@@ -130,6 +132,7 @@ class Produtos extends CI_Controller {
 			
 						'codigo_gerado' => $this->core_model->generate_unique_code('produtos', 'numeric', 8, 'produto_codigo'),
 						'categorias' =>  $this->core_model->get_all('categorias', array('categoria_ativa' => 1)),// get a
+						'master' =>  $this->core_model->get_all('categorias_pai', array('categoria_pai_ativa' => 1)),// get a
 						'marcas' =>  $this->core_model->get_all('marcas', array('marca_ativa' => 1)),// get a
 					);
 			 					 
@@ -145,7 +148,8 @@ class Produtos extends CI_Controller {
 			}else{
 				//editando
 				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[40]|callback_valida_nome_produto');
-				$this->form_validation->set_rules('produto_categoria_id', 'Categoria do Produto', 'trim|required');
+				$this->form_validation->set_rules('produto_categoria_pai_id', 'Categoria do Produto', 'trim|required');					
+				$this->form_validation->set_rules('produto_categoria_id', 'Subcategoria do Produto', 'trim|required');
 				$this->form_validation->set_rules('produto_marca_id', 'Marca do Produto', 'trim|required');       			
        			$this->form_validation->set_rules('produto_valor', 'Valor de venda do produto', 'trim|required');       			
        			$this->form_validation->set_rules('produto_peso', 'Peso do Produto', 'trim|required|integer');       			
@@ -162,6 +166,7 @@ class Produtos extends CI_Controller {
 					$data = elements(
        					array(
        						'produto_nome',
+							'produto_categoria_pai_id',
        						'produto_categoria_id',
        						'produto_marca_id',
        						'produto_valor',
@@ -232,6 +237,7 @@ class Produtos extends CI_Controller {
 						'produto' => $produto,
 						'fotos_produto' => $this->core_model->get_all('produtos_fotos', array('foto_produto_id' => $produto_id)),
 						'categorias' => $this->core_model->get_all('categorias', array('categoria_ativa' => 1)),
+						'master' =>  $this->core_model->get_all('categorias_pai', array('categoria_pai_ativa' => 1)),// get a
 						'marcas' => $this->core_model->get_all('marcas', array('marca_ativa' => 1)),
 						'codigo_gerado' => $this->core_model->generate_unique_code('produtos', 'numeric', 8, 'produto_codigo'),
 					);
