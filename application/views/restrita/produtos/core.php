@@ -56,6 +56,24 @@
 					  </div> 
 					  
 					  <div class="form-group col-md-3">
+							<label>Categoria</label>
+							<select name="produto_categoria_pai_id" class="form-control">
+							<option value="">Escolha...</option>
+							<?php foreach($master as $pai): ?>
+							
+								<?php if(isset($produto)): ?>
+									  <option value="<?php echo $pai->categoria_pai_id; ?>" <?php echo ($pai->categoria_pai_id == $produto->produto_categoria_pai_id  ? 'selected' : '') ?>><?php echo $pai->categoria_pai_nome; ?></option>
+								
+								<?php else: ?>
+									  <option value="<?php echo $pai->categoria_pai_id; ?>"><?php echo $pai->categoria_pai_nome; ?></option>
+								
+								 <?php endif; ?>
+							<?php endforeach; ?>	 
+							</select>
+							<?php echo form_error('produto_categoria_pai_id', '<div class="text-danger">', '</div>'); ?>
+						  </div>
+					  
+					  <div class="form-group col-md-3">
 							<label>Subcategoria</label>
 							<select name="produto_categoria_id" class="form-control">
 							<option value="">Escolha...</option>
