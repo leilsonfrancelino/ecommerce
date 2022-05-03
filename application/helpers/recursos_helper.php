@@ -2,6 +2,15 @@
 
 defined('BASEPATH') or exit('Ação não permitida');
 
+//enviando informacoes do sistema para o header e o footer
+function info_header_footer() {
+	$CI = & get_instance();
+	
+	$sistema = $CI->core_model->get_by_id('sistema', array('sistema_id' => 1));
+	
+	return $sistema;
+}
+		
 
 function url_amigavel($string = NULL) {
     $string = remove_acentos($string);
