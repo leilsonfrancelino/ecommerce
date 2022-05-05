@@ -22,7 +22,14 @@
 			$this->db->join('categorias_pai', 'categorias_pai.categoria_pai_id = categorias.categoria_pai_id', 'LEFT');			
 		
 			return $this->db->get('produtos')->result();
-		}		
+		}	
+
+		function get_sub_category($category_id){
+		$query = $this->db->get_where('categorias', array('categoria_pai_id' => $category_id));
+		
+		return $query;
+	}
+		
 	}	
 	
 	

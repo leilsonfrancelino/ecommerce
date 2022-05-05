@@ -57,7 +57,7 @@
 					  
 					  <div class="form-group col-md-3">
 							<label>Categoria</label>
-							<select name="produto_categoria_pai_id" class="form-control">
+							<select name="produto_categoria_pai_id" id="produto_categoria_pai_id" class="form-control">
 							<option value="">Escolha...</option>
 							<?php foreach($master as $pai): ?>
 							
@@ -73,23 +73,14 @@
 							<?php echo form_error('produto_categoria_pai_id', '<div class="text-danger">', '</div>'); ?>
 						  </div>
 					  
-					  <div class="form-group col-md-3">
-							<label>Subcategoria</label>
-							<select name="produto_categoria_id" class="form-control">
-							<option value="">Escolha...</option>
-							<?php foreach($categorias as $categoria): ?>
+							<div class="form-group col-md-3">
+								<label>Subcategoria</label>								
+								<select class="form-control" id="sub_category" name="sub_category" required>
+								<option value="">Escolha antes uma categoria</option>
+
+								</select>
 							
-								<?php if(isset($produto)): ?>
-									  <option value="<?php echo $categoria->categoria_id; ?>" <?php echo ($categoria->categoria_id == $produto->produto_categoria_id  ? 'selected' : '') ?>><?php echo $categoria->categoria_nome; ?></option>
-								
-								<?php else: ?>
-									  <option value="<?php echo $categoria->categoria_id; ?>"><?php echo $categoria->categoria_nome; ?></option>
-								
-								 <?php endif; ?>
-							<?php endforeach; ?>	 
-							</select>
-							<?php echo form_error('produto_categoria_id', '<div class="text-danger">', '</div>'); ?>
-						  </div>
+							</div>
 						  
 						  <div class="form-group col-md-3">
 							<label>Marcas</label>
@@ -258,3 +249,33 @@
 		<?php $this->load->view('restrita/layout/sidebar_settings'); ?>       
       </div>
       
+		<script type="text/javascript" src="<?php echo base_url().'public/assets/js/jquery-3.3.1.js'?>"></script>
+		<script type="text/javascript" src="<?php echo base_url().'public/assets/js/bootstrap.js'?>"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+
+				$('#produto_categoria_pai_id').change(function(){ 
+					var id=$(this).val();
+					
+					$.ajax({
+						url : "<?php echo site_url('restrita/produtos/get_sub_category');?>",
+						method : "POST",
+						data : {id: id},
+						async : true,
+						dataType : 'json',
+						success: function(data){
+							console.log(data);
+							var html = '';
+							var i;
+							for(i=0; i<data.length; i++){
+								html += '<option value='+data[i].categoria_id+'>'+data[i].categoria_nome+'</option>';
+							}
+							$('#sub_category').html(html);
+
+						}
+					});
+					return false;
+				}); 
+				
+			});
+	</script>

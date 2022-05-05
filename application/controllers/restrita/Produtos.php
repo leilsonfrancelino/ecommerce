@@ -6,7 +6,7 @@ class Produtos extends CI_Controller {
 	
 	public function __construct() {
 		parent::__construct();			
-	
+		$this->load->model('Produtos_model','produtos_model');
 		if(!$this->ion_auth->logged_in()) {
 				redirect('restrita/login');
 		}
@@ -39,6 +39,8 @@ class Produtos extends CI_Controller {
 		
 		if(!$produto_id) {
 			//cadastrando
+			
+	
 				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[240]|callback_valida_nome_produto');
 				$this->form_validation->set_rules('produto_categoria_pai_id', 'Categoria do Produto', 'trim|required');				
 				$this->form_validation->set_rules('produto_categoria_id', 'Subcategoria do Produto', 'trim|required');
@@ -364,5 +366,12 @@ class Produtos extends CI_Controller {
 
 		redirect('restrita/produtos','refresh');
 
+	}
+	
+			function get_sub_category(){
+		$category_id = $this->input->post('id',TRUE);
+		$data = $this->produtos_model->get_sub_category($category_id)->result();
+		echo json_encode($data);
+		
 	}
 }
