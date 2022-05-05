@@ -247,35 +247,5 @@
           </div>
         </section>
 		<?php $this->load->view('restrita/layout/sidebar_settings'); ?>       
-      </div>
-      
-		<script type="text/javascript" src="<?php echo base_url().'public/assets/js/jquery-3.3.1.js'?>"></script>
-		<script type="text/javascript" src="<?php echo base_url().'public/assets/js/bootstrap.js'?>"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-
-				$('#produto_categoria_pai_id').change(function(){ 
-					var id=$(this).val();
-					
-					$.ajax({
-						url : "<?php echo site_url('restrita/produtos/get_sub_category');?>",
-						method : "POST",
-						data : {id: id},
-						async : true,
-						dataType : 'json',
-						success: function(data){
-							console.log(data);
-							var html = '';
-							var i;
-							for(i=0; i<data.length; i++){
-								html += '<option value='+data[i].categoria_id+'>'+data[i].categoria_nome+'</option>';
-							}
-							$('#sub_category').html(html);
-
-						}
-					});
-					return false;
-				}); 
-				
-			});
-	</script>
+      </div>      
+		
