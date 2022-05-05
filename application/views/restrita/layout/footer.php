@@ -44,11 +44,8 @@
   <!-- JS CKEditor -->
   <script type="text/javascript" src="<?php echo base_url().'public/ckeditor/ckeditor.js'?>"></script>
   <!-- adicionando editor no cadastro e edição de produtos -->	
-  <script>CKEDITOR.replace( 'produto_descricao' );</script>
-  
-	<!-- JS para os selects categoria e subcategoria -->	
-	<script type="text/javascript" src="<?php echo base_url().'public/assets/js/jquery-3.3.1.js'?>"></script>
-	<script type="text/javascript" src="<?php echo base_url().'public/assets/js/bootstrap.js'?>"></script>
+  <script>CKEDITOR.replace( 'produto_descricao' );</script>  
+	
 	<!-- JS para preencher select subcategoria de acordo com a escolha da categoria em cadastro de produto -->
 	<script type="text/javascript">
 		$(document).ready(function(){
