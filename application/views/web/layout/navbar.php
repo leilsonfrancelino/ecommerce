@@ -8,7 +8,8 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="header-top-left">
                                     <ul class="phone-wrap">
-                                        <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+										<?php $sistema = info_header_footer(); ?>
+                                        <li><span>Telefones:</span><?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?></li>
                                     </ul>
                                 </div>
                             </div>

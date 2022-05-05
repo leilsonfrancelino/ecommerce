@@ -82,14 +82,16 @@
                                         <li>
                                             <span>Endereço: </span>
                                             <?php echo 'CEP ' . $sistema->sistema_cep . ' ' . $sistema->sistema_endereco . ', ' . $sistema->sistema_numero;?>
+											<?php echo $sistema->sistema_cidade . ' - ' . $sistema->sistema_estado;?>
+                                       
+										</li>
+                                        <li>
+                                            <span>Telefones: </span>
+                                           <?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?>
                                         </li>
                                         <li>
-                                            <span>Phone: </span>
-                                            <a href="#">(+123) 123 321 345</a>
-                                        </li>
-                                        <li>
-                                            <span>Email: </span>
-                                            <a href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                            <span>E-mail: </span>
+                                            <a href="mailto://<?php echo $sistema->sistema_email;?>"><?php echo $sistema->sistema_email;?></a>
                                         </li>
                                     </ul>
                                 </div>
