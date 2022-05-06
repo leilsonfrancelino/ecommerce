@@ -187,7 +187,7 @@
 						 </fieldset>
 
 						  <fieldset class="custom-border">
-							  <legend class="custom-border">Descrição do Produto</legend>
+							  <legend class="custom-border">Descrição do Produto<span style="color: red">*</span></legend>
 						  <div class="form-row">
 							<div class="form-group col-md-12">								
 								<textarea name="produto_descricao" class="form-control" rows="10" style="min-height: 100px"><?php echo (isset($produto) ? $produto->produto_descricao : set_value('produto_descricao'));?></textarea>
@@ -196,7 +196,7 @@
 						  </div>
 						  </fieldset>
 						  <fieldset class="custom-border">
-							  <legend class="custom-border">Imagens do Produto</legend>
+							  <legend class="custom-border">Imagens do Produto<span style="color: red">*</span></legend>
 						  <div class="form-row">
 							<div class="form-group col-md-12">								
 								<div id="fileuploader">									
