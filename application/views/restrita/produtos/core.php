@@ -102,7 +102,7 @@
 
 							<div class="form-group col-md-3">
 								<label class="required">Subcategoria</label>								
-								<select class="form-control" id="sub_category" name="sub_category" required>
+								<select class="form-control" id="sub_category" name="sub_category" disabled>
 								<option value="">Escolha uma categoria...</option>
 							<?php foreach($categorias as $categoria): ?>
 

@@ -60,7 +60,7 @@
 					async : true,
 					dataType : 'json',
 					success: function(data){
-						console.log(data);
+						$('#sub_category').removeAttr('disabled');
 						var html = '';
 						var i;
 						for(i=0; i<data.length; i++){
