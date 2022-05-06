@@ -63,8 +63,8 @@ class Clientes extends CI_Controller {
 					$this->form_validation->set_rules('cliente_estado', 'Estado', 'trim|required|exact_length[2]');
 					$this->form_validation->set_rules('cliente_complemento', 'Complemento', 'trim|max_length[130]');
 
-					$this->form_validation->set_rules('password', 'Senha', 'trim|min_length[6]|max_length[200]');
-                    $this->form_validation->set_rules('confirma', 'Confirma', 'trim|matches[password]');
+					$this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[6]|max_length[200]');
+                    			$this->form_validation->set_rules('confirma', 'Confirma', 'trim|required|matches[password]');
 								
 					if($this->form_validation->run()) {
 						 //Validou
