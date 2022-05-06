@@ -70,7 +70,7 @@
 								 <td><?php echo 'R$&nbsp'.number_format($produto->produto_valor, 2, ',', '.'); ?></td>
 								 <td><?php echo ($produto->produto_ativo == 1 ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'); ?></td>                           
                           
-                            <td>
+                            <td style="display:flex">
 								<a href="<?php echo base_url('restrita/produtos/core/'.$produto->produto_id); ?>" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
 								<a href="<?php echo base_url('restrita/produtos/delete/'.$produto->produto_id); ?>" class="btn btn-icon btn-danger delete" data-confirm="Tem certeza da exclusão?"><i class="fas fa-times"></i></a>
 							</td>							
