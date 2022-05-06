@@ -76,9 +76,18 @@
 							<div class="form-group col-md-3">
 								<label>Subcategoria</label>								
 								<select class="form-control" id="sub_category" name="sub_category" required>
-								<option value="">Escolha antes uma categoria</option>
-
-								</select>
+								<option value="">Escolha uma categoria...</option>
+							<?php foreach($categorias as $categoria): ?>
+							
+								<?php if(isset($produto)): ?>
+									  <option value="<?php echo $categoria->categoria_id; ?>" <?php echo ($categoria->categoria_id == $produto->produto_categoria_id  ? 'selected' : '') ?>><?php echo $categoria->categoria_nome; ?></option>
+								
+								<?php else: ?>
+									  <option value="<?php echo $categoria->categoria_id; ?>"><?php echo $categoria->categoria_nome; ?></option>
+								
+								 <?php endif; ?>
+							<?php endforeach; ?>	 
+							</select>
 							
 							</div>
 						  
