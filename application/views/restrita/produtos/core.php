@@ -102,7 +102,11 @@
 
 							 <div class="form-group col-md-3">
 								<label class="required">Subcategoria</label>								
+								<?php if(isset($produto)) { ?>
+								<select class="form-control" id="produto_categoria_id" name="produto_categoria_id" readonly>
+								<?php }else{ ?>
 								<select class="form-control" id="produto_categoria_id" name="produto_categoria_id" disabled>
+								<?php } ?>
 								<option value="">Escolha uma categoria...</option>
 							<?php foreach($categorias as $categoria): ?>
 
