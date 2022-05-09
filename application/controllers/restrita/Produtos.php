@@ -39,7 +39,7 @@ class Produtos extends CI_Controller {
 		
 		if(!$produto_id) {
 			//cadastrando
-			
+				
 	
 				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[240]|callback_valida_nome_produto');
 				$this->form_validation->set_rules('produto_categoria_pai_id', 'Categoria do Produto', 'trim|required');				
@@ -51,7 +51,7 @@ class Produtos extends CI_Controller {
        			$this->form_validation->set_rules('produto_largura', 'Largura do Produto', 'trim|required|integer');       			
        			$this->form_validation->set_rules('produto_comprimento', 'Comprimento do Produto', 'trim|required|integer');       			
        			$this->form_validation->set_rules('produto_quantidade_estoque', 'Quantidade em Estoque', 'trim|required|integer');       			
-       			$this->form_validation->set_rules('produto_descricao', 'Descrição do Produto', 'trim|min_length[10]|max_length[5000]');	
+       			$this->form_validation->set_rules('produto_descricao', 'Descrição do Produto', 'trim|min_length[10]|max_length[15000]');	
 				
 				$fotos_produtos = $this->input->post('fotos_produtos');
        			if(!$fotos_produtos){
@@ -79,7 +79,7 @@ class Produtos extends CI_Controller {
        						'produto_descricao',
        					), $this->input->post()
        				);
-
+					
 					/* Remove virgula do valor */
        				$data['produto_valor'] = str_replace(',', '', $data['produto_valor']);
 
@@ -149,7 +149,7 @@ class Produtos extends CI_Controller {
 				redirect('restrita/produtos');
 			}else{
 				//editando
-				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[40]|callback_valida_nome_produto');
+				$this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[5]|max_length[240]|callback_valida_nome_produto');
 				$this->form_validation->set_rules('produto_categoria_pai_id', 'Categoria do Produto', 'trim|required');					
 				$this->form_validation->set_rules('produto_categoria_id', 'Subcategoria do Produto', 'trim|required');
 				$this->form_validation->set_rules('produto_marca_id', 'Marca do Produto', 'trim|required');       			
@@ -159,7 +159,7 @@ class Produtos extends CI_Controller {
        			$this->form_validation->set_rules('produto_largura', 'Largura do Produto', 'trim|required|integer');       			
        			$this->form_validation->set_rules('produto_comprimento', 'Comprimento do Produto', 'trim|required|integer');       			
        			$this->form_validation->set_rules('produto_quantidade_estoque', 'Quantidade em Estoque', 'trim|required|integer');       			
-       			$this->form_validation->set_rules('produto_descricao', 'Descrição do Produto', 'trim|min_length[10]|max_length[5000]');	
+       			$this->form_validation->set_rules('produto_descricao', 'Descrição do Produto', 'trim|min_length[10]|max_length[15000]');	
 				
 				
 				

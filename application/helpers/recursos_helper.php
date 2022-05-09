@@ -10,6 +10,37 @@ function info_header_footer() {
 	
 	return $sistema;
 }
+
+//grandes marcas para o navbar
+function grandes_marcas_navbar() {
+	$CI = & get_instance();
+	
+	$grandes_marcas = $CI->loja_model->get_grandes_marcas();
+	
+	return $grandes_marcas;
+}
+
+//Categorias pai navbar
+function categorias_pai_navbar(){
+    
+    $CI = & get_instance();
+    
+    $categorias_pai = $CI->loja_model->get_categorias_pai();
+    
+    return $categorias_pai;
+    
+}
+
+//Recupera as categorias filhas de acordo com a categoria_pai_id como parâmetro
+function categorias_filhas_navbar($categoria_pai_id = NULL){
+    
+    $CI = & get_instance();
+    
+    $categorias_filhas = $CI->loja_model->get_categorias_filhas($categoria_pai_id);
+    
+    return $categorias_filhas;
+    
+}
 		
 
 function url_amigavel($string = NULL) {

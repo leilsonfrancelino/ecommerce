@@ -60,13 +60,13 @@
 					async : true,
 					dataType : 'json',
 					success: function(data){
-						$('#sub_category').removeAttr('disabled');
+						$('#produto_categoria_id').removeAttr('disabled');
 						var html = '';
 						var i;
 						for(i=0; i<data.length; i++){
 							html += '<option value='+data[i].categoria_id+'>'+data[i].categoria_nome+'</option>';
 						}
-						$('#sub_category').html(html);
+						$('#produto_categoria_id').html(html);
 					}
 				});
 				return false;

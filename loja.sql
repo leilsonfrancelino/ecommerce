@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 02-Maio-2022 às 02:17
+-- Generation Time: 09-Maio-2022 às 02:07
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.0.33
 
@@ -179,14 +179,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(1, '127.0.0.1', 'admin@admin.com', 1651429166);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -255,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `produto_altura` int(11) DEFAULT '0',
   `produto_largura` int(11) DEFAULT '0',
   `produto_comprimento` int(11) DEFAULT '0',
-  `produto_valor` varchar(45) DEFAULT NULL,
+  `produto_valor` decimal(10,2) DEFAULT NULL,
   `produto_destaque` tinyint(1) DEFAULT NULL,
   `produto_controlar_estoque` tinyint(1) DEFAULT NULL,
   `produto_quantidade_estoque` int(11) DEFAULT '0',
@@ -266,14 +259,14 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   KEY `produto_categoria_id` (`produto_categoria_id`),
   KEY `produto_marca_id` (`produto_marca_id`),
   KEY `produto_categoria_pai_id` (`produto_categoria_pai_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produtos`
 --
 
 INSERT INTO `produtos` (`produto_id`, `produto_codigo`, `produto_data_cadastro`, `produto_categoria_pai_id`, `produto_categoria_id`, `produto_marca_id`, `produto_nome`, `produto_meta_link`, `produto_peso`, `produto_altura`, `produto_largura`, `produto_comprimento`, `produto_valor`, `produto_destaque`, `produto_controlar_estoque`, `produto_quantidade_estoque`, `produto_ativo`, `produto_descricao`, `produto_data_alteracao`) VALUES
-(1, '19650278', '2022-05-01 00:49:20', 6, 29, 2, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', 'smartphone-motorola-moto-g-3ª-geracao-edicao-especial-cabernet-dual-chip-desbloqueado-android-51-tela-hd-5', 1, 20, 10, 11, '1500', 1, 1, 5, 1, 'Smartphone para o que der e vier:\r\nPrepare-se para as surpresas maravilhosas que o novo Moto G 3ª Geração apresenta para você: ele está redesenhado, melhorado e mais completo!\r\nCom uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.\r\nQuer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da Motorola!\r\nÀ prova de preocupações: o Novo Moto G não te deixa na mão:\r\nA gente sabe que a água é o pior inimigo do seu smartphone. Por isso, a proteção com certificação IPX7¹ mantém seu aparelho seguro contra respingos e quedas acidentais na água.\r\nDuas câmeras:\r\nTire fotos excepcionais: o flash LED duplo e a tecnologia CCT (Correlated Color Temperature) ajustam automaticamente a intensidade do flash, mesmo com pouca luz. Além disso, com uma câmera frontal de 5 MP, você sempre vai sair bem ao tirar uma selfie ou conversar em uma chamada de vídeo.\r\nCâmera instantânea:\r\nNão perca um só momento: inicie a câmera com dois giros do pulso. Toque em qualquer lugar da tela para tirar uma foto, fazer panorâmicas ou gravar um vídeo. Em seguida, compartilhe as melhores com apenas três toques. Veja suas fotos ganharem vida em detalhes deslumbrantes na tela HD de 5 polegadas.', NULL);
+(3, '01452397', '2022-05-09 01:13:51', 6, 29, 1, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', '', 1, 15, 15, 15, '3500.00', 1, 1, 5, 1, '&lt;h1&gt;Smartphone para o que der e vier&lt;/h1&gt;\r\n\r\n&lt;p&gt;Prepare-se para as surpresas maravilhosas que o novo &lt;strong&gt;Moto G 3ª Geração&lt;/strong&gt; apresenta para você: ele está redesenhado, melhorado e mais completo!&lt;/p&gt;\r\n\r\n&lt;p&gt;Com uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.&lt;/p&gt;\r\n\r\n&lt;p&gt;Quer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da &lt;strong&gt;Motorola&lt;/strong&gt;!&lt;/p&gt;\r\n\r\n&lt;p&gt;Informações Técnicas&lt;/p&gt;\r\n\r\n&lt;table&gt;\r\n &lt;tbody&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Marca&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Cor&lt;/th&gt;\r\n   &lt;td&gt;Preto&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de Chip&lt;/th&gt;\r\n   &lt;td&gt;Micro Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Quantidade de Chips&lt;/th&gt;\r\n   &lt;td&gt;Dual Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Sistema Operacional&lt;/th&gt;\r\n   &lt;td&gt;Android&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Processador&lt;/th&gt;\r\n   &lt;td&gt;1.4GHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de tela&lt;/th&gt;\r\n   &lt;td&gt;LCD TFT&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tamanho do Display&lt;/th&gt;\r\n   &lt;td&gt;5&quot;&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Banda&lt;/th&gt;\r\n   &lt;td&gt;GSM 850; 900; 1800; 1900 MHz; WCDMA 850; 900; 1700; 1900; 2100 MHz; LTE 700 (B28); 1700 (B4); 2600 (B7) MHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conectividade&lt;/th&gt;\r\n   &lt;td&gt;4G&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;NFC&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Memória Interna&lt;/th&gt;\r\n   &lt;td&gt;16GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Câmera traseira&lt;/th&gt;\r\n   &lt;td&gt;13MP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Filmadora&lt;/th&gt;\r\n   &lt;td&gt;Full HD&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;TV&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Expansivo até&lt;/th&gt;\r\n   &lt;td&gt;MicroSD até 32GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Alimentação/Tipo de bateria&lt;/th&gt;\r\n   &lt;td&gt;2470 mAh&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conteúdo da Embalagem&lt;/th&gt;\r\n   &lt;td&gt;1 Aparelho Moto G 3ª Geração 16GB Preto com Capa Cabernet; 1 Carregador de parede; 1 Fone de ouvido estereo; 1 Kit de manuais; 1 Cabo para sincronismo; 1 Capa Traseira Preta&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Dimensões aproximadas do produto - cm (AxLxP)&lt;/th&gt;\r\n   &lt;td&gt;14,2x7,2x1,1cm&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Peso líq. aproximado do produto (kg)&lt;/th&gt;\r\n   &lt;td&gt;150 gramas&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Garantia do Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;12 meses&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Referência do modelo&lt;/th&gt;\r\n   &lt;td&gt;XT1543CBP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;SAC&lt;/th&gt;\r\n   &lt;td&gt;Grande SP: 11 4004 4000; Demais regiões: 0800 12 4421&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n &lt;/tbody&gt;\r\n&lt;/table&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;', NULL);
 
 -- --------------------------------------------------------
 
@@ -288,15 +281,14 @@ CREATE TABLE IF NOT EXISTS `produtos_fotos` (
   `foto_caminho` varchar(255) NOT NULL,
   PRIMARY KEY (`foto_id`),
   KEY `fk_foto_produto_id` (`foto_produto_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `produtos_fotos`
 --
 
 INSERT INTO `produtos_fotos` (`foto_id`, `foto_produto_id`, `foto_caminho`) VALUES
-(1, 1, '251e1ab028e315c8d633b9ab1b7446f4.jpg'),
-(2, 1, '03f3a7749a25ae210ac5f08ee7127d65.png');
+(11, 3, 'bf1e6c8c71defd67ea89463939e1fbdf.jpg');
 
 -- --------------------------------------------------------
 
@@ -374,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `cliente_user_id`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2y$12$68J1neG25LgjkJl.yf5YT.hG1OuQ0GQV71SqsoqJLHRrpOjRqKvHC', 'admin@admin.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1651092268, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1651442918, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
+(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1652055027, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
 (9, '', 'fulanodetal', '$2y$10$xrj6p/LQUnIvzZ0SxbmU4euDHjN4a73EEU3kTwfsUS2hGLHC/kY92', 'fulano@fulano.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, NULL, 1, 'Fulano', 'de Tal', NULL, NULL),
 (10, '127.0.0.1', 'cicranodetal', '$2y$10$X.7BF9FNaLxGBiByutXMruQhA4yinC9Om/SdGXSdtPTpR9k2CebAi', 'cicrano@cicrano.com', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651196948, NULL, 1, 'Cicrano', 'de Tal', NULL, '(00) 00000-0000');
 

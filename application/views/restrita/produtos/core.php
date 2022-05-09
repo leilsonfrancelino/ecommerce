@@ -59,7 +59,7 @@
 					  </div> 
 					  <div class="form-group col-md-2">
 								<label class="required">Valor</label>
-								<input type="text" name="produto_valor" class="form-control money" value="<?php echo (isset($produto) ? $produto->produto_valor : set_value('produto_valor')); ?>">
+								<input type="text" name="produto_valor" class="form-control money2" value="<?php echo (isset($produto) ? $produto->produto_valor : set_value('produto_valor')); ?>">
 								<?php echo form_error('produto_valor', '<div class="text-danger">', '</div>'); ?>
 							  </div>
 							  <div class="form-group col-md-2">
@@ -100,9 +100,9 @@
 							<?php echo form_error('produto_categoria_pai_id', '<div class="text-danger">', '</div>'); ?>
 						  </div>
 
-							<div class="form-group col-md-3">
+							 <div class="form-group col-md-3">
 								<label class="required">Subcategoria</label>								
-								<select class="form-control" id="sub_category" name="sub_category" disabled>
+								<select class="form-control" id="produto_categoria_id" name="produto_categoria_id" disabled>
 								<option value="">Escolha uma categoria...</option>
 							<?php foreach($categorias as $categoria): ?>
 
@@ -114,8 +114,10 @@
 
 								 <?php endif; ?>
 							<?php endforeach; ?>	 
-							</select>							
-							</div>
+							</select>	
+							<?php echo form_error('produto_categoria_id', '<div class="text-danger">', '</div>'); ?>							
+							</div> 
+							
 
 							 <div class="form-group col-md-2">
 							<label class="required">Marcas</label>
