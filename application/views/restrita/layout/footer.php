@@ -60,6 +60,7 @@
 					async : true,
 					dataType : 'json',
 					success: function(data){
+						$('#produto_categoria_id').removeAttr('readonly');
 						$('#produto_categoria_id').removeAttr('disabled');
 						var html = '';
 						var i;
