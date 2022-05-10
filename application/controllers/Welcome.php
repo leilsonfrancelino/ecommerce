@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 	
+	public function __construct() {
+		parent::__construct();
+		
+		$this->load->helper('text');
+	}
+	
 	public function index()	{
 		
 		$sistema = info_header_footer();

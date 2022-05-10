@@ -189,9 +189,7 @@ class Produtos extends CI_Controller {
 
        				//criando metalink do produto 
        				$data['produto_meta_link'] = url_amigavel($data['produto_nome']);
-echo'<pre>';
-					print_r($data['produto_meta_link']);
-					exit();
+
        				//Código gerado no cadastro de produtos//
        				//$data['produto_codigo'] = $this->input->post('produto_codigo');
 
