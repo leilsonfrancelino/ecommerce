@@ -11,6 +11,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="<?php echo base_url('/'); ?>">Home</a></li>
+                <li><a href="<?php echo base_url('master/'.$categoria_pai_meta_link); ?>"><?php echo $categoria_pai_nome; ?></a></li>
                 <li class="active"><?php echo $categoria; ?></li>
             </ul>
         </div>
@@ -21,8 +22,8 @@
 <div class="content-wraper pt-60 pb-60">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">               
-                
+            <div class="col-lg-12">                   
+                              
                 <!-- shop-products-wrapper start -->
                 <div class="shop-products-wrapper">
                     <div class="tab-content">
@@ -56,7 +57,7 @@
                                                                 <li><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                         </div>
-                                                    </div>												
+                                                    </div>
                                                     <h4><a class="product_name" href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>"><?php echo word_limiter($produto->produto_nome, 7); ?></a></h4>
                                                     <div class="price-box">
                                                         <span class="new-price"><?php echo 'R$&nbsp;'. number_format($produto->produto_valor, 2, ',', '.'); ?></span>
@@ -74,10 +75,10 @@
                                     
                                     <?php endforeach; ?>
                                     
+                                
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 <!-- shop-products-wrapper end -->

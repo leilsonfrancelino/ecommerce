@@ -1,7 +1,3 @@
-
-
-
-
 <?php $this->load->view('web/layout/navbar'); ?>
 
 
@@ -11,7 +7,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="<?php echo base_url('/'); ?>">Home</a></li>
-                <li class="active"><?php echo $categoria; ?></li>
+                <li class="active"><?php echo $marca; ?></li>
             </ul>
         </div>
     </div>
@@ -21,7 +17,7 @@
 <div class="content-wraper pt-60 pb-60">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">               
+            <div class="col-lg-12">                           
                 
                 <!-- shop-products-wrapper start -->
                 <div class="shop-products-wrapper">
@@ -56,10 +52,10 @@
                                                                 <li><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                         </div>
-                                                    </div>												
-                                                    <h4><a class="product_name" href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>"><?php echo word_limiter($produto->produto_nome, 7); ?></a></h4>
+                                                    </div>
+                                                    <h4><a class="product_name" href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>"><?php echo word_limiter($produto->produto_nome, 4); ?></a></h4>
                                                     <div class="price-box">
-                                                        <span class="new-price"><?php echo 'R$&nbsp;'. number_format($produto->produto_valor, 2, ',', '.'); ?></span>
+                                                        <span class="new-price"><?php echo 'R$&nbsp;'. number_format($produto->produto_valor, 2); ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="add-actions">
@@ -72,12 +68,11 @@
                                         <!-- single-product-wrap end -->
                                     </div>
                                     
-                                    <?php endforeach; ?>
-                                    
+                                    <?php endforeach; ?>                                    
+                               
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 <!-- shop-products-wrapper end -->

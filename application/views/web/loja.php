@@ -117,14 +117,15 @@
 																</ul>
 															</div>
 														</div>
-														<h4><a class="product_name" href="single-product.html"><?php echo word_limiter($produto->produto_nome, 7);?></a></h4>
+														<h4><a class="product_name" href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>"><?php echo word_limiter($produto->produto_nome, 7);?></a></h4>
 														<div class="price-box">
 															<span class="new-price"><?php echo 'R$&nbsp'.number_format($produto->produto_valor, 2, ',', '.'); ?></span>
 														</div>
+														
 													</div>
 													<div class="add-actions">
 														<ul class="add-actions-link">
-															<li class="add-cart active"><a href="<?php echo base_url('produto/.'.$produto->produto_meta_link); ?>">Visualizar</a></li>
+															<li class="add-cart active"><a href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>">Visualizar</a></li>
 														</ul>
 													</div>
 												</div>
