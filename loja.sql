@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 09-Maio-2022 às 02:07
+-- Generation Time: 11-Maio-2022 às 00:44
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.0.33
 
@@ -147,6 +147,47 @@ INSERT INTO `clientes` (`cliente_id`, `cliente_data_cadastro`, `cliente_nome`, `
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `config_correios`
+--
+
+DROP TABLE IF EXISTS `config_correios`;
+CREATE TABLE IF NOT EXISTS `config_correios` (
+  `config_id` int(11) NOT NULL,
+  `config_cep_origem` varchar(20) NOT NULL,
+  `config_codigo_pac` varchar(10) NOT NULL,
+  `config_codigo_sedex` varchar(10) NOT NULL,
+  `config_somar_frete` decimal(10,2) NOT NULL,
+  `config_valor_declarado` decimal(5,2) NOT NULL,
+  `config_data_alteracao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`config_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `config_correios`
+--
+
+INSERT INTO `config_correios` (`config_id`, `config_cep_origem`, `config_codigo_pac`, `config_codigo_sedex`, `config_somar_frete`, `config_valor_declarado`, `config_data_alteracao`) VALUES
+(1, '80530-000', '04510', '04014', '3.50', '21.50', '2020-05-23 02:11:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `config_pagseguro`
+--
+
+DROP TABLE IF EXISTS `config_pagseguro`;
+CREATE TABLE IF NOT EXISTS `config_pagseguro` (
+  `config_id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_email` varchar(255) NOT NULL,
+  `config_token` varchar(100) NOT NULL,
+  `config_ambiente` tinyint(1) NOT NULL COMMENT '0 -> Ambiente real / 1 -> Ambiente sandbox',
+  `config_data_alteracao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`config_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `groups`
 --
 
@@ -231,6 +272,45 @@ INSERT INTO `marcas` (`marca_id`, `marca_nome`, `marca_meta_link`, `marca_ativa`
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `pedidos`
+--
+
+DROP TABLE IF EXISTS `pedidos`;
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `pedido_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pedido_codigo` varchar(8) DEFAULT NULL,
+  `pedido_cliente_id` int(11) DEFAULT NULL,
+  `pedido_valor_produtos` decimal(15,2) DEFAULT NULL,
+  `pedido_valor_frete` decimal(15,2) DEFAULT NULL,
+  `pedido_valor_final` decimal(15,2) DEFAULT NULL,
+  `pedido_forma_envio` tinyint(1) DEFAULT NULL COMMENT '1 = Correios Sedex---------------------2 - Correios PAC',
+  `pedido_data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pedido_data_alteracao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pedido_id`),
+  KEY `pedido_cliente_id` (`pedido_cliente_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedidos_produtos`
+--
+
+DROP TABLE IF EXISTS `pedidos_produtos`;
+CREATE TABLE IF NOT EXISTS `pedidos_produtos` (
+  `pedido_id` int(11) DEFAULT NULL,
+  `produto_id` int(11) DEFAULT NULL,
+  `produto_nome` varchar(200) NOT NULL,
+  `produto_quantidade` int(11) NOT NULL,
+  `produto_valor_unitario` decimal(15,2) NOT NULL,
+  `produto_valor_total` decimal(15,2) NOT NULL,
+  KEY `pedido_id` (`pedido_id`,`produto_id`),
+  KEY `produto_id` (`produto_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produtos`
 --
 
@@ -259,14 +339,14 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   KEY `produto_categoria_id` (`produto_categoria_id`),
   KEY `produto_marca_id` (`produto_marca_id`),
   KEY `produto_categoria_pai_id` (`produto_categoria_pai_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produtos`
 --
 
 INSERT INTO `produtos` (`produto_id`, `produto_codigo`, `produto_data_cadastro`, `produto_categoria_pai_id`, `produto_categoria_id`, `produto_marca_id`, `produto_nome`, `produto_meta_link`, `produto_peso`, `produto_altura`, `produto_largura`, `produto_comprimento`, `produto_valor`, `produto_destaque`, `produto_controlar_estoque`, `produto_quantidade_estoque`, `produto_ativo`, `produto_descricao`, `produto_data_alteracao`) VALUES
-(3, '01452397', '2022-05-09 01:13:51', 6, 29, 1, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', '', 1, 15, 15, 15, '3500.00', 1, 1, 5, 1, '&lt;h1&gt;Smartphone para o que der e vier&lt;/h1&gt;\r\n\r\n&lt;p&gt;Prepare-se para as surpresas maravilhosas que o novo &lt;strong&gt;Moto G 3ª Geração&lt;/strong&gt; apresenta para você: ele está redesenhado, melhorado e mais completo!&lt;/p&gt;\r\n\r\n&lt;p&gt;Com uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.&lt;/p&gt;\r\n\r\n&lt;p&gt;Quer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da &lt;strong&gt;Motorola&lt;/strong&gt;!&lt;/p&gt;\r\n\r\n&lt;p&gt;Informações Técnicas&lt;/p&gt;\r\n\r\n&lt;table&gt;\r\n &lt;tbody&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Marca&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Cor&lt;/th&gt;\r\n   &lt;td&gt;Preto&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de Chip&lt;/th&gt;\r\n   &lt;td&gt;Micro Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Quantidade de Chips&lt;/th&gt;\r\n   &lt;td&gt;Dual Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Sistema Operacional&lt;/th&gt;\r\n   &lt;td&gt;Android&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Processador&lt;/th&gt;\r\n   &lt;td&gt;1.4GHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de tela&lt;/th&gt;\r\n   &lt;td&gt;LCD TFT&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tamanho do Display&lt;/th&gt;\r\n   &lt;td&gt;5&quot;&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Banda&lt;/th&gt;\r\n   &lt;td&gt;GSM 850; 900; 1800; 1900 MHz; WCDMA 850; 900; 1700; 1900; 2100 MHz; LTE 700 (B28); 1700 (B4); 2600 (B7) MHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conectividade&lt;/th&gt;\r\n   &lt;td&gt;4G&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;NFC&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Memória Interna&lt;/th&gt;\r\n   &lt;td&gt;16GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Câmera traseira&lt;/th&gt;\r\n   &lt;td&gt;13MP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Filmadora&lt;/th&gt;\r\n   &lt;td&gt;Full HD&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;TV&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Expansivo até&lt;/th&gt;\r\n   &lt;td&gt;MicroSD até 32GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Alimentação/Tipo de bateria&lt;/th&gt;\r\n   &lt;td&gt;2470 mAh&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conteúdo da Embalagem&lt;/th&gt;\r\n   &lt;td&gt;1 Aparelho Moto G 3ª Geração 16GB Preto com Capa Cabernet; 1 Carregador de parede; 1 Fone de ouvido estereo; 1 Kit de manuais; 1 Cabo para sincronismo; 1 Capa Traseira Preta&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Dimensões aproximadas do produto - cm (AxLxP)&lt;/th&gt;\r\n   &lt;td&gt;14,2x7,2x1,1cm&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Peso líq. aproximado do produto (kg)&lt;/th&gt;\r\n   &lt;td&gt;150 gramas&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Garantia do Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;12 meses&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Referência do modelo&lt;/th&gt;\r\n   &lt;td&gt;XT1543CBP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;SAC&lt;/th&gt;\r\n   &lt;td&gt;Grande SP: 11 4004 4000; Demais regiões: 0800 12 4421&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n &lt;/tbody&gt;\r\n&lt;/table&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;', NULL);
+(4, '98034761', '2022-05-09 15:46:21', 6, 29, 2, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', 'smartphone-motorola-moto-g-3-geracao-edicao-especial-cabernet-dual-chip-desbloqueado-android-51-tela-hd-5', 1, 15, 15, 15, '3500.00', 1, 1, 5, 1, '&lt;h1&gt;Smartphone para o que der e vier&lt;/h1&gt;\r\n\r\n&lt;p&gt;Prepare-se para as surpresas maravilhosas que o novo &lt;strong&gt;Moto G 3ª Geração&lt;/strong&gt; apresenta para você: ele está redesenhado, melhorado e mais completo!&lt;/p&gt;\r\n\r\n&lt;p&gt;Com uma fantástica configuração e um design de tirar o fôlego, ele irá te surpreender. Da Tecnologia IPX7 de resistência à água à memória expansível para cartão Micro SD de até 32BG, esse aparelho te deixa por dentro do que há de mais moderno em tecnologia para Android.&lt;/p&gt;\r\n\r\n&lt;p&gt;Quer saber mais? Então vem com a gente e navegue pelo mundo de um dos smartphones mais queridos da &lt;strong&gt;Motorola&lt;/strong&gt;!&lt;/p&gt;\r\n\r\n&lt;p&gt;Informações Técnicas&lt;/p&gt;\r\n\r\n&lt;table&gt;\r\n &lt;tbody&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Marca&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Cor&lt;/th&gt;\r\n   &lt;td&gt;Preto&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de Chip&lt;/th&gt;\r\n   &lt;td&gt;Micro Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Quantidade de Chips&lt;/th&gt;\r\n   &lt;td&gt;Dual Chip&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Sistema Operacional&lt;/th&gt;\r\n   &lt;td&gt;Android&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Processador&lt;/th&gt;\r\n   &lt;td&gt;1.4GHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tipo de tela&lt;/th&gt;\r\n   &lt;td&gt;LCD TFT&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Tamanho do Display&lt;/th&gt;\r\n   &lt;td&gt;5&quot;&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Banda&lt;/th&gt;\r\n   &lt;td&gt;GSM 850; 900; 1800; 1900 MHz; WCDMA 850; 900; 1700; 1900; 2100 MHz; LTE 700 (B28); 1700 (B4); 2600 (B7) MHz&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conectividade&lt;/th&gt;\r\n   &lt;td&gt;4G&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;NFC&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Memória Interna&lt;/th&gt;\r\n   &lt;td&gt;16GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Câmera traseira&lt;/th&gt;\r\n   &lt;td&gt;13MP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Filmadora&lt;/th&gt;\r\n   &lt;td&gt;Full HD&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;TV&lt;/th&gt;\r\n   &lt;td&gt;Não&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Expansivo até&lt;/th&gt;\r\n   &lt;td&gt;MicroSD até 32GB&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Alimentação/Tipo de bateria&lt;/th&gt;\r\n   &lt;td&gt;2470 mAh&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Conteúdo da Embalagem&lt;/th&gt;\r\n   &lt;td&gt;1 Aparelho Moto G 3ª Geração 16GB Preto com Capa Cabernet; 1 Carregador de parede; 1 Fone de ouvido estereo; 1 Kit de manuais; 1 Cabo para sincronismo; 1 Capa Traseira Preta&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Dimensões aproximadas do produto - cm (AxLxP)&lt;/th&gt;\r\n   &lt;td&gt;14,2x7,2x1,1cm&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Peso líq. aproximado do produto (kg)&lt;/th&gt;\r\n   &lt;td&gt;150 gramas&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Garantia do Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;12 meses&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Referência do modelo&lt;/th&gt;\r\n   &lt;td&gt;XT1543CBP&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;Fornecedor&lt;/th&gt;\r\n   &lt;td&gt;Motorola&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n  &lt;tr&gt;\r\n   &lt;th&gt;SAC&lt;/th&gt;\r\n   &lt;td&gt;Grande SP: 11 4004 4000; Demais regiões: 0800 12 4421&lt;/td&gt;\r\n  &lt;/tr&gt;\r\n &lt;/tbody&gt;\r\n&lt;/table&gt;\r\n\r\n&lt;p&gt; &lt;/p&gt;', NULL);
 
 -- --------------------------------------------------------
 
@@ -281,14 +361,14 @@ CREATE TABLE IF NOT EXISTS `produtos_fotos` (
   `foto_caminho` varchar(255) NOT NULL,
   PRIMARY KEY (`foto_id`),
   KEY `fk_foto_produto_id` (`foto_produto_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `produtos_fotos`
 --
 
 INSERT INTO `produtos_fotos` (`foto_id`, `foto_produto_id`, `foto_caminho`) VALUES
-(11, 3, 'bf1e6c8c71defd67ea89463939e1fbdf.jpg');
+(21, 4, '0703337f8cad2c8e8ae8557f90f356df.jpg');
 
 -- --------------------------------------------------------
 
@@ -323,6 +403,35 @@ CREATE TABLE IF NOT EXISTS `sistema` (
 
 INSERT INTO `sistema` (`sistema_id`, `sistema_razao_social`, `sistema_nome_fantasia`, `sistema_cnpj`, `sistema_ie`, `sistema_telefone_fixo`, `sistema_telefone_movel`, `sistema_email`, `sistema_site_url`, `sistema_cep`, `sistema_endereco`, `sistema_numero`, `sistema_cidade`, `sistema_estado`, `sistema_produtos_destaques`, `sistema_texto`, `sistema_data_alteracao`) VALUES
 (1, 'Loja virtual', 'Sensação do Momento', '80.838.809/0001-26', '683.90228-49', '(16) 3232-3030', '(16) 9999-9999', 'lojavirtual@contato.com.br', 'http://lojavirtual.com.br', '80510-000', 'Rua da Programação', '54', 'São Paulo', 'SP', 10, 'Preço e qualidade!', '2022-05-01 00:52:14');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `transacoes`
+--
+
+DROP TABLE IF EXISTS `transacoes`;
+CREATE TABLE IF NOT EXISTS `transacoes` (
+  `transacao_id` int(11) NOT NULL AUTO_INCREMENT,
+  `transacao_pedido_id` int(11) DEFAULT NULL,
+  `transacao_cliente_id` int(11) DEFAULT NULL,
+  `transacao_data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `transacao_codigo_hash` varchar(255) DEFAULT NULL,
+  `transacao_tipo_metodo_pagamento` tinyint(1) DEFAULT NULL COMMENT '1 = Cartão | 2 = Boleto | 3 = Transferência',
+  `transacao_codigo_metodo_pagamento` varchar(10) DEFAULT NULL,
+  `transacao_link_pagamento` varchar(255) DEFAULT NULL,
+  `transacao_banco_escolhido` varchar(20) DEFAULT NULL,
+  `transacao_valor_bruto` decimal(15,2) DEFAULT NULL,
+  `transacao_valor_taxa_pagseguro` decimal(15,2) DEFAULT NULL,
+  `transacao_valor_liquido` decimal(15,2) DEFAULT NULL,
+  `transacao_numero_parcelas` int(11) DEFAULT NULL,
+  `transacao_valor_parcela` decimal(15,2) DEFAULT NULL,
+  `transacao_status` tinyint(1) DEFAULT NULL COMMENT 'Verificar documentação',
+  `transacao_data_alteracao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`transacao_id`),
+  KEY `transacao_pedido_id` (`transacao_pedido_id`,`transacao_cliente_id`),
+  KEY `fk_transacao_cliente_id` (`transacao_cliente_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -366,7 +475,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `cliente_user_id`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2y$12$68J1neG25LgjkJl.yf5YT.hG1OuQ0GQV71SqsoqJLHRrpOjRqKvHC', 'admin@admin.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1651092268, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1652055027, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
+(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1652110151, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
 (9, '', 'fulanodetal', '$2y$10$xrj6p/LQUnIvzZ0SxbmU4euDHjN4a73EEU3kTwfsUS2hGLHC/kY92', 'fulano@fulano.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, NULL, 1, 'Fulano', 'de Tal', NULL, NULL),
 (10, '127.0.0.1', 'cicranodetal', '$2y$10$X.7BF9FNaLxGBiByutXMruQhA4yinC9Om/SdGXSdtPTpR9k2CebAi', 'cicrano@cicrano.com', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651196948, NULL, 1, 'Cicrano', 'de Tal', NULL, '(00) 00000-0000');
 
@@ -408,10 +517,30 @@ ALTER TABLE `categorias`
   ADD CONSTRAINT `fk_categoria_pai_id` FOREIGN KEY (`categoria_pai_id`) REFERENCES `categorias_pai` (`categoria_pai_id`) ON DELETE CASCADE;
 
 --
+-- Limitadores para a tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `fk_pedido_cliente_id` FOREIGN KEY (`pedido_cliente_id`) REFERENCES `clientes` (`cliente_id`) ON DELETE CASCADE;
+
+--
+-- Limitadores para a tabela `pedidos_produtos`
+--
+ALTER TABLE `pedidos_produtos`
+  ADD CONSTRAINT `fk_pedido_id` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`pedido_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`produto_id`) ON DELETE CASCADE;
+
+--
 -- Limitadores para a tabela `produtos_fotos`
 --
 ALTER TABLE `produtos_fotos`
   ADD CONSTRAINT `fk_foto_produto_id` FOREIGN KEY (`foto_produto_id`) REFERENCES `produtos` (`produto_id`) ON DELETE CASCADE;
+
+--
+-- Limitadores para a tabela `transacoes`
+--
+ALTER TABLE `transacoes`
+  ADD CONSTRAINT `fk_transacao_cliente_id` FOREIGN KEY (`transacao_cliente_id`) REFERENCES `clientes` (`cliente_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_transacao_pedido_id` FOREIGN KEY (`transacao_pedido_id`) REFERENCES `pedidos` (`pedido_id`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `users`
