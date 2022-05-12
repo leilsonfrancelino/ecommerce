@@ -456,6 +456,8 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 									'restrita/produtos/upload.*', 
 									'restrita/produtos/get_sub_category.*',
+									'ajax.*',
+									'carrinho.*',
 								);
 
 /*

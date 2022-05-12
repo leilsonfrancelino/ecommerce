@@ -1,5 +1,5 @@
- <!-- Begin Footer Area -->
-            <div class="footer">
+  <!-- Begin Footer Area -->
+  <div class="footer">
                 <!-- Begin Footer Static Top Area -->
                 <div class="footer-static-top">
                     <div class="container">
@@ -10,7 +10,7 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                                     <div class="li-shipping-inner-box">
                                         <div class="shipping-icon">
-                                            <img src="images/shipping-icon/1.png" alt="Shipping Icon">
+                                            <img src="<?php echo base_url('public/web/images/shipping-icon/1.png')?>" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
                                             <h2>Free Delivery</h2>
@@ -23,7 +23,7 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                                     <div class="li-shipping-inner-box">
                                         <div class="shipping-icon">
-                                            <img src="images/shipping-icon/2.png" alt="Shipping Icon">
+                                            <img src="<?php echo base_url('public/web/images/shipping-icon/2.pn')?>g" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
                                             <h2>Safe Payment</h2>
@@ -36,7 +36,7 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                                     <div class="li-shipping-inner-box">
                                         <div class="shipping-icon">
-                                            <img src="images/shipping-icon/3.png" alt="Shipping Icon">
+                                            <img src="<?php echo base_url('public/web/images/shipping-icon/3.png')?>" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
                                             <h2>Shop with Confidence</h2>
@@ -49,7 +49,7 @@
                                 <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                                     <div class="li-shipping-inner-box">
                                         <div class="shipping-icon">
-                                            <img src="images/shipping-icon/4.png" alt="Shipping Icon">
+                                            <img src="<?php echo base_url('public/web/images/shipping-icon/4.png')?>" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
                                             <h2>24/7 Help Center</h2>
@@ -72,26 +72,24 @@
                                 <!-- Begin Footer Logo Area -->
                                 <div class="col-lg-4 col-md-6">
                                     <div class="footer-logo">
-                                        <img src="images/menu/logo/1.jpg" alt="Footer Logo">
+                                        <img src="<?php echo base_url('public/web/images/menu/logo/1.jpg')?>" alt="Footer Logo">
                                         <p class="info">
                                             We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
                                         </p>
                                     </div>
+                                    <?php $sistema = info_header_footer(); ?>
                                     <ul class="des">
-										<?php $sistema = info_header_footer(); ?>
                                         <li>
-                                            <span>Endereço: </span>
-                                            <?php echo 'CEP ' . $sistema->sistema_cep . ' ' . $sistema->sistema_endereco . ', ' . $sistema->sistema_numero;?>
-											<?php echo $sistema->sistema_cidade . ' - ' . $sistema->sistema_estado;?>
-                                       
-										</li>
-                                        <li>
-                                            <span>Telefones: </span>
-                                           <?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?>
+                                            <span>Endereço: </span><br/>
+                                           <?php echo  $sistema->sistema_endereco . ' ' .$sistema->sistema_numero . ' <br/> '. $sistema->sistema_cidade . ' - ' . $sistema->sistema_estado . '<br/>' . 'CEP: ' . $sistema->sistema_cep   ?>
                                         </li>
                                         <li>
-                                            <span>E-mail: </span>
-                                            <a href="mailto://<?php echo $sistema->sistema_email;?>"><?php echo $sistema->sistema_email;?></a>
+                                            <span>Telefone: </span>
+                                            <a href="#"><?php echo $sistema->sistema_telefone_fixo; ?></a>
+                                        </li>
+                                        <li>
+                                            <span>Email: </span>
+                                            <a href="mailto://info@yourdomain.com"><?php echo $sistema->sistema_email; ?></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -212,7 +210,7 @@
                                 <!-- Begin Footer Payment Area -->
                                 <div class="copyright text-center">
                                     <a href="#">
-                                        <img src="images/payment/1.png" alt="">
+                                        <img src="<?php echo base_url('public/web/images/payment/1.png')?>" alt="">
                                     </a>
                                 </div>
                                 <!-- Footer Payment Area End Here -->
@@ -242,31 +240,31 @@
                                     <div class="product-details-left">
                                         <div class="product-details-images slider-navigation-1">
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/1.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/1.jpg')?>" alt="product image">
                                             </div>
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/2.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/2.jpg')?>" alt="product image">
                                             </div>
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/3.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/3.jpg')?>" alt="product image">
                                             </div>
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/4.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/4.jpg')?>" alt="product image">
                                             </div>
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/5.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/5.jpg')?>" alt="product image">
                                             </div>
                                             <div class="lg-image">
-                                                <img src="images/product/large-size/6.jpg" alt="product image">
+                                                <img src="<?php echo base_url('public/web/images/product/large-size/6.jpg')?>" alt="product image">
                                             </div>
                                         </div>
                                         <div class="product-details-thumbs slider-thumbs-1">                                        
-                                            <div class="sm-image"><img src="images/product/small-size/1.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/2.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/3.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/4.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/5.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/6.jpg" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/1.jpg')?>" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/2.jpg')?>" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/3.jpg')?>" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/4.jpg')?>" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/5.jpg')?>" alt="product image thumb"></div>
+                                            <div class="sm-image"><img src="<?php echo base_url('public/web/images/product/small-size/6.jpg')?>" alt="product image thumb"></div>
                                         </div>
                                     </div>
                                     <!--// Product Details Left -->
@@ -343,47 +341,55 @@
         </div>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
-        <script src="<?php echo base_url ('public/web/js/vendor/jquery-1.12.4.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/vendor/jquery-1.12.4.min.js')?>"></script>
         <!-- Popper js -->
-        <script src="<?php echo base_url ('public/web/js/vendor/popper.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/vendor/popper.min.js')?>"></script>
         <!-- Bootstrap V4.1.3 Fremwork js -->
-        <script src="<?php echo base_url ('public/web/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/bootstrap.min.js')?>"></script>
         <!-- Ajax Mail js -->
-        <script src="<?php echo base_url ('public/web/js/ajax-mail.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/ajax-mail.js')?>"></script>
         <!-- Meanmenu js -->
-        <script src="<?php echo base_url ('public/web/js/jquery.meanmenu.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.meanmenu.min.js')?>"></script>
         <!-- Wow.min js -->
-        <script src="<?php echo base_url ('public/web/js/wow.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/wow.min.js')?>"></script>
         <!-- Slick Carousel js -->
-        <script src="<?php echo base_url ('public/web/js/slick.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/slick.min.js')?>"></script>
         <!-- Owl Carousel-2 js -->
-        <script src="<?php echo base_url ('public/web/js/owl.carousel.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/owl.carousel.min.js')?>"></script>
         <!-- Magnific popup js -->
-        <script src="<?php echo base_url ('public/web/js/jquery.magnific-popup.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.magnific-popup.min.js')?>"></script>
         <!-- Isotope js -->
-        <script src="<?php echo base_url ('public/web/js/isotope.pkgd.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/isotope.pkgd.min.js')?>"></script>
         <!-- Imagesloaded js -->
-        <script src="<?php echo base_url ('public/web/js/imagesloaded.pkgd.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/imagesloaded.pkgd.min.js')?>"></script>
         <!-- Mixitup js -->
-        <script src="<?php echo base_url ('public/web/js/jquery.mixitup.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.mixitup.min.js')?>"></script>
         <!-- Countdown -->
-        <script src="<?php echo base_url ('public/web/js/jquery.countdown.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.countdown.min.js')?>"></script>
         <!-- Counterup -->
-        <script src="<?php echo base_url ('public/web/js/jquery.counterup.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.counterup.min.js')?>"></script>
         <!-- Waypoints -->
-        <script src="<?php echo base_url ('public/web/js/waypoints.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/waypoints.min.js')?>"></script>
         <!-- Barrating -->
-        <script src="<?php echo base_url ('public/web/js/jquery.barrating.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.barrating.min.js')?>"></script>
         <!-- Jquery-ui -->
-        <script src="<?php echo base_url ('public/web/js/jquery-ui.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery-ui.min.js')?>"></script>
         <!-- Venobox -->
-        <script src="<?php echo base_url ('public/web/js/venobox.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/venobox.min.js')?>"></script>
         <!-- Nice Select js -->
-        <script src="<?php echo base_url ('public/web/js/jquery.nice-select.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/jquery.nice-select.min.js')?>"></script>
         <!-- ScrollUp js -->
-        <script src="<?php echo base_url ('public/web/js/scrollUp.min.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/scrollUp.min.js')?>"></script>
         <!-- Main/Activator js -->
-        <script src="<?php echo base_url ('public/web/js/main.js'); ?>"></script>
+        <script src="<?php echo base_url('public/web/js/main.js')?>"></script>
+         <!-- Util JS File -->
+        <script src="<?php echo base_url('public/assets/js/util.js'); ?>"></script>
+        <!-- scripts secundários -->
+        <?php if(isset($scripts)): ?>
+            <?php foreach ($scripts as $script): ?>
+            <script src="<?php echo base_url('public/assets/'.$script); ?>"></script>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </body>
 
 <!-- index30:23-->

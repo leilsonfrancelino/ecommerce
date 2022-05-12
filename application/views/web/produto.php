@@ -82,18 +82,28 @@
                         
                         <!--Botão de adcionar ao carrinho-->
                         <div class="single-add-to-cart">
-                            <form action="#" class="cart-quantity">
+						
+							<?php 
+                            
+                            $atributos = array(
+                                'class' => 'cart-quantity'
+                            );
+                            
+                            ?>
+                            
+                            <?php echo form_open('carrinho', $atributos); ?> 							
+                            
                                 <div class="quantity">
                                     <label>Quantidade</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" style="font-size: 20px" value="1" type="text">
+                                        <input class="cart-plus-minus-box mask-produto-qty" style="font-size: 20px" name="produto_quantidade" id="produto_quantidade" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" style="font-size: 20px;" type="submit"><span class="text-white"><i class="fa fa-shopping-basket"></i></span><span class="text-white">&nbsp;&nbsp;Comprar</span></button>
+                                <button class="add-to-cart btn-add-produto" data-id="<?php echo $produto->produto_id; ?>" style="font-size: 20px;" type="button"><span class="text-white"><i class="fa fa-shopping-basket"></i></span><span class="text-white">&nbsp;&nbsp;Comprar</span></button>
                                 <p class="pt-20">Este produto é vendido e entrege por&nbsp;&nbsp;<b><?php echo $sistema->sistema_razao_social; ?></b></p>
-                            </form>    
+                            <?php echo form_close(); ?>    
                         </div>
                         
                     </div>
