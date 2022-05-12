@@ -41,8 +41,8 @@
 		});
   </script>
   
-  <!-- JS CKEditor -->
-  <script type="text/javascript" src="<?php echo base_url().'public/ckeditor/ckeditor.js'?>"></script>
+ <!-- JS CKEditor -->
+  <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
   <!-- adicionando editor no cadastro e edição de produtos -->	
   <script>CKEDITOR.replace( 'produto_descricao' );</script>  
 	
