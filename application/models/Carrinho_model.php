@@ -18,7 +18,7 @@ class Carrinho_model extends CI_Model{
                 'produtos_fotos.foto_caminho',
             ]);
             $this->db->where('produtos.produto_id', $produto_id);
-            $this->db->where('produtos.produto_active', 1);
+            $this->db->where('produtos.produto_ativo', 1);
             $this->db->limit(1);
             $this->db->join('produtos_fotos', 'produtos_fotos.foto_produto_id = produtos.produto_id', 'LEFT');
             return $this->db->get('produtos')->row();

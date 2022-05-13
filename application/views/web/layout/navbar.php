@@ -103,51 +103,56 @@
 										<ul class="hm-menu">											
 											<!-- Begin Header Mini Cart Area -->
 											<li class="hm-minicart">
-												<div class="hm-minicart-trigger">
+												<div id="top-cart" class="hm-minicart-trigger">
 													<span class="item-icon"></span>
-													<span class="item-text">£80.00
-														<span class="cart-item-count">2</span>
+													<span class="item-text"><?php echo ($this->carrinho_compras->get_total() > '0,00' ? 'R$&nbsp' .$this->carrinho_compras->get_total() : '0,00' ); ?>
+                                                <?php if($this->carrinho_compras->get_total_itens() > 0 ): ?>
+                                                    <span class="cart-item-count"><?php echo $this->carrinho_compras->get_total_itens(); ?></span>
+                                                <?php endif; ?>
 													</span>
 												</div>
 												<span></span>
-												<div class="minicart">
+												<div id="list-itens" class="minicart">
 													<ul class="minicart-product-list">
-														<li>
-															<a href="single-product.html" class="minicart-product-image">
-																<img src="images/product/small-size/5.jpg" alt="cart products">
-															</a>
-															<div class="minicart-product-details">
-																<h6><a href="single-product.html">Aenean eu tristique</a></h6>
-																<span>£40 x 1</span>
-															</div>
-															<button class="close" title="Remove">
-																<i class="fa fa-close"></i>
-															</button>
-														</li>
-														<li>
-															<a href="single-product.html" class="minicart-product-image">
-																<img src="images/product/small-size/6.jpg" alt="cart products">
-															</a>
-															<div class="minicart-product-details">
-																<h6><a href="single-product.html">Aenean eu tristique</a></h6>
-																<span>£40 x 1</span>
-															</div>
-															<button class="close" title="Remove">
-																<i class="fa fa-close"></i>
-															</button>
-														</li>
-													</ul>
-													<p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
-													<div class="minicart-button">
-														<a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
-															<span>View Full Cart</span>
-														</a>
-														<a href="checkout.html" class="li-button li-button-fullwidth">
-															<span>Checkout</span>
-														</a>
-													</div>
-												</div>
-											</li>
+                                                    <?php if($this->carrinho_compras->get_total_itens() > 0 ): ?>
+
+                                                        <?php $carrinho = $this->carrinho_compras->get_all(); ?>
+
+                                                        <?php foreach ($carrinho as $produto): ?>
+                                                      
+                                                            <li>
+                                                                <a href="<?php echo base_url('produto/'.$produto['produto_meta_link']); ?>" class="minicart-product-image">
+                                                                    <img src="<?php echo base_url('uploads/produtos/small/' . $produto['produto_foto']); ?>" alt="<?php echo $produto['produto_nome']; ?>">
+                                                                </a>
+                                                                <div class="minicart-product-details">
+                                                                    <h6><a href="<?php echo base_url('produto/'.$produto['produto_meta_link']); ?>"><?php echo word_limiter($produto['produto_nome'], 2); ?></a></h6>
+                                                                    <span>R$&nbsp<?php echo number_format($produto['produto_valor'], 2, ',', '.'); ?> x <?php echo $produto['produto_quantidade']; ?>  </span>
+                                                                </div>
+                                                               
+                                                            </li>
+                                                        <?php endforeach; ?>    
+                                                    <?php endif; ?>
+                                                </ul>
+                                                <?php if($this->carrinho_compras->get_total_itens() > 0 ): ?>
+                                                <p class="minicart-total">SUBTOTAL: <span><?php echo ($this->carrinho_compras->get_total() > '0,00' ? 'R$&nbsp' .$this->carrinho_compras->get_total() : '0,00' ); ?></span></p>
+                                                <div class="minicart-button">
+                                                
+                                                    <a href="<?php echo base_url('carrinho'); ?>" class="li-button li-button-fullwidth li-button-dark">
+                                                        <span>Ver Carrinho</span>
+                                                    </a>
+                                                    <a  href="<?php echo base_url('checkout'); ?>" class="li-button li-button-fullwidth">
+                                                        <span>Finalizar Compra</span>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <p class="minicart-total">SUBTOTAL R$:&nbsp <span><span class="item-text"> <?php echo ($this->carrinho_compras->get_total() > '0,00' ? $this->carrinho_compras->get_total() : '0,00' ); ?></span></p>
+                                                    <a href="<?php echo base_url('carrinho'); ?>" class="li-button li-button-fullwidth li-button-dark">
+                                                    
+                                                        <span>Carrinho Vazio</span>
+                                                    </a>
+                                                <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
 											<!-- Header Mini Cart Area End Here -->
 										</ul>
 									</div>

@@ -42,8 +42,8 @@ class Carrinho_compras{
             $retorno[$indice]['produto_id'] = $query->produto_id;
             $retorno[$indice]['produto_nome'] = $query->produto_nome;
             $retorno[$indice]['produto_valor'] = $query->produto_valor;
-            $retorno[$indice]['produto_quantidade'] = $query->$produto_quantidade;
-            $retorno[$indice]['subtotal'] = number_format($produto_quantidade * $query->produto_valor, 2, ',', '.');
+            $retorno[$indice]['produto_quantidade'] = $produto_quantidade;
+            $retorno[$indice]['subtotal'] = number_format($produto_quantidade * $query->produto_valor, 2, '.', '');
             $retorno[$indice]['produto_peso'] = $query->produto_peso;
             $retorno[$indice]['produto_altura'] = $query->produto_altura;
             $retorno[$indice]['produto_largura'] = $query->produto_largura;
@@ -63,6 +63,7 @@ class Carrinho_compras{
         }
         return number_format($valor_total_carrinho, 2, ',', '.');
     }
+	
     public function get_parcelas(){
         $carrinho = $this->get_all();
         $valor_total_carrinho = 0;

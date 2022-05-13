@@ -6,10 +6,8 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="<?php echo base_url('/'); ?>">Home</a></li>
-                
+                <li><a href="<?php echo base_url('/'); ?>">Home</a></li>                
                 <li class="active"><?php echo $titulo; ?></a></li>
-
             </ul>
         </div>
     </div>
@@ -42,8 +40,8 @@
                                             <tr>
                                                 <td class="li-product-remove"><a class="btn-del-item" data-id="<?php echo $produto['produto_id']; ?>" href="#"><i class="fa fa-times"></i></a></td>
                                                 <td class="li-product-thumbnail"><a href="<?php echo base_url('produto/'.$produto['produto_meta_link']); ?>"><img width="50" src="<?php echo base_url('uploads/produtos/small/' . $produto['produto_foto']); ?>" alt="<?php echo $produto['produto_nome']; ?>"></a></td>
-                                                <td class="li-product-name"><a href="<?php echo base_url('produto/'.$produto['produto_meta_link']); ?>"><?php echo $produto['produto_nome']; ?></a></td>
-                                                <td class="li-product-price"><span class="amount">R$:&nbsp<?php echo number_format($produto['produto_valor'], 2); ?></span></td>
+                                                <td class="li-product-name"><a href="<?php echo base_url('produto/'.$produto['produto_meta_link']); ?>"><?php echo word_limiter($produto['produto_nome'], 7); ?></a></td>
+                                                <td class="li-product-price"><span class="amount">R$&nbsp<?php echo number_format($produto['produto_valor'], 2, ',', '.'); ?></span></td>
                                                 <td class="quantity" stype="width: 150px;">
                                                 
                                                     <div class="cart-plus-minus float-left">
@@ -51,10 +49,10 @@
                                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                     </div>
-                                                    <button type="button"  title="Atualizar quantidade" class="btn btn-info btn-altera-quantidade" data-id="<?php echo $produto['produto_id']; ?>" syle="padding: 10px 15px; border-radius: 2px"><i class="fa fa-refresh"></i></button>
+                                                    <button type="button"  title="Atualizar quantidade" class="btn btn-info btn-altera-quantidade" data-id="<?php echo $produto['produto_id']; ?>" style="padding: 10px 15px; border-radius: 2px"><i class="fa fa-refresh"></i></button>
                                                 </td>
                                                
-                                                <td class="product-subtotal"><span class="amount">R$:&nbsp<?php echo number_format($produto['subtotal'], 2); ?></span></td>
+                                                <td class="product-subtotal"><span class="amount">R$&nbsp<?php echo number_format($produto['subtotal'], 2, ',', '.'); ?></span></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
@@ -95,7 +93,7 @@
                                         <div class="cart-page-total">
                                             <h2>Total Carrinho</h2>
                                             <ul>
-                                                <li>Subtotal <span>R$:&nbsp<?php echo $this->carrinho_compras->get_total(); ?></li>
+                                                <li>Subtotal <span>R$&nbsp<?php echo $this->carrinho_compras->get_total(); ?></li>
                                                 <li>Frete <span id="opcao_frete_escolhido"> R$&nbsp;0.00 </span></li>
                                                 <li>Total Pedido<span id="total_final_carrinho">  R$&nbsp;<?php echo $this->carrinho_compras->get_total(); ?> </span></li>
                                             </ul>
@@ -110,7 +108,7 @@
                    <?php else: ?>
                   
                     <div class="col-12">
-                    <h4 class="mb-10">Carrinho vázio</h4>
+                    <h4 class="mb-30">Carrinho vazio</h4>
                     <div class="coupon-all">
                    
                         <div class="coupon">

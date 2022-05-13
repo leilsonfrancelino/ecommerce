@@ -81,6 +81,7 @@
                         </div>
                         
                         <!--Botão de adcionar ao carrinho-->
+						<?php if($produto->produto_quantidade_estoque > 0): ?>
                         <div class="single-add-to-cart">
 						
 							<?php 
@@ -103,7 +104,14 @@
                                 </div>
                                 <button class="add-to-cart btn-add-produto" data-id="<?php echo $produto->produto_id; ?>" style="font-size: 20px;" type="button"><span class="text-white"><i class="fa fa-shopping-basket"></i></span><span class="text-white">&nbsp;&nbsp;Comprar</span></button>
                                 <p class="pt-20">Este produto é vendido e entrege por&nbsp;&nbsp;<b><?php echo $sistema->sistema_razao_social; ?></b></p>
-                            <?php echo form_close(); ?>    
+                            <?php echo form_close(); ?> 
+						  <?php else: ?>
+
+                                <div class="cart-quantity">
+                                    <button class="add-to-cart bg-danger" type="button">Indisponível</button>
+                                </div>
+
+                          <?php endif; ?>
                         </div>
                         
                     </div>

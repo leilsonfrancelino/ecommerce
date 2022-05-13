@@ -6,8 +6,7 @@ class Carrinho extends CI_Controller{
     public function __construct()
     {
         parent::__construct();
-
-       // $this->load->library('carrinho_compras');
+       
     }
 
     public function index()
@@ -17,10 +16,8 @@ class Carrinho extends CI_Controller{
              'scripts' => array (
                 'mask/jquery.mask.min.js',
                 'mask/custom.js',
-                'js/carrinho.js'
-   
-             ),
-          
+                'js/carrinho.js'   
+             ),          
         );
 
         $carrinho = array(
@@ -105,7 +102,7 @@ class Carrinho extends CI_Controller{
 
             if(!$produto = $this->core_model->get_by_id('produtos', array('produto_id' => $produto_id))){
                 $retorno['erro'] = 5;
-                $retorno['mensagem'] = 'O prdouto não encontrado';
+                $retorno['mensagem'] = 'O produto não foi encontrado';
             }else{
                 if($produto_quantidade > $produto->produto_quantidade_estoque){
                     $retorno['erro'] = 5;
