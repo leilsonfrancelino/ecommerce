@@ -108,7 +108,7 @@
                    <?php else: ?>
                   
                     <div class="col-12">
-                    <h4 class="mb-30">Carrinho vazio</h4>
+                    <h4 class="mb-30">Seu carrinho esta vazio</h4>
                     <div class="coupon-all">
                    
                         <div class="coupon">
@@ -117,7 +117,7 @@
                                             
                     </div>
                     <div class="container">
-                        <img width="35%" src="<?php echo base_url('public/web/images/empty_cart.png') ?>" alt="carrinho vazio">
+                        <img width="35%" src="<?php echo base_url('public/web/images/img-carrinho-vazio.png') ?>" alt="carrinho vazio">
                     </div>
                     </div>
                   
