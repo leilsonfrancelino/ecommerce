@@ -97,7 +97,7 @@
                                                 <li>Frete <span id="opcao_frete_escolhido"> R$&nbsp;0.00 </span></li>
                                                 <li>Total Pedido<span id="total_final_carrinho">  R$&nbsp;<?php echo $this->carrinho_compras->get_total(); ?> </span></li>
                                             </ul>
-                                            <a href="<?php echo base_url('checkout'); ?>">Finalizar a compra</a>
+                                            <a href="<?php echo base_url('checkout'); ?>">Finalizar compra</a>
                                         </div>
                                     </div>
                                 </div>
@@ -108,17 +108,12 @@
                    <?php else: ?>
                   
                     <div class="col-12">
-                    <h4 class="mb-30">Seu carrinho esta vazio</h4>
-                    <div class="coupon-all">
-                   
-                        <div class="coupon">
-                        <a href="<?php echo base_url('/'); ?>" class="button"><input class="button" style="width:240px" value="Continuar Comprando" > </a>
-                        </div>
-                                            
-                    </div>
-                    <div class="container">
-                        <img width="35%" src="<?php echo base_url('public/web/images/img-carrinho-vazio.png') ?>" alt="carrinho vazio">
-                    </div>
+                    <h4 class="mb-30" style="text-align: center">Seu carrinho esta vazio</h4>
+						<div class="coupon-all" >                   
+							<div class="coupon" >
+							<a href="<?php echo base_url('/'); ?>" class="button"><input class="button" style="width:240px" value="Continuar Comprando" > </a>
+							</div>                                            
+						</div>                    
                     </div>
                   
                         

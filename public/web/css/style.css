@@ -4042,7 +4042,7 @@ thead {
 	margin-top: 30px;
 }
 .coupon {
-	float: left;
+	text-align: center;
 }
 .coupon input {
 	background-color: transparent;

@@ -164,7 +164,7 @@
 					</div>
 					<!-- Header Middle Area End Here -->
 					<!-- Begin Header Bottom Area -->
-					<div class="header-bottom header-sticky d-none d-lg-block d-xl-block">
+					<div class="header-bottom header-sticky d-none d-lg-block d-xl-block mb-0">
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-12">
