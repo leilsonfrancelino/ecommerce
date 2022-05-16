@@ -19,6 +19,7 @@ class Login extends CI_Controller {
 		$password = $this->input->post('password');
 		$remember = $this->input->post('remember' ? TRUE : FALSE);
 		
+		
 		if($this->ion_auth->login($identity, $password,$remember)) {
 			$this->session->set_flashdata('sucesso', 'Seja bem vindo(a)!');
 			redirect('restrita');

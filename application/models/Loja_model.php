@@ -9,14 +9,13 @@
 										
 			]);
 			
-			$this->db->where('marca_ativa', 1);
-			
-			$this->db->join('produtos', 'produtos.produto_marca_id = marcas.marca_id');	
-				
+			$this->db->where('marca_ativa', 1);			
+			$this->db->join('produtos', 'produtos.produto_marca_id = marcas.marca_id');					
 			$this->db->group_by('marca_nome');
 			
 			return $this->db->get('marcas')->result();
 		}	
+		
 		//categorias pai navbar
 		public function get_categorias_pai() {
 			$this->db->select([
@@ -66,15 +65,32 @@
 			]);
 
 			$this->db->join('produtos_fotos', 'produtos_fotos.foto_produto_id = produtos.produto_id');
-
 			$this->db->where('produtos.produto_destaque', 1);
-
 			$this->db->where('produtos.produto_ativo', 1);
-
 			$this->db->limit($num_produtos_destaques);
-
 			$this->db->group_by('produtos.produto_id');
 
 			return $this->db->get('produtos')->result();
 		}
-	}	
+		
+		public function get_produtos_mais_vendidos(){
+        $this->db->select([
+            'produtos.produto_nome',
+            'produtos.produto_valor',            
+            'produtos.produto_meta_link',
+            'produtos_fotos.foto_caminho',
+            'pedidos_produtos.*',            
+        ]);
+		
+        $this->db->join('produtos_fotos', 'produtos_fotos.foto_produto_id = produtos.produto_id');
+        $this->db->join('pedidos_produtos','pedidos_produtos.produto_id = produtos.produto_id');
+		
+        $this->db->where('produtos.produto_destaque', 1);
+        $this->db->where('produtos.produto_ativo' , 1);
+		
+        $this->db->order_by('produtos.produto_id', 'RANDOM');
+        $this->db->group_by('produtos.produto_id');
+		
+        return $this->db->get('produtos')->result();
+    }
+}	

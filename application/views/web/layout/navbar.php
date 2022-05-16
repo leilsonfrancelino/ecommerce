@@ -7,9 +7,9 @@
 								<!-- Begin Header Top Left Area -->
 								<div class="col-lg-3 col-md-4">
 									<div class="header-top-left">
-										<ul class="phone-wrap">
+										<ul class="phone-wrap" style="width: 274px">
 											<?php $sistema = info_header_footer(); ?>
-											<li><span>Telefones:</span><?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?></li>
+											<li><span>Telefones: </span><?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?></li>
 										</ul>
 									</div>
 								</div>
@@ -35,33 +35,28 @@
 												</div>
 											</li>
 											<!-- Setting Area End Here -->
-											<!-- Begin Currency Area -->
-											<li>
-												<span class="currency-selector-wrapper">Currency :</span>
-												<div class="ht-currency-trigger"><span>USD $</span></div>
-												<div class="currency ht-currency">
-													<ul class="ht-setting-list">
-														<li><a href="#">EUR €</a></li>
-														<li class="active"><a href="#">USD $</a></li>
-													</ul>
-												</div>
-											</li>
-											<!-- Currency Area End Here -->
-											<!-- Begin Language Area -->
-											<li>
-												<span class="language-selector-wrapper">Language :</span>
-												<div class="ht-language-trigger"><span>English</span></div>
-												<div class="language ht-language">
-													<ul class="ht-setting-list">
-														<li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg" alt="">English</a></li>
-														<li><a href="#"><img src="images/menu/flag-icon/2.jpg" alt="">Français</a></li>
-													</ul>
-												</div>
-											</li>
-											<!-- Language Area End Here -->
-										</ul>
-									</div>
-								</div>
+											 <li>
+                                           <?php $cliente_logado = $this->ion_auth->logged_in(); ?>
+
+                                            <div class="ht-currency-trigger"><span><?php echo (!$cliente_logado ? 'Entrar' : 'Olá, '. $this->session->userdata('cliente_nome')); ?></span></div>
+                                            <div class="currency ht-currency">
+                                                <ul class="ht-currency-list">
+                                                    <?php if(!$cliente_logado): ?>
+                                                        <li><a href="<?php echo base_url('login'); ?>">Entrar</a> </li>
+                                                        
+                                                    <?php else: ?>
+                                                        <li><a href="<?php echo base_url('perfil'); ?>"> Perfil </a> </li>
+                                                        <li class="active"><a href="<?php echo base_url('pedido'); ?>">Pedidos </a></li>
+                                                        <li ><a href="<?php echo base_url('login/logout'); ?>">Sair </a></li>
+                                                <?php endif; ?>
+                                                
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
 								<!-- Header Top Right Area End Here -->
 							</div>
 						</div>

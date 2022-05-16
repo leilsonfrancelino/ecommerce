@@ -211,9 +211,7 @@
                                             <div id="cliente_confirmacao" class="text-danger"></div>
                                         </div>
                                     </div>
-								</div>
-
-                                
+								</div>                                
                             </div>
  
                      </div>
@@ -464,7 +462,7 @@
                    <?php else: ?>
                   
                     <div class="col-12 pt-10">
-                    <h4 class="mb-10">Carrinho vázio</h4>
+                    <h4 class="mb-10">Carrinho vazio</h4>
                     <div class="coupon-all">
                    
                         <div class="coupon">

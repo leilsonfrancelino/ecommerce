@@ -16,6 +16,8 @@ class Welcome extends CI_Controller {
 		$data = array(
 			'titulo' => 'Seja muito bem vindo(a) à Loja Virtual '.$sistema->sistema_nome_fantasia,
 			'produtos_destaques' => $this->loja_model->get_produtos_destaques($sistema->sistema_produtos_destaques),
+			//'produtos_lateral_direita' => $this->loja_model->get_produtos_lateral(),
+			'produtos_mais_vendidos' => $this->loja_model->get_produtos_mais_vendidos(),
 		);		
 				
 		$this->load->view('web/layout/header', $data);
