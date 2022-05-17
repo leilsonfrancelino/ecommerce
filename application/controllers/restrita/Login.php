@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('Ação não permitida');
-	<?php
-	defined('BASEPATH') OR exit('Ação não permitida');
-
+	
 	class Login extends CI_Controller {	
 		
 		public function index() {
@@ -27,7 +25,7 @@ defined('BASEPATH') OR exit('Ação não permitida');
 					 $this->session->set_flashdata('sucesso', 'Seja bem vindo(a)!');
 					 redirect('restrita');
 				 }else{
-					 $this->session->set_flashdata('erro', 'Você não tem permisão de administrador!');
+					 $this->session->set_flashdata('erro', 'Você não tem permissão de administrador!');
 					 redirect('restrita/login');
 				 }
 			}else{

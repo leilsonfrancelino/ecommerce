@@ -461,7 +461,7 @@
 
                    <?php else: ?>
                   
-                    <div class="col-12 pt-10">
+                    <div class="col-12 pt-10" style="text-align: center">
                     <h4 class="mb-10">Carrinho vazio</h4>
                     <div class="coupon-all">
                    
@@ -470,9 +470,7 @@
                         </div>
                                             
                     </div>
-                    <div class="container">
-                        <img width="35%" src="<?php echo base_url('public/web/images/empty_cart.png') ?>" alt="carrinho vazio">
-                    </div>
+                    
                     </div>
                   
                         

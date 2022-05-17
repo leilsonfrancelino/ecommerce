@@ -201,7 +201,7 @@ class Perfil extends CI_Controller
 
                    $dados_usuario = html_escape($dados_usuario);
 
-                   $usurio_id = $usuario->id;
+                   $usuario_id = $usuario->id;
                    $this->ion_auth->update($usurio_id, $dados_usuario);
 
                    $this->session->set_flashdata('sucesso', 'Cliente Editado');

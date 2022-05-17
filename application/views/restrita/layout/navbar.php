@@ -11,9 +11,11 @@
         </div>
         <ul class="navbar-nav navbar-right">         
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user"> 
+		  <?php $user = $this->ion_auth->user()->row();  ?>
       <i class="fas fa-user-cog text-dark"></i><span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Olá.</div>
+              <div class="dropdown-title">Olá, <?php echo $user->first_name; ?></div>
+			  
                <a href="<?php echo base_url('restrita/usuarios/core/'.$this->session->userdata('user_id')); ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> Perfil</a> 
           			 
               <div class="dropdown-divider"></div>

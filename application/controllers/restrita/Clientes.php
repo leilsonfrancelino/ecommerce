@@ -210,7 +210,7 @@ class Clientes extends CI_Controller {
 				   
 				   $dados_usuario = html_escape($dados_usuario);
 				   
-				   $user_id = $usuario->id;
+				   $user_id = $usuario->id;				  
 				   
 				   $this->ion_auth->update($user_id, $dados_usuario);				   
 				   
