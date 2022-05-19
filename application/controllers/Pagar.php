@@ -113,7 +113,7 @@ class Pay extends CI_Controller{
                 $group = array('2');//grupo de clientes
                 if($this->ion_auth->register($username, $password, $email, $dados_usuario, $group)){
                     $retorno['erro'] = 0;
-                    $retorno['mensagem'] = 'Usuario do cliente criado com sucesso';
+                    $retorno['mensagem'] = 'Usuário do cliente criado com sucesso';
                 }else{
                     $retorno['erro'] = 5;
                     $retorno['mensagem'] = 'Nao foi possivel criar o usuario do cliente';
@@ -160,7 +160,7 @@ class Pay extends CI_Controller{
         }        
         if(!$cliente = $this->core_model->get_by_id('clientes', array('cliente_id' => $cliente_user_id))){
             $retorno['erro'] = 6;
-            $retorno['mensagem'] = 'Cliente nao localizado'; 
+            $retorno['mensagem'] = 'Cliente não foi localizado'; 
             echo json_encode($retorno);
             exit();
         }else{
@@ -168,7 +168,7 @@ class Pay extends CI_Controller{
             $hash_pagamento = $this->input->post('hash_pagamento'); //verifica se o hash_pagamento contem valor
             if(!$hash_pagamento){
                 $retorno['erro'] = 6;
-                $retorno['mensagem'] = 'Nao foi gerado o hash de pagamento'; 
+                $retorno['mensagem'] = 'Não foi gerado o hash de pagamento'; 
                 echo json_encode($retorno);
                 exit();
             }else{

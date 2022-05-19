@@ -228,7 +228,7 @@ var App_checkout = function(){
                         $('#cliente_email').html(response.cliente_email);
                         $('#opcao_frete_carrinho').html(response.opcao_frete_carrinho);
                         $('#cliente_telefone_movel').html(response.cliente_telefone_movel);
-                        $('#cliente_cep').html(response.cliente_cep);
+                        $('#erro_cep').html(response.cliente_cep);
                         $('#cliente_endereco').html(response.cliente_endereco);
                         $('#cliente_numero_endereco').html(response.cliente_numero_endereco);
                         $('#cliente_bairro').html(response.cliente_bairro);
