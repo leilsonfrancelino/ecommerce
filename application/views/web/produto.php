@@ -75,8 +75,8 @@
                                         <input type="text" id="cep" name="cep" class="cart-plus-minus-box cep" placeholder="Digite o CEP">
                                     </div>
                                 </div>                                        
-                            <button type="button" id="btn-calcula-frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-primary" style="font-size: 20px; padding: 8px 30px" type="submit"><span class="text-white"></span><span class="text-white">&nbsp;&nbsp;ok</span></button>
-                            <div class="pt-15 text-primary" id="retorno-frete"></div>                               
+                             <button type="button" id="btn_calcula_frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-info" style="padding: 11px 20px">Calcular</button>
+                            <div id="retorno_frete" class="mt-15"></div>
                             <?php echo form_close(); ?>
                         </div>
                         
