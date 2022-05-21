@@ -27,7 +27,7 @@ var App = function() {
             var produto_quantidade = $('#produto_quantidade').val();
             $.ajax({
                 type: 'post',
-                url: BASE_URL + 'cart/insert',
+                url: BASE_URL + 'carrinho/insert',
                 dataType: 'json',
                 data: {
                     produto_id: produto_id,
@@ -39,7 +39,7 @@ var App = function() {
             }).then(function(response) {
                 $('#top-cart').load(' #top-cart > *');
                 $('#list-itens').load(' #list-itens > *');
-                $(".btn-add-produto").html('Add ao carrinho');
+                $(".btn-add-produto").html('Adicionado');
                 $("#mensagem").html('<div style="width:52.5%" class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                 console.log(response);
             });

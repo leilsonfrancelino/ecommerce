@@ -58,6 +58,7 @@ class Checkout extends CI_Controller {
               $curl = curl_init();
               curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($curl, CURLOPT_URL, $url_endereco);
+			  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
               $resultado = curl_exec($curl);
 

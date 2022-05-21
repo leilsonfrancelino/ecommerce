@@ -61,25 +61,24 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-12">
-                                    
+                                    <div class="col-12">                                    
                                         <div class="coupon-all">
-                                            <div class="coupon">
+                                            <div class="coupon" style="text-align: left">
                                                 <input id="cep" class="input-text cep" name="cep"  placeholder="CEP" type="text">
 
                                                 <button class="btn btn-info" id="btn-calcula-frete-carrinho" style="padding:8.1px 17px; border-radius:1px;"  type="button"> Calcular frete</button>
-                                                <div class="pt-10 text-info" id="retorno-frete"></div>
+                                                
+												<div class="pt-10 text-info" id="retorno-frete"></div>
                                             </div>
                                             
-                                            <div class="coupon2">
-                                                
+                                            <div class="coupon2">                                                
                                                 <a href="<?php echo base_url('carrinho'); ?>" class="button"><input class="button"  value="Atualizar Carrinho" > </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="coupon-all">
-                                            <div class="coupon">
+                                            <div class="coupon" style="text-align: left">
                                                
                                                <button class=" btn btn-outline-info btn-limpa-carrinho" style="border-radius: 2px; font-weigth: 700; cursor:point; heigth: 42px; border-color:#007bb0">Limpar Carrinho</button>
                                             </div>
@@ -93,7 +92,7 @@
                                         <div class="cart-page-total">
                                             <h2>Total Carrinho</h2>
                                             <ul>
-                                                <li>Subtotal <span>R$&nbsp<?php echo $this->carrinho_compras->get_total(); ?></li>
+                                                <li>Subtotal <span>R$&nbsp<?php echo $this->carrinho_compras->get_total(); ?></span></li>
                                                 <li>Frete <span id="opcao_frete_escolhido"> R$&nbsp;0.00 </span></li>
                                                 <li>Total Pedido<span id="total_final_carrinho">  R$&nbsp;<?php echo $this->carrinho_compras->get_total(); ?> </span></li>
                                             </ul>

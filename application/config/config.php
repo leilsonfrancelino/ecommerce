@@ -458,6 +458,8 @@ $config['csrf_exclude_uris'] = array(
 									'restrita/produtos/get_sub_category.*',
 									'ajax/.*',
 									'carrinho/.*',
+									'checkout/.*',
+									'pagar/.*',
 								);
 
 /*

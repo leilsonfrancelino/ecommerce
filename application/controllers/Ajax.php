@@ -118,7 +118,7 @@ class Ajax extends CI_Controller{
 
                         $valor_formatado = str_replace(',', '.', $dados->Valor);
 
-                        number_format($valor_calculado = ($valor_formatado + $config_correios->config_somar_frete), 2);
+                        number_format($valor_calculado = ($valor_formatado + $config_correios->config_somar_frete), 2, '.', '');
 
                         $frete_calculado .= '<p>' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . '&nbsp;R$&nbsp;' . $valor_calculado . ', <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis<p>';
                     }

@@ -69,7 +69,7 @@
                                         <div class="cart-page-total">
                                            
                                             <ul>
-                                                <li>Subtotal <span>R$&nbsp<?php echo $this->carrinho_compras->get_total(); ?></li>
+                                                <li>Subtotal <span>R$&nbsp<?php echo $this->carrinho_compras->get_total(); ?></span></li>
                                                 <li>Frete <span id="opcao_frete_escolhido"> R$&nbsp;0.00 </span></li>
                                                 <li>Total Pedido<span id="total_final_carrinho">  R$&nbsp;<?php echo $this->carrinho_compras->get_total(); ?> </span></li>
                                             </ul>

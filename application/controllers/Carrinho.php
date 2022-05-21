@@ -3,14 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Carrinho extends CI_Controller{
 
-    public function __construct()
-    {
-        parent::__construct();
-       
+    public function __construct() {
+        parent::__construct();       
     }
 
-    public function index()
-    {
+    public function index() {
         $data = array(
             'titulo' => 'Carrinho de Compra',
              'scripts' => array (
@@ -33,8 +30,7 @@ class Carrinho extends CI_Controller{
         $this->load->view('web/layout/footer');
     }
 
-    public function insert()
-    {
+    public function insert(){
         $produto_id = (int) $this->input->post('produto_id');
         $produto_quantidade  = (int) $this->input->post('produto_quantidade');
 
@@ -72,9 +68,7 @@ class Carrinho extends CI_Controller{
         echo json_encode($retorno);
     }
 
-    public function delete()
-    {
-
+    public function delete(){
         $retorno = array();
 
             if($produto_id = (int) $this->input->post('produto_id')){
@@ -88,8 +82,7 @@ class Carrinho extends CI_Controller{
         echo json_encode($retorno);
     }
 
-    public function update()
-    {
+    public function update(){
         $produto_id = (int) $this->input->post('produto_id');
         $produto_quantidade = (int) $this->input->post('produto_quantidade');
 
@@ -118,8 +111,7 @@ class Carrinho extends CI_Controller{
         echo json_encode($retorno);
     }
 
-    public function clean()
-    {
+    public function clean() {
         $retorno = array();
 
         if($this->input->post('clean') && $this->input->post('clean') == true){
@@ -132,14 +124,11 @@ class Carrinho extends CI_Controller{
         echo json_encode($retorno);
     }
 
-    public function calcula_frete()
-    {
+    public function calcula_frete() {
         $this->form_validation->set_rules('cep', 'CEP destino', 'trim|required|exact_length[9]');
 
         if($this->form_validation->run()){
-
             $cep_destino = str_replace('-', '', $this->input->post('cep'));
-
             $retorno = array();
 
               //Montando a URL para consultar o endereço
@@ -147,10 +136,10 @@ class Carrinho extends CI_Controller{
               $url_endereco .= $cep_destino;
               $url_endereco .= '/json/';
 
-
               $curl = curl_init();
               curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
               curl_setopt($curl, CURLOPT_URL, $url_endereco);
+			  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
               $resultado = curl_exec($curl);
 
@@ -167,17 +156,13 @@ class Carrinho extends CI_Controller{
                   $retorno['mensagem'] = 'Sucesso';
                   $retorno_endereco = $retorno['retorno_endereco'] = $resultado->logradouro . ', ' . $resultado->bairro . ', ' . $resultado->localidade . ' - ' . $resultado->uf . ', ' . $resultado->cep;
               }
-
               
                 //Informações dos correios no banco de dados
                 $config_correios = $this->core_model->get_by_id('config_correios', array('config_id' => 1));
 
                 //recupera o maior produto e o total de peso dos itens do carrinho
                 $produto = $this->carrinho_compras->get_produto_maior_dimensao();
-                $total_pesos = $this->carrinho_compras->get_total_pesos();
-
-
-                
+                $total_pesos = $this->carrinho_compras->get_total_pesos();                
 
                 $url_correios = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
                 $url_correios .= 'nCdEmpresa=08082650';
@@ -229,7 +214,7 @@ class Carrinho extends CI_Controller{
 
                         //$frete_calculado .= '<p>' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . '&nbsp;R$&nbsp;' . $valor_calculado . ', <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis<p>';
 
-                        $frete_calculado .= '<div class="custom-control custom-radio">
+                       $frete_calculado .= '<div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input" id="'. $dados->Codigo .'" name="opcao_frete_carrinho" value="'.$valor_calculado.'" data-valor_frete="'.$valor_calculado.'" data-valor_final_carrinho="'. number_format($valor_final_carrinho, 2) .'">
                         <label class="custom-control-label" for="'. $dados->Codigo .'">' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') .' &nbsp;R$&nbsp;'.$valor_calculado.'&nbsp;&nbsp; Prazo <span class="badge badge-primary py-0 pt-1">'  . $dados->PrazoEntrega . '</span> dias úteis</label>
                       </div>';

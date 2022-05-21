@@ -126,7 +126,6 @@ var App_carrinho = function(){
         $('[name="opcao_frete_carrinho"]').on('click', function(){
             var opcao_frete_escolhido = $(this).attr('data-valor_frete');
             var total_final_carrinho = $(this).attr('data-valor_final_carrinho');
-
             $('#opcao_frete_escolhido').html('R$&nbsp;'+ opcao_frete_escolhido);
             $('#total_final_carrinho').html('R$&nbsp;'+ total_final_carrinho);
         });
