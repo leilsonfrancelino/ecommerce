@@ -76,7 +76,7 @@
                                     </div>
                                 </div>                                        
                              <button type="button" id="btn_calcula_frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-info" style="padding: 11px 20px">Calcular</button>
-                            <div id="retorno_frete" class="mt-15"></div>
+                            <div id="retorno_frete" class="mt-15 text-info"></div>
                             <?php echo form_close(); ?>
                         </div>
                         
