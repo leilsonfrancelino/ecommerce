@@ -1,6 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('Acao nao permitida');
-class Pay extends CI_Controller{
+class Pagar extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->library('user_agent');
@@ -8,7 +8,7 @@ class Pay extends CI_Controller{
     public function index(){
         redirect('/');
     }
-    public function pagseguro_session_id(){
+    public function pag_seguro_session_id(){
         if(!$this->input->is_ajax_request()){
             exit('Açao nao permitida');
         }

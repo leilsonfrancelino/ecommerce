@@ -1,553 +1,490 @@
-var App_checkout = function(){
-    
- /*
-    var del_item_cart = function(){
-        $('.btn-del-item').on('click', function(){
-           var produto_id = $(this).attr('data-id');
-         
+var App_checkout = function () {
 
-           //alert(produto_id );
 
-           $.ajax({
-            type: 'post',
-            url: BASE_URL + 'carrinho/delete',
-            dataType: 'json',
-            data: {
-                produto_id: produto_id, 
-            },
-           }).then(function(response){
-              
-            if(response.erro === 0 ) {
-                $(this).parent().parent().remove();
-                window.location.href = BASE_URL + 'carrinho';
-            }else{
-                alert('Não foi possivel excluir o produto!');
-            }
-                console.log(response);
-           });
-        });
-    }
+    var set_session_payment = function () {
 
-    var altera_quantidade_carrinho = function(){
-
-        $('.btn-altera-quantidade').on('click', function(){
-           var produto_id = $(this).attr('data-id');
-           var produto_quantidade = $("#produto_" + produto_id).val();
-         
-            if(produto_quantidade == "" || produto_quantidade < 1){
-               // alert("informe a quantidade do produto");
-                $('#mensagem').html('<div class="alert alert-success alert-dismissible fade show mt-2" role="alert"> A quantidade não pode ser Zero(0) <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-
-            }else{
-                $.ajax({
-                    type: 'post',
-                    url: BASE_URL + 'carrinho/update',
-                    dataType: 'json',
-                    data: {
-                        produto_id: produto_id, 
-                        produto_quantidade: produto_quantidade,
-                    },
-                   }).then(function(response){
-                      
-                    if(response.erro === 0 ) {
-                     
-                        window.location.href = BASE_URL + 'carrinho';
-                        
-                   }else{
-
-                    $('#mensagem').html('<div class="alert alert-success alert-dismissible fade show mt-2" role="alert"> ' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-
-                    }
-                        console.log(response);
-                  }); 
-            }
-
-         
-        });
-    }
-
-    var limpa_carrinho = function(){
-
-        $('.btn-limpa-carrinho').on('click', function(){
-            $.ajax({
-                type: 'post',
-                url: BASE_URL + 'carrinho/clean',
-                dataType: 'json',
-                data: {
-                    clean: true, 
-                    
-                },
-               }).then(function(response){
-                  
-                if(response.erro === 0 ) {
-                 
-                    window.location.href = BASE_URL + 'carrinho';
-                    
-               }else{
-                alert('Houve um erro ao limpar o carrinho');
-               // $('#mensagem').html('<div class="alert alert-success alert-dismissible fade show mt-2" role="alert"> ' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-
-                }
-                    console.log(response);
-              }); 
-
-         
-        });
-    }
-*/
-
-    var set_session_payment = function(){
         $.ajax({
+
             url: BASE_URL + 'pagar/pag_seguro_session_id',
             dataType: 'json',
-            success: function(response){
-                if(response.erro === 0){
-                    var session_id = response.session_id;
+            success: function (response) {
 
-                    if(session_id){
+                if (response.erro === 0) {
+
+                    var session_id = response.session_id;
+                    if (session_id) {
+
                         PagSeguroDirectPayment.setSessionId(session_id);
                     }else{
                         window.location.href = BASE_URL + 'checkout';
                     }
+
+
                 }else{
-                   console.log(response.mensagem);
+
+                    console.log(response.mensagem);
                 }
-            },
 
-            error: function(error){
-                alert('Não foi possivel conectar o pagseguro');
+            },
+            error: function (error) {
+
+                alert('Não foi possível integrar com o pagseguro');
             }
+
         });
     }
 
-    var calcula_frete = function(){
-        $('#btn-busca-cep').on('click', function(){
 
-          // var cliente_cep = $('#cliente_cep').val();
-          var cliente_cep = $("#cliente_cep").val();
+    var calcula_frete = function () {
 
-          // alert(cliente_cep);
-          
+        $('#btn-busca-cep').on('click', function () {
 
-           $.ajax({
-            type: 'post',
-            url: BASE_URL + 'checkout/calcula_frete',
-            dataType: 'json',
-            data: {
-               cliente_cep: cliente_cep, 
-            },
-            beforeSend: function(){
-                $('#erro-frete').html('');
-                $('.endereco').addClass('d-none');
-                $('#btn-busca-cep').html('<span class="text-black"> <i class="fa fa-cog fa-spin"></i> &nbsp Calculando... </span>');
-            },
-           }).then(function(response){
-              
-            if(response.erro === 0 ) {
-                $('.endereco').removeClass('d-none');
-                $('#btn-busca-cep').html('Calcular Frete');
-                $('#retorno-frete').html(response.retorno_endereco);
+            var cliente_cep = $("#cliente_cep").val();
+            $.ajax({
 
-                $('[name="cliente_endereco"]').val(response.endereco);
-                $('[name="cliente_bairro"]').val(response.bairro);
-                $('[name="cliente_cidade"]').val(response.cidade);
+                type: 'post',
+                url: BASE_URL + 'checkout/calcula_frete',
+                dataType: 'json',
+                data: {
+                    cliente_cep: cliente_cep,
+                },
+                beforeSend: function () {
+                    $('#erro_frete').html('');
+                    $('.endereco').addClass('d-none');
+                    $('#btn-busca-cep').html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;Calculando...</span>');
+                },
+            }).then(function (response) {
 
-               
-                get_opcao_frete_carrinho();
-            }else{
-                $('#btn-busca-cep').html('Calcular Frete');
-                $('#erro-frete').html(response.retorno_endereco);
-            }
+
+                if (response.erro === 0) {
+
+//Sucesso
+
+//Exibe os campos escondidos
+                    $('.endereco').removeClass('d-none');
+                    $('#btn-busca-cep').html('Calcular');
+                    $('#retorno-frete').html(response.retorno_endereco);
+                    //Preenchendo os inputs com os valores adequados
+                    $('[name="cliente_endereco"]').val(response.endereco);
+                    $('[name="cliente_bairro"]').val(response.bairro);
+                    $('[name="cliente_cidade"]').val(response.cidade);
+                    get_opcao_frete_carrinho(); // Chamo a função aqui no response para criar o name opcao_frete_carrinho;
+
+                } else {
+
+//Erro de formatação ou validação
+
+                    $('#btn-busca-cep').html('Calcular');
+                    $('#erro_frete').html(response.retorno_endereco);
+                }
+
+
                 console.log(response);
-           });
+            });
         });
     }
 
-    var get_opcao_frete_carrinho = function(){
-        $('[name="opcao_frete_carrinho"]').on('click', function(){
+
+    var get_opcao_frete_carrinho = function () {
+
+
+        $('[name="opcao_frete_carrinho"]').on('click', function () {
+
             var opcao_frete_escolhido = $(this).attr('data-valor_frete');
             var total_final_carrinho = $(this).attr('data-valor_final_carrinho');
-
-            $('#opcao_frete_escolhido').html('R$&nbsp;'+ opcao_frete_escolhido);
-            $('#total_final_carrinho').html('R$&nbsp;'+ total_final_carrinho);
+            $('#opcao_frete_escolhido').html('R$&nbsp;' + opcao_frete_escolhido);
+            $('#total_final_carrinho').html('R$&nbsp;' + total_final_carrinho);
         });
     }
 
-    
-    var pagar_boleto = function(){
 
-        $('#btn-pagar-boleto').on('click', function(){
-            
-           $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
+    var pagar_boleto = function () {
 
-           var form = $('.do-payment');
 
+        $('#btn-pagar-boleto').on('click', function () {
+
+
+            $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
+            var form = $('.do-payment');
             $.ajax({
                 type: "post",
                 url: BASE_URL + 'pagar/boleto',
                 dataType: 'json',
                 data: form.serialize(),
-                beforeSend: function(){
-                    //Apagar erros quando houver
-                    $('#opcao_boleto').html('<span class="text-black"> <i class="fa fa-cog fa-spin"></i> &nbsp Processando Pagamento... </span>');
-                   
-                    $('#cliente_nome').html('');
-                    $('#cliente_sobrenome').html('');
-                    $('#cliente_data_nascimento').html('');
-                    $('#cliente_cpf').html('');
-                    $('#cliente_email').html('');
-                    $('#opcao_frete_carrinho').html('');
-                    $('#cliente_telefone_movel').html('');
-                    $('#cliente_cep').html('');
-                    $('#cliente_endereco').html('');
-                    $('#cliente_numero_endereco').html('');
-                    $('#cliente_bairro').html('');
-                    $('#cliente_cidade').html('');
-                    $('#cliente_estado').html('');
-                    $('#cliente_senha').html('');
-                    $('#cliente_confirmacao').html('');
-
+                beforeSend: function () {
+                    ///apagar erros quando houver
+                    $('#opcao_boleto').html('<span class="text-info"><i class="fa fa-cog fa-spin"></i>&nbsp;processando pagamento...</span>');
+                    $("#cliente_nome").html('');
+                    $("#cliente_sobrenome").html('');
+                    $("#cliente_cpf").html('');
+                    $("#erro_frete").html(''); //erro_frete, pois já existe o id 'cliente_cep'
+                    $("#cliente_data_nascimento").html('');
+                    $("#cliente_email").html('');
+                    $("#cliente_telefone_movel").html('');
+                    $("#opcao_frete_carrinho").html('');
+                    $("#cliente_endereco").html('');
+                    $("#cliente_numero_endereco").html('');
+                    $("#cliente_bairro").html('');
+                    $("#cliente_cidade").html('');
+                    $("#cliente_senha").html('');
+                    $("#confirmacao").html('');
                 },
+                success: function (response) {
 
+                    if (response.erro === 0) {
 
-                success: function(response){
-                    if(response.erro === 0){
+                        window.location = BASE_URL + 'sucesso';
+                        $("#opcao_boleto").html('');
+                    } else {
 
-                      window.location = BASE_URL + 'sucesso';
-                      //alert('Sucesso');
-                      $('#opcao_boleto').html('');
-
-                    }else{
                         console.log(response.mensagem);
-                        $('#opcao_boleto').html('');
-                        
-                        $('#cliente_nome').html(response.cliente_nome);
-                        $('#cliente_sobrenome').html(response.cliente_sobrenome);
-                        $('#cliente_data_nascimento').html(response.cliente_data_nascimento);
-                        $('#cliente_cpf').html(response.cliente_cpf);
-                        $('#cliente_email').html(response.cliente_email);
-                        $('#opcao_frete_carrinho').html(response.opcao_frete_carrinho);
-                        $('#cliente_telefone_movel').html(response.cliente_telefone_movel);
-                        $('#erro_cep').html(response.cliente_cep);
-                        $('#cliente_endereco').html(response.cliente_endereco);
-                        $('#cliente_numero_endereco').html(response.cliente_numero_endereco);
-                        $('#cliente_bairro').html(response.cliente_bairro);
-                        $('#cliente_cidade').html(response.cliente_cidade);
-                        $('#cliente_estado').html(response.cliente_estado);
-                        $('#cliente_senha').html(response.cliente_senha);
-                        $('#cliente_confirmacao').html(response.cliente_confirmacao);
-
+                        $("#opcao_boleto").html('');
+                        $("#cliente_nome").html(response.cliente_nome);
+                        $("#cliente_sobrenome").html(response.cliente_sobrenome);
+                        $("#cliente_cpf").html(response.cliente_cpf);
+                        $("#erro_frete").html(response.cliente_cep); //erro_frete, pois já existe o id 'cliente_cep'
+                        $("#cliente_data_nascimento").html(response.cliente_data_nascimento);
+                        $("#cliente_email").html(response.cliente_email);
+                        $("#cliente_telefone_movel").html(response.cliente_telefone_movel);
+                        $("#opcao_frete_carrinho").html(response.opcao_frete_carrinho);
+                        $("#cliente_endereco").html(response.cliente_endereco);
+                        $("#cliente_numero_endereco").html(response.cliente_numero_endereco);
+                        $("#cliente_bairro").html(response.cliente_bairro);
+                        $("#cliente_cidade").html(response.cliente_cidade);
+                        $("#cliente_senha").html(response.cliente_senha);
+                        $("#confirmacao").html(response.confirmacao);
                     }
-                },
 
-                error: function(error){
-                    alert('Não foi possivel completar a compra');
+                },
+                error: function (error) {
+
+                    alert('Não foi possível processar o pagamento. Contacte o suporte');
                 }
+
             });
         });
-
-       
     }
 
-    var pagar_debito_conta = function(){
 
-        $('#btn-debito-conta').on('click', function(){
-            
-           $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
+    var pagar_debito_conta = function () {
 
-           var form = $('.do-payment');
 
+        $('#btn-debito-conta').on('click', function () {
+
+
+            $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
+            var form = $('.do-payment');
             $.ajax({
                 type: "post",
                 url: BASE_URL + 'pagar/debito_conta',
                 dataType: 'json',
                 data: form.serialize(),
-                beforeSend: function(){
-                    //Apagar erros quando houver
-                    $('#opcao_bnt_debito_conta').html('<span class="text-black"> <i class="fa fa-cog fa-spin"></i> &nbsp Processando Pagamento... </span>');
-                   
-                    $('#cliente_nome').html('');
-                    $('#cliente_sobrenome').html('');
-                    $('#cliente_data_nascimento').html('');
-                    $('#cliente_cpf').html('');
-                    $('#cliente_email').html('');
-                    $('#opcao_frete_carrinho').html('');
-                    $('#cliente_telefone_movel').html('');
-                    $('#cliente_cep').html('');
-                    $('#cliente_endereco').html('');
-                    $('#cliente_numero_endereco').html('');
-                    $('#cliente_bairro').html('');
-                    $('#cliente_cidade').html('');
-                    $('#cliente_estado').html('');
-                    $('#cliente_senha').html('');
-                    $('#cliente_confirmacao').html('');
-                    $('#opcao_banco').html('');
-
+                beforeSend: function () {
+                    ///apagar erros quando houver
+                    $('#opcao_btn_debito_conta').html('<span class="text-info"><i class="fa fa-cog fa-spin"></i>&nbsp;processando pagamento...</span>');
+                    $("#cliente_nome").html('');
+                    $("#cliente_sobrenome").html('');
+                    $("#cliente_cpf").html('');
+                    $("#erro_frete").html(''); //erro_frete, pois já existe o id 'cliente_cep'
+                    $("#cliente_data_nascimento").html('');
+                    $("#cliente_email").html('');
+                    $("#cliente_telefone_movel").html('');
+                    $("#opcao_frete_carrinho").html('');
+                    $("#cliente_endereco").html('');
+                    $("#cliente_numero_endereco").html('');
+                    $("#cliente_bairro").html('');
+                    $("#cliente_cidade").html('');
+                    $("#cliente_senha").html('');
+                    $("#confirmacao").html('');
                 },
+                success: function (response) {
 
+                    if (response.erro === 0) {
 
-                success: function(response){
-                    if(response.erro === 0){
+                        window.location = BASE_URL + 'sucesso';
+                        $("#opcao_btn_debito_conta").html('');
+                    } else {
 
-                      window.location = BASE_URL + 'sucesso';
-                      //alert('Sucesso');
-                      $('#opcao_bnt_debito_conta').html('');
-
-                    }else{
                         console.log(response.mensagem);
-                        $('#opcao_bnt_debito_conta').html('');
-                        
-                        $('#cliente_nome').html(response.cliente_nome);
-                        $('#cliente_sobrenome').html(response.cliente_sobrenome);
-                        $('#cliente_data_nascimento').html(response.cliente_data_nascimento);
-                        $('#cliente_cpf').html(response.cliente_cpf);
-                        $('#cliente_email').html(response.cliente_email);
-                        $('#opcao_frete_carrinho').html(response.opcao_frete_carrinho);
-                        $('#cliente_telefone_movel').html(response.cliente_telefone_movel);
-                        $('#cliente_cep').html(response.cliente_cep);
-                        $('#cliente_endereco').html(response.cliente_endereco);
-                        $('#cliente_numero_endereco').html(response.cliente_numero_endereco);
-                        $('#cliente_bairro').html(response.cliente_bairro);
-                        $('#cliente_cidade').html(response.cliente_cidade);
-                        $('#cliente_estado').html(response.cliente_estado);
-                        $('#cliente_senha').html(response.cliente_senha);
-                        $('#cliente_confirmacao').html(response.cliente_confirmacao);
-                        $('#opcao_banco').html(response.opcao_banco);
-
+                        $("#opcao_btn_debito_conta").html('');
+                        $("#cliente_nome").html(response.cliente_nome);
+                        $("#cliente_sobrenome").html(response.cliente_sobrenome);
+                        $("#cliente_cpf").html(response.cliente_cpf);
+                        $("#erro_frete").html(response.cliente_cep); //erro_frete, pois já existe o id 'cliente_cep'
+                        $("#cliente_data_nascimento").html(response.cliente_data_nascimento);
+                        $("#cliente_email").html(response.cliente_email);
+                        $("#cliente_telefone_movel").html(response.cliente_telefone_movel);
+                        $("#opcao_frete_carrinho").html(response.opcao_frete_carrinho);
+                        $("#cliente_endereco").html(response.cliente_endereco);
+                        $("#cliente_numero_endereco").html(response.cliente_numero_endereco);
+                        $("#cliente_bairro").html(response.cliente_bairro);
+                        $("#cliente_cidade").html(response.cliente_cidade);
+                        $("#cliente_senha").html(response.cliente_senha);
+                        $("#confirmacao").html(response.confirmacao);
+                        $("#opcao_banco").html(response.opcao_banco);
                     }
-                },
 
-                error: function(error){
-                    alert('Não foi possivel completar a compra');
+                },
+                error: function (error) {
+
+                    alert('Não foi possível processar o pagamento. Contacte o suporte');
                 }
+
             });
         });
-
-       
     }
 
-    var pagar_cartao_credito = function(){
 
-        $('#btn-pagar-cartao').on('click', function(){
+    var pagar_cartao_credito = function () {
+
+
+        $('#btn-pagar-cartao').on('click', function () {
+
 
             gerar_token_pagamento();
-            
+
+
             $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
 
             var form = $('.do-payment');
- 
-             $.ajax({
-                 type: "post",
-                 url: BASE_URL + 'pagar/cartao_credito',
-                 dataType: 'json',
-                 data: form.serialize(),
-                 beforeSend: function(){
-                     //Apagar erros quando houver
-                     $('#opcao_pagar_cartao').html('<span class="text-black"> <i class="fa fa-cog fa-spin"></i> &nbsp Processando Pagamento... </span>');
-                    
-                     $('#cliente_nome').html('');
-                     $('#cliente_sobrenome').html('');
-                     $('#cliente_data_nascimento').html('');
-                     $('#cliente_cpf').html('');
-                     $('#cliente_email').html('');
-                     $('#opcao_frete_carrinho').html('');
-                     $('#cliente_telefone_movel').html('');
-                     $('#cliente_cep').html('');
-                     $('#cliente_endereco').html('');
-                     $('#cliente_numero_endereco').html('');
-                     $('#cliente_bairro').html('');
-                     $('#cliente_cidade').html('');
-                     $('#cliente_estado').html('');
-                     $('#cliente_senha').html('');
-                     $('#cliente_confirmacao').html('');
-                     $('#opcao_banco').html('');
- 
-                 },
- 
- 
-                 success: function(response){
-                     if(response.erro === 0){
- 
-                       window.location = BASE_URL + 'sucesso';
-                       //alert('Sucesso');
-                      
- 
-                     }else{
 
-                        if(response.token_pagamento){
-                            $("opcao_pagar_cartao").html('<span class="text-danger"> &nbsp Verifique os dados do cartão de credito e tente novamente </span>');
+
+            $.ajax({
+                type: "post",
+                url: BASE_URL + 'pagar/cartao_credito',
+                dataType: 'json',
+                data: form.serialize(),
+                beforeSend: function () {
+                    ///apagar erros quando houver
+                    $('#opcao_pagar_cartao').html('<span class="text-info"><i class="fa fa-cog fa-spin"></i>&nbsp;processando pagamento...</span>');
+                    $("#cliente_nome").html('');
+                    $("#cliente_sobrenome").html('');
+                    $("#cliente_cpf").html('');
+                    $("#erro_frete").html(''); //erro_frete, pois já existe o id 'cliente_cep'
+                    $("#cliente_data_nascimento").html('');
+                    $("#cliente_email").html('');
+                    $("#cliente_telefone_movel").html('');
+                    $("#opcao_frete_carrinho").html('');
+                    $("#cliente_endereco").html('');
+                    $("#cliente_numero_endereco").html('');
+                    $("#cliente_bairro").html('');
+                    $("#cliente_cidade").html('');
+                    $("#cliente_senha").html('');
+                    $("#confirmacao").html('');
+                },
+
+                success: function (response) {
+
+                    if (response.erro === 0) {
+
+                        window.location = BASE_URL + 'sucesso';
+
+                    } else {
+
+
+                        if (response.token_pagamento) {
+                            $("#opcao_pagar_cartao").html('<span class="text-danger">Verifique os dados do cartão de crédito e tente novamente</span>');
                             gerar_token_pagamento();
                         }
-                        
 
-                         $('#cliente_nome').html(response.cliente_nome);
-                         $('#cliente_sobrenome').html(response.cliente_sobrenome);
-                         $('#cliente_data_nascimento').html(response.cliente_data_nascimento);
-                         $('#cliente_cpf').html(response.cliente_cpf);
-                         $('#cliente_email').html(response.cliente_email);
-                         $('#opcao_frete_carrinho').html(response.opcao_frete_carrinho);
-                         $('#cliente_telefone_movel').html(response.cliente_telefone_movel);
-                         $('#cliente_cep').html(response.cliente_cep);
-                         $('#cliente_endereco').html(response.cliente_endereco);
-                         $('#cliente_numero_endereco').html(response.cliente_numero_endereco);
-                         $('#cliente_bairro').html(response.cliente_bairro);
-                         $('#cliente_cidade').html(response.cliente_cidade);
-                         $('#cliente_estado').html(response.cliente_estado);
-                         $('#cliente_senha').html(response.cliente_senha);
-                         $('#cliente_confirmacao').html(response.cliente_confirmacao);
-                         
- 
-                     }
-                 },
- 
-                 error: function(error){
-                     alert('Não foi possivel completar a compra');
-                 }
-             });
-         
+                        $("#cliente_nome").html(response.cliente_nome);
+                        $("#cliente_sobrenome").html(response.cliente_sobrenome);
+                        $("#cliente_cpf").html(response.cliente_cpf);
+                        $("#erro_frete").html(response.cliente_cep); //erro_frete, pois já existe o id 'cliente_cep'
+                        $("#cliente_data_nascimento").html(response.cliente_data_nascimento);
+                        $("#cliente_email").html(response.cliente_email);
+                        $("#cliente_telefone_movel").html(response.cliente_telefone_movel);
+                        $("#opcao_frete_carrinho").html(response.opcao_frete_carrinho);
+                        $("#cliente_endereco").html(response.cliente_endereco);
+                        $("#cliente_numero_endereco").html(response.cliente_numero_endereco);
+                        $("#cliente_bairro").html(response.cliente_bairro);
+                        $("#cliente_cidade").html(response.cliente_cidade);
+                        $("#cliente_senha").html(response.cliente_senha);
+                        $("#confirmacao").html(response.confirmacao);
+
+
+                    }
+
+                },
+                error: function (error) {
+
+                    alert('Não foi possível processar o pagamento. Contacte o suporte');
+                }
+
+            });
+
+
+
         });
-        
-        function gerar_token_pagamento(){
+        function gerar_token_pagamento() {
+
+
             var card_titular = $('[name="cliente_nome_titular"]').val();
-            if(!card_titular){
+            if (!card_titular) {
                 $("#cliente_nome_titular").html("Obrigatório");
                 return false;
             }
 
+
+
+
             var card_number = $('[name="numero_cartao"]').val();
-            if(!card_number){
+            if (!card_number) {
                 $("#numero_cartao").html("Obrigatório");
                 return false;
             }
 
+
+
+
             var card_expire = $('[name="validade_cartao"]').val();
-            if(!card_expire){
+            if (!card_expire) {
                 $("#validade_cartao").html("Obrigatório");
                 return false;
-            }else{
-                card_expire = card_expire.split('/');
+            } else {
 
+                card_expire = card_expire.split('/');
                 var mes_expire = card_expire[0];
                 var ano_expire = card_expire[1];
-
             }
 
-            var card_cvv = $('[name="codigo_seguranca"]').val();
-            if(!card_cvv){
+
+            var card_ccv = $('[name="codigo_seguranca"]').val();
+            if (!card_ccv) {
                 $("#codigo_seguranca").html("Obrigatório");
                 return false;
             }
 
-           var bandeira = "";
 
-           PagSeguroDirectPayment.getBrand({
+            var bandeira = "";
 
-            cardBin: card_number.replace(" ", ""), //Retira o espaço do número do cartão para validar o cardBin.
 
-            success: function(response){
-                bandeira = response.brand['name'];
-                
-                if(bandeira){
-                    //Gerada a Bandeira, Gerar o cardToken
-                    PagSeguroDirectPayment.createCardToken({
-                        cardNumber: card_number, 
-                        brand: bandeira,
-                        cvv: card_cvv,
-                        expirationMonth:mes_expire,
-                        expirationYear:ano_expire,
-                      
+            PagSeguroDirectPayment.getBrand({
 
-                        success: function(response){
-                            //Caso o token seja gerado.
-                            var token_pagamento = response.card.token;
-                            
-                            if(token_pagamento){
-                                $("#token_pagamento").val(token_pagamento);
-                            }else{
-                                alert('Token de pagamento não foi gerado' + response.message);
+                cardBin: card_number.replace(" ", ""), //Fazemos um replace no primeiro espaço para ser gerado 'cardBin'
+
+
+                success: function (response) {
+
+                    bandeira = response.brand['name'];
+                    if (bandeira) {
+
+                        //Sucesso... bandeira foi gerada... podemos invocar o método 'PagSeguroDirectPayment.createCardToken({})'
+                        //Para gerarmos o token do cartão de crédito
+
+
+                        PagSeguroDirectPayment.createCardToken({
+
+                            cardNumber: card_number,
+                            brand: bandeira,
+                            cvv: card_ccv,
+                            expirationMonth: mes_expire,
+                            expirationYear: ano_expire,
+
+                            success: function (response) {
+
+                                //Sucesso.... foi gerado o token do cartão de crédito
+
+                                var token_pagamento = response.card.token;
+
+                                if (token_pagamento) {
+
+                                    $("#token_pagamento").val(token_pagamento);
+                                } else {
+                                    alert('Não foi gerado o token de pagamento para cartão');
+                                }
+
+                            },
+
+                            error: function (response) {
+
+                                //Ops... houve um erro ao gerar o token do cartão de crédito
+
+                                alert('Não foi gerado o token de pagamento para cartão ' + response.message);
+
                             }
 
-                        },
-                        error: function(response){
 
-                            //Caso o token não seja gerado.
-                            alert('Erro ao usar o cartão, verifique os dados...' + response.message);
-                        }
-                    });
+                        });
+                    } else {
 
-                }else{
-                    //Não gerou a bandeira 
-                    alert('Não foi possivel gerar a bandeira do cartão' + response.statusMessage);
+                        alert('Não foi possível gerar a bandeira do cartão' + response.statusMessage);
+                    }
+
+                },
+                error: function (response) {
+                    alert(response);
                 }
-            },
-            error: function(response){
-                alert(response);
-            }
 
-
-           });
+            });
         }
-    
-       
     }
 
-    
-    var forma_pagamento = function(){
-        $('.forma_pagamento').on('change', function(){
+    var forma_pagamento = function () {
+
+        $('.forma_pagamento').on('change', function () {
+
             var opcao = $(this).val();
-            switch (opcao){
+            switch (opcao) {
+
                 case '1':
+
                     $('.cartao').removeClass('d-none');
-                    $('.opcao_debito_conta').addClass('d-none');
+                    $('.opcao-debito-conta').addClass('d-none');
                     $('.opcao-boleto').addClass('d-none');
                     $('.cartao input').prop('disabled', false);
-                    $('.opcao_debito_conta select').prop('disabled', true);
-                    break ;
-                    
+                    $('.opcao-debito-conta select').prop('disabled', true);
+                    break;
                 case '2':
+
                     $('.cartao').addClass('d-none');
                     $('.opcao-boleto').removeClass('d-none');
-                    $('.opcao_debito_conta').addClass('d-none');
+                    $('.opcao-debito-conta').addClass('d-none');
                     $('.cartao input').prop('disabled', true);
-                    $('.opcao_debito_conta select').prop('disabled', true);
-                    break ;
-
+                    $('.opcao-debito-conta select').prop('disabled', true);
+                    break;
                 case '3':
+
                     $('.cartao').addClass('d-none');
+                    $('.opcao-debito-conta').removeClass('d-none');
                     $('.opcao-boleto').addClass('d-none');
-                    $('.opcao_debito_conta').removeClass('d-none');
                     $('.cartao input').prop('disabled', true);
-                    $('.opcao_debito_conta select').prop('disabled', false);
-                    break ;
-
-               
-
+                    $('.opcao-debito-conta select').prop('disabled', false);
+                    break;
             }
         });
     }
-
-
     return {
-        init:function(){
+
+        init: function () {
+
             set_session_payment();
-           
             calcula_frete();
             forma_pagamento();
             pagar_boleto();
             pagar_debito_conta();
             pagar_cartao_credito();
-          
         }
-    }
-}();//Inicializa ao carregar
 
-jQuery(document).ready(function(){
-    $(window).keydown(function(event){
-        if(event.keyCode == 13){
+    }
+
+}(); //Inicializa ao carregar
+
+
+jQuery(document).ready(function () {
+
+    $(window).keydown(function (event) {
+
+        if (event.keyCode == 13) {
+
             event.preventDefault();
             return false;
         }
-    });
 
+    });
     App_checkout.init();
 });
+
+
+
+

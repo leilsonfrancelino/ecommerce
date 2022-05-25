@@ -236,7 +236,7 @@
                                     <div class="col-md-4">
                                         <div class="checkout-form-list">
                                             <div class="order-button-payment">
-                                            <button class="btn btn-info" id="btn-busca-cep" style="height:40px; margin:23px 0 0; font-size:14px;  "  type="button"> Calcular frete</button>
+                                            <button class="btn btn-info" id="btn-busca-cep" style="height:42px; margin:26px -13px 0; font-size:14px;  "  type="button"> Calcular frete</button>
                                             </div>
                                         </div>
                                     </div>
@@ -257,7 +257,7 @@
                                     </div>
 
                                 <?php if(!$logged_in): ?>
-                                    <div class="col-md-9 endereco d-none">
+                                    <div class="col-md-9 endereco d-none mt-20">
                                         <div class="checkout-form-list ">
                                             <label>Endereço <span class="required">*</span></label>
                                             <input name="cliente_endereco" value="<?php set_value('cliente_endereco'); ?>" placeholder="" type="text">
@@ -265,7 +265,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 endereco d-none">
+                                    <div class="col-md-3 endereco d-none mt-20">
                                         <div class="checkout-form-list ">
                                             <label>Número <span class="required">*</span></label>
                                             <input name="cliente_numero_endereco"  value="<?php set_value('cliente_numero_endereco'); ?>" placeholder="" type="text">

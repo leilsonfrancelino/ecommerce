@@ -45,7 +45,8 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Configurações</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="<?php echo base_url('restrita/sistema'); ?>">Sistema</a></li> 
-				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>				
+				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>	
+				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/pagseguro'); ?>">Pagseguro</a></li>				
               </ul>
             </li>
 			
