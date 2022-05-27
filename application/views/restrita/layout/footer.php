@@ -1,4 +1,7 @@
-<<?php if($this->router->fetch_class() != 'login') : ?>	
+<?php if($this->router->fetch_class() != 'login') : ?>	
+	<?php if($this->router->fetch_method() != 'imprimir') : ?>	
+		<?php if($this->router->fetch_method() != 'diaria') : ?>	
+			<?php if($this->router->fetch_method() != 'vendidos') : ?>
 	<footer class="main-footer">
         <div class="footer-left">
           <a href="templateshub.net">Templateshub</a></a>
@@ -6,7 +9,11 @@
         <div class="footer-right">
         </div>
       </footer>
+			<?php endif; ?>
+		<?php endif; ?>
+	<?php endif; ?>
 <?php endif; ?>
+
 	  
     </div>
   </div>

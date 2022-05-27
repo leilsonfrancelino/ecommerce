@@ -14,8 +14,8 @@
                   Relatórios
                 </button>
                 <div class="dropdown-menu">
-                  <a target="_blanck" class="dropdown-item" href="<?php echo base_url('restrita/pedidos/diarias')?>">Vendas diárias</a>
-                  <a target="_blanck" class="dropdown-item" href="<?php echo base_url('restrita/pedidos/vendidos')?>">Produtos mais vendidos</a>
+                  <a target="_blank" class="dropdown-item" href="<?php echo base_url('restrita/pedidos/diaria')?>">Vendas diárias</a>
+                  <a target="_blank" class="dropdown-item" href="<?php echo base_url('restrita/pedidos/vendidos')?>">Produtos mais vendidos</a>
                 </div>
               </div>
             </div>

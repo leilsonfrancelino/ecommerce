@@ -1,9 +1,18 @@
-var App = function() {
-    var calcula_frete = function() {
-        $("#btn_calcula_frete").on('click', function() {
+var App = function () {
+
+    var calcula_frete = function () {
+
+
+        $("#btn-calcula-frete").on('click', function () {
+
             var produto_id = $(this).attr('data-id');
             var cep = $("#cep").val();
+
+//            alert('Produto ID: ' + produto_id + 'CEP: ' + cep);
+
+
             $.ajax({
+
                 type: 'post',
                 url: BASE_URL + 'ajax/index',
                 dataType: 'json',
@@ -11,21 +20,39 @@ var App = function() {
                     cep: cep,
                     produto_id: produto_id,
                 },
-                beforeSend: function() {
-                    $("#btn_calcula_frete").html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;Processando...</span>');
+                beforeSend: function () {
+                    $('#btn-calcula-frete').html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;Processando...</span>');
                 },
-            }).then(function(response) {
-                $("#btn_calcula_frete").html('Calcular');
-                $("#retorno_frete").html(response.retorno_endereco);
+            }).then(function (response) {
+
+                $('#btn-calcula-frete').html('Calcular');
+                $('#retorno-frete').html(response.retorno_endereco);
+
                 console.log(response);
+
             });
+
+
+
         });
+
     };
-    var add_item_cart = function() {
-        $(".btn-add-produto").on('click', function() {
+
+
+    var add_item_cart = function () {
+
+
+        $('.btn-add-produto').on('click', function () {
+
+
             var produto_id = $(this).attr('data-id');
             var produto_quantidade = $('#produto_quantidade').val();
+
+
+//            alert(produto_id + ' -- ' + produto_quantidade);
+
             $.ajax({
+
                 type: 'post',
                 url: BASE_URL + 'carrinho/insert',
                 dataType: 'json',
@@ -33,80 +60,64 @@ var App = function() {
                     produto_id: produto_id,
                     produto_quantidade: produto_quantidade,
                 },
-                beforeSend: function() {
-                    $(".btn-add-produto").html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;Adicionando...</span>');
+                beforeSend: function () {
+                    $('.btn-add-produto').html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;adicionando...</span>');
                 },
-            }).then(function(response) {
+            }).then(function (response) {
+
                 $('#top-cart').load(' #top-cart > *');
                 $('#list-itens').load(' #list-itens > *');
-                $(".btn-add-produto").html('Adicionado');
-                $("#mensagem").html('<div style="width:52.5%" class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+
+                $('.btn-add-produto').html('Adicionar');
+
+                $('#mensagem').html('<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                 console.log(response);
+
             });
 
-        });
-    }
-    var add_item_favoritos = function() {
-        $(".btn-add-favoritos").on('click', function() {
-            var produto_id = $(this).attr('data-id');
-            $.ajax({
-                type: 'post',
-                url: BASE_URL + 'favoritos/insert',
-                dataType: 'json',
-                data: {
-                    produto_id: produto_id,
-                },
-                beforeSend: function() {
-                    $(".btn-add-favoritos").html('<span class="text-black"><i class="fa fa-cog fa-spin"></i>&nbsp;Adicionando...</span>');
-                },
-            }).then(function(response) {
-                $('#top-cart').load(' #top-cart > *');
-                $('#list-itens').load(' #list-itens > *');
-                $(".btn-add-favoritos").html('Add ao carrinho');
-                $("#mensagem").html('<div style="width:52.5%" class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                console.log(response);
-            });
+
+
 
         });
-    }
-    var add_item_cart_home = function() {
-        $(".btn-add-produto-home").on('click', function() {
-            var produto_id = $(this).attr('data-id');
-            $.ajax({
-                type: 'post',
-                url: BASE_URL + 'welcome/insert',
-                dataType: 'json',
-                data: {
-                    produto_id: produto_id,
-                },
-                beforeSend: function() {
-                    $(".btn-add-produto-home").html('<span class="text-white"><i class="fa fa-cog fa-spin"></i>&nbsp;Adicionando...</span>');
-                },
-            }).then(function(response) {
-                $('#top-cart').load(' #top-cart > *');
-                $('#list-itens').load(' #list-itens > *');
-                $(".btn-add-produto-home").html('Add ao carrinho');
-                $("#mensagem").html('<div style="width:52.5%" class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + response.mensagem + '<button type="button" class="close" data-dismiss="alert" arial-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                console.log(response);
-            });
 
-        });
+
+
     }
+
+
+
+
+
     return {
-        init: function() {
+
+        init: function () {
+
             calcula_frete();
             add_item_cart();
-            add_item_favoritos();
-            add_item_cart_home();
         }
+
     }
+
 }(); //Inicializa ao carregar
-jQuery(document).ready(function() {
-    $(window).keydown(function(event) {
+
+
+jQuery(document).ready(function () {
+
+    $(window).keydown(function (event) {
+
         if (event.keyCode == 13) {
+
             event.preventDefault();
             return false;
+
         }
+
     });
-    App.init(); //Inicializa app
+
+    App.init();
+
 });
+
+
+
+

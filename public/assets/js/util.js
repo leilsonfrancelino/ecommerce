@@ -1,1 +1,1 @@
-const BASE_URL = "http://localhost/loja/";
+const BASE_URL = "http://localhost/emocao/";

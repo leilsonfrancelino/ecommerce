@@ -19,10 +19,13 @@ class Busca extends CI_Controller {
 
 
         if ($busca) {
+
             if ($produtos = $this->produtos_model->get_all_by_busca($busca)) {
+
                 $data['produtos'] = $produtos;
             }
         }
+
 
         $this->load->view('web/layout/header', $data);
         $this->load->view('web/busca');

@@ -15,10 +15,14 @@
               <a href="<?php echo base_url('restrita/pedidos'); ?>" class="nav-link"><i data-feather="shopping-cart"></i><span>Pedidos</span></a>
             </li>  
 			
-			<li class="dropdown <?php echo $this->router->fetch_class() == 'clientes' && $this->router->fetch_method() == 'index' ? 'active' : ''; ?>">
-              <a href="<?php echo base_url('restrita/clientes'); ?>" class="nav-link"><i data-feather="users"></i><span>Clientes</span></a>
+			<li class="dropdown <?php echo $this->router->fetch_class() == 'transacoes' && $this->router->fetch_method() == 'index' ? 'active' : ''; ?>">
+                <a href="<?php echo base_url('restrita/transacoes'); ?>" class="nav-link"><i data-feather="dollar-sign"></i><span>Transacões</span></a>
             </li>
 			
+			<li class="dropdown <?php echo $this->router->fetch_class() == 'clientes' && $this->router->fetch_method() == 'index' ? 'active' : ''; ?>">
+              <a href="<?php echo base_url('restrita/clientes'); ?>" class="nav-link"><i data-feather="users"></i><span>Clientes</span></a>
+            </li>			
+						
 			<li class="dropdown <?php echo $this->router->fetch_class() == 'usuarios' && $this->router->fetch_method() == 'index' ? 'active' : ''; ?>">
               <a href="<?php echo base_url('restrita/usuarios'); ?>" class="nav-link"><i data-feather="user"></i><span>Usuários</span></a>
             </li>
@@ -45,7 +49,8 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Configurações</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="<?php echo base_url('restrita/sistema'); ?>">Sistema</a></li> 
-				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>				
+				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>	
+				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/pagseguro'); ?>">Pagseguro</a></li>
               </ul>
             </li>
 			

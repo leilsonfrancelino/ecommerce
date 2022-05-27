@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ajax extends CI_Controller{
+defined('BASEPATH') or exit('Ação não permitida');
 
-    public function __construct()
-    {
+class Ajax extends CI_Controller {
+
+    public function __construct() {
         parent::__construct();
     }
 
-    public function index()
-    {
+    public function index() {
+
+
         $this->form_validation->set_rules('cep', 'CEP destino', 'trim|required|exact_length[9]');
         $this->form_validation->set_rules('produto_id', 'Produto ID', 'trim|required');
 
@@ -52,12 +53,22 @@ class Ajax extends CI_Controller{
 
                 $resultado = json_decode($resultado);
 
+                /*
+                 * bairro: "São Francisco"
+                  cep: "80520-000"
+                  complemento: "até 324/325"
+                  gia: ""
+                  ibge: "4106902"
+                  localidade: "Curitiba"
+                  logradouro: "Rua Nilo Peçanha"
+                  uf: "PR"
+                  unidade: ""
+                 */
+
                 if (isset($resultado->erro)) {
                     $retorno['erro'] = 3;
                     $retorno['mensagem'] = 'Não encontramos o CEP em nossa base de dados';
                     $retorno['retorno_endereco'] = 'Não encontramos o CEP em nossa base de dados';
-                    echo json_encode($retorno);
-                    exit();
                 } else {
                     $retorno['erro'] = 0;
                     $retorno['mensagem'] = 'Sucesso';
@@ -67,7 +78,18 @@ class Ajax extends CI_Controller{
                 //Final da consulta ao Web service via Cep
 
 
+                /*
+                 * Início da consulta ao web service dos correios
+                 */
+
                 //Montando a url para os correios exibir o valor do frete
+
+                /*
+                 * http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=08082650&sDsSenha=564321&sCepOrigem=70002900&sCepDestino=04547000
+                 * &nVlPeso=1&nCdFormato=1&nVlComprimento=20&nVlAltura=20&nVlLargura=20&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n
+                 * &nCdServico=04510&nVlDiametro=0&StrRetorno=xml&nIndicaCalculo=3
+                 */
+
 
                 //Informações dos correios no banco de dados
                 $config_correios = $this->core_model->get_by_id('config_correios', array('config_id' => 1));
@@ -118,7 +140,7 @@ class Ajax extends CI_Controller{
 
                         $valor_formatado = str_replace(',', '.', $dados->Valor);
 
-                        number_format($valor_calculado = ($valor_formatado + $config_correios->config_somar_frete), 2, '.', '');
+                        $valor_calculado = number_format($valor_formatado + $config_correios->config_somar_frete, 2);
 
                         $frete_calculado .= '<p>' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . '&nbsp;R$&nbsp;' . $valor_calculado . ', <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis<p>';
                     }
@@ -135,6 +157,6 @@ class Ajax extends CI_Controller{
         }
 
         echo json_encode($retorno);
-
     }
+
 }

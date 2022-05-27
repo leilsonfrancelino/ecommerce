@@ -1,4 +1,7 @@
+
+
 <?php $this->load->view('web/layout/navbar'); ?>
+
 
 <!-- Begin Li's Breadcrumb Area -->
 <div class="breadcrumb-area">
@@ -6,8 +9,9 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="<?php echo base_url('/'); ?>">Home</a></li>
-                <li><a href="<?php echo base_url('master/'.$produto->categoria_pai_meta_link); ?>"><?php echo $produto->categoria_pai_nome; ?></a></li>
-                <li class="active"><a href="<?php echo base_url('categoria/'.$produto->categoria_meta_link); ?>"><?php echo $produto->categoria_nome; ?></a></li>
+                <li><a href="<?php echo base_url('master/' . $produto->categoria_pai_meta_link); ?>"><?php echo $produto->categoria_pai_nome; ?></a></li>
+                <li class="active"><a href="<?php echo base_url('categoria/' . $produto->categoria_meta_link); ?>"><?php echo $produto->categoria_nome; ?></a></li>
+
             </ul>
         </div>
     </div>
@@ -21,24 +25,26 @@
             <div class="col-lg-5 col-md-6">
                 <!-- Product Details Left -->
                 <div class="product-details-left">
-                    <div class="product-details-images slider-navigation-1">                       
-                        
-                        <?php foreach ($fotos_produtos as $foto): ?>                     
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="<?php echo base_url('uploads/produtos/small/'.$foto->foto_caminho); ?>" data-gall="myGallery">
-                                <img src="<?php echo base_url('uploads/produtos/'.$foto->foto_caminho); ?>" alt="<?php $produto->produto_nome; ?>">
-                            </a>
-                        </div>
-                        <?php endforeach; ?>                        
-                        
-                    </div>
-                    <div class="product-details-thumbs slider-thumbs-1">
-                        
+
+                    <div class="product-details-images slider-navigation-1">
+
                         <?php foreach ($fotos_produtos as $foto): ?>
-                        
-                        <div class="sm-image"><img src="<?php echo base_url('uploads/produtos/small/'.$foto->foto_caminho); ?>" alt="<?php $produto->produto_nome; ?>"></div>
-                    
+                            <div class="lg-image">
+                                <a class="popup-img venobox vbox-item" href="<?php echo base_url('uploads/produtos/small/' . $foto->foto_caminho); ?>" data-gall="myGallery">
+                                    <img src="<?php echo base_url('uploads/produtos/' . $foto->foto_caminho); ?>" alt="<?php $produto->produto_nome; ?>">
+                                </a>
+                            </div>
                         <?php endforeach; ?>
+
+                    </div>
+                    <div class="product-details-thumbs slider-thumbs-1">  
+
+                        <?php foreach ($fotos_produtos as $foto): ?>
+
+                            <div class="sm-image"><img src="<?php echo base_url('uploads/produtos/small/' . $foto->foto_caminho); ?>" alt="<?php $produto->produto_nome; ?>"></div>
+
+                        <?php endforeach; ?>
+
                     </div>
                 </div>
                 <!--// Product Details Left -->
@@ -47,73 +53,90 @@
             <div class="col-lg-7 col-md-6">
                 <div class="product-details-view-content pt-60">
                     <div class="product-info">
-                        <h2><?php echo $produto->produto_nome; ?></h2>
-                        <span class="product-details-ref"><b>Código:&nbsp;</b><?php echo $produto->produto_codigo; ?></span>
-                        
-                        <p class="mt-10"><span class="product-details-ref"><b>Marca:&nbsp;</b><a href="<?php echo base_url('marca/'.$produto->marca_meta_link); ?>"><?php echo $produto->marca_nome; ?></a></span></p>
-                        
-                        <p class="mt-10"><span class="product-details-ref"><b>Estoque:&nbsp;</b><b><?php echo ($produto->produto_quantidade_estoque > 0 ? '<span class="badge-pill badge-success">'.$produto->produto_quantidade_estoque.'</span>' : '<span class="badge-pill badge-danger">Indisponível</span>'); ?></b></span></p>
-                                                
+                        <h2 class="mb-20"><?php echo $produto->produto_nome; ?></h2>
+                        <span class="product-details-ref" style="font-size: 14px">Código: <?php echo $produto->produto_codigo; ?></span>
+
+                        <p class="mt-20"><span class="product-details-ref" style="font-size: 14px">Marca:&nbsp;<a href="<?php echo base_url('marca/' . $produto->marca_meta_link); ?>"><?php echo $produto->marca_nome; ?></a></span></p>
+
+                        <p class="mt-5"><span class="product-details-ref" style="font-size: 14px;">Estoque:&nbsp;<?php echo ($produto->produto_quantidade_estoque > 0 ? '<span class="badge badge-success" style="padding-left: 10px; padding-right: 10px">' . $produto->produto_quantidade_estoque . '</span>' : '<span class="badge badge-danger">Indisponível</span>'); ?></span></p>
+
                         <div class="price-box pt-20">
-                            <span class="new-price new-price-2"><?php echo 'R$&nbsp;' . number_format($produto->produto_valor, 2, ',', '.'); ?></span> 
-                        </div>                        
-                                           
-                        <div class="single-add-to-cart">
-                            
-                            <?php 
-                            
-                            $atributos = array(
-                                'class' => 'cart-quantity'
-                            );
-                            
-                            ?>
-                            
-                            <?php echo form_open('ajax', $atributos); ?>                           
-                                <div class="quantity">
-                                    <label>Calcular frete e prazo</label>
-                                    <div class="" style="min-width: 140px; float: left; margin-right: 10px; position: relative; text-align: left;">
-                                        <input type="text" id="cep" name="cep" class="cart-plus-minus-box cep" placeholder="Digite o CEP">
-                                    </div>
-                                </div>                                        
-                             <button type="button" id="btn_calcula_frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-info" style="padding: 11px 20px">Calcular</button>
-                            <div id="retorno_frete" class="mt-15"></div>
-                            <?php echo form_close(); ?>
+                            <span class="new-price new-price-2"><?php echo 'R$&nbsp;' . number_format($produto->produto_valor, 2); ?></span>
                         </div>
-                        
-                        <!--Botão de adcionar ao carrinho-->
-						<?php if($produto->produto_quantidade_estoque > 0): ?>
+
+
                         <div class="single-add-to-cart">
-						
-							<?php 
-                            
+
+                            <?php
                             $atributos = array(
                                 'class' => 'cart-quantity'
                             );
-                            
                             ?>
-                            
-                            <?php echo form_open('carrinho', $atributos); ?> 							
-                            
+
+                            <?php echo form_open('ajax', $atributos); ?>
+
+                            <div class="quantity">
+                                <label>Calcular frete e prazo de entrega</label>
+                                <div class="" style="min-width: 140px; float: left; margin-right: 10px; position: relative; text-align: left">
+                                    <input type="text" id="cep" name="cep" class="cart-plus-minus-box cep" placeholder="Informe seu CEP">
+                                </div>
+                            </div>
+
+                            <button type="button" id="btn-calcula-frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-info" style="padding: 12px 20px;">Calcular</button>
+
+                            <div class="pt-10 text-info" id="retorno-frete">
+                            </div>
+
+                            <?php echo form_close(); ?>
+
+
+                        </div>
+
+
+
+
+                        <div class="single-add-to-cart">
+
+                            <?php if ($produto->produto_quantidade_estoque > 0): ?>
+
+
+                                <?php
+                                $atributos = array(
+                                    'class' => 'cart-quantity'
+                                );
+                                ?>
+
+                                <?php echo form_open('carrinho', $atributos); ?>
+
+
+
                                 <div class="quantity">
                                     <label>Quantidade</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box mask-produto-qty" style="font-size: 20px" name="produto_quantidade" id="produto_quantidade" value="1" type="text">
+                                        <input class="cart-plus-minus-box mask-produto-qty" name="produto_quantidade" id="produto_quantidade" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart btn-add-produto" data-id="<?php echo $produto->produto_id; ?>" style="font-size: 20px;" type="button"><span class="text-white"><i class="fa fa-shopping-basket"></i></span><span class="text-white">&nbsp;&nbsp;Comprar</span></button>
-                                <p class="pt-20">Este produto é vendido e entrege por&nbsp;&nbsp;<b><?php echo $sistema->sistema_razao_social; ?></b></p>
-                            <?php echo form_close(); ?> 
-						  <?php else: ?>
+                                <button class="add-to-cart btn-add-produto" data-id="<?php echo $produto->produto_id; ?>" type="button">Adicionar</button>
+                                <div id="mensagem" style="max-width: 295px">
+
+                                </div>
+
+
+                                <?php echo form_close(); ?>
+
+                            <?php else: ?>
 
                                 <div class="cart-quantity">
                                     <button class="add-to-cart bg-danger" type="button">Indisponível</button>
                                 </div>
 
-                          <?php endif; ?>
+                            <?php endif; ?>
+
                         </div>
-                        
+
+
                     </div>
                 </div>
             </div> 
@@ -130,7 +153,6 @@
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
                         <li><a class="active" data-toggle="tab" href="#description"><span>Descrição</span></a></li>
-                        
                     </ul>               
                 </div>
                 <!-- Begin Li's Tab Menu Content Area -->
@@ -142,6 +164,7 @@
                     <span><?php echo (htmlspecialchars_decode($produto->produto_descricao)); ?></span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -8,20 +8,20 @@ class Checkout extends CI_Controller {
     }
 
     public function index(){
-        /* $config_pageseguro = $this->core_model->get_by_id('config_pagseguro', array('config_id'=> 1));
+         $config_pagseguro = $this->core_model->get_by_id('config_pagseguro', array('config_id'=> 1));
 
-        if($config_pageseguro->config_ambiente == 1){
-            $api_javascript = 'pagseguro.sandbox.directpayment.js'; //sendbox
+        if($config_pagseguro->config_ambiente == 1){
+            $api_javascript = 'pagseguro.sandbox.directpayment.js'; //sandbox
         }else{
             $api_javascript = 'pagseguro.producao.directpayment.js'; //produção
-        } */
+        } 
         
         $data = array(
             'titulo' => 'Finalizar Compra',
              'scripts' => array (
                 'mask/jquery.mask.min.js',
                 'mask/custom.js',
-                //'js/'.$api_javascript,
+                'js/'.$api_javascript,
                 'js/checkout.js'   
              ),          
         );
@@ -73,17 +73,13 @@ class Checkout extends CI_Controller {
                   $retorno['mensagem'] = 'Sucesso';
                   $retorno_endereco = $retorno['retorno_endereco'] = $resultado->logradouro . ', ' . $resultado->bairro . ', ' . $resultado->localidade . ' - ' . $resultado->uf . ', ' . $resultado->cep;
               }
-
               
                 //Informações dos correios no banco de dados
                 $config_correios = $this->core_model->get_by_id('config_correios', array('config_id' => 1));
 
                 //recupera o maior produto e o total de peso dos itens do carrinho
                 $produto = $this->carrinho_compras->get_produto_maior_dimensao();
-                $total_pesos = $this->carrinho_compras->get_total_pesos();
-
-
-                
+                $total_pesos = $this->carrinho_compras->get_total_pesos();                
 
                 $url_correios = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?';
                 $url_correios .= 'nCdEmpresa=08082650';
@@ -126,7 +122,7 @@ class Checkout extends CI_Controller {
                 } else {
                     //sucesso.... valor e prazo gerados
 
-                    $valor_total_produtos =  str_replace(',', '', $this->carrinho_compras->get_total());
+                    $valor_total_produtos = str_replace(',', '', $this->carrinho_compras->get_total());
                     $frete_calculado = "";
 
                     foreach ($consulta->cServico as $dados) {
@@ -144,7 +140,6 @@ class Checkout extends CI_Controller {
                       </div>';
 
                     }
-
 
                     $retorno['endereco'] = $resultado->logradouro;
                     $retorno['bairro']  = $resultado->bairro;

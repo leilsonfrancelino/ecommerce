@@ -9,16 +9,15 @@ class Produto extends CI_Controller {
     }
 
     public function index($produto_meta_link = NULL) {
-        
-        $sistema = info_header_footer();
 
         if (!$produto_meta_link || !$produto = $this->produtos_model->get_by_id($produto_meta_link)) {
+
             redirect('/');
-        }else{
+        } else {
+
             $data = array(
-                'titulo' => 'Detalhes do Produto',
+                'titulo' => 'Detalhes do produto',
                 'produto' => $produto,
-                'sistema' => $sistema,
                 'scripts' => array(
                     'mask/jquery.mask.min.js',
                     'mask/custom.js',
@@ -27,10 +26,10 @@ class Produto extends CI_Controller {
             );
 
             $data['fotos_produtos'] = $this->core_model->get_all('produtos_fotos', array('foto_produto_id' => $produto->produto_id));
-            
-           // echo'<pre>';
-            //print_r($data);
-            //exit();
+
+//            echo '<pre>';
+//            print_r($data);
+//            exit();
 
             $this->load->view('web/layout/header', $data);
             $this->load->view('web/produto');

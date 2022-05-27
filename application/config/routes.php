@@ -53,10 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
 $route['restrita'] = 'restrita/home/index';
 $route['produto/(:any)'] = 'produto/index/$1';
 $route['master/(:any)'] = 'master/index/$1';
 $route['categoria/(:any)'] = 'categoria/index/$1';
 $route['marca/(:any)'] = 'marca/index/$1';
 $route['busca'] = 'busca/index/';
-$route['carrinho'] = 'carrinho/index/$1';
+$route['sucesso'] = 'pagar/sucesso/';
+

@@ -1,257 +1,254 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Perfil extends CI_Controller
-{
-    public function __construct()
-    {
+defined('BASEPATH') OR exit('Ação não permitida');
+
+class Perfil extends CI_Controller {
+
+    public function __construct() {
         parent::__construct();
     }
 
-    public function index()
-    {
+    public function index() {
+
 
         $cliente_id = (int) $this->session->userdata('cliente_user_id');
 
+        /*
+         * Se não há nenhum valor na variável $cliente_id ou o $cliente_id não existe no banco de dados,
+         * Então estamos criando um novo cliente
+         */
+        if (!$cliente_id || !$cliente = $this->core_model->get_by_id('clientes', array('cliente_id' => $cliente_id))) {
 
-        /* Se não houver cliente logado ou não achar o cliente no banco de dados, irá criar um novo cliente */
-        if(!$cliente_id || !$cliente = $this->core_model->get_by_id('clientes', array('cliente_id' => $cliente_id))){
-            //Cadastrar Cliente
-           
-          $this->form_validation->set_rules('cliente_nome', 'Nome', 'trim|required|min_length[4]|max_length[40]');
-          $this->form_validation->set_rules('cliente_sobrenome', 'Sobrenome', 'trim|required|min_length[4]|max_length[140]');
-          $this->form_validation->set_rules('cliente_data_nascimento', 'Data de Nascimento', 'trim|required');
-          $this->form_validation->set_rules('cliente_cpf', 'CPF do cliente', 'trim|required|exact_length[14]|callback_valida_cpf');
-          $this->form_validation->set_rules('cliente_email', 'Email', 'trim|required|valid_email|callback_valida_email');
+            ///Cadastrar
 
-          $cliente_telefone_fixo = $this->input->post('cliente_telefone_fixo');
+            $this->form_validation->set_rules('cliente_nome', 'Nome', 'trim|required|min_length[4]|max_length[40]');
+            $this->form_validation->set_rules('cliente_sobrenome', 'Sobrenome', 'trim|required|min_length[4]|max_length[140]');
+            $this->form_validation->set_rules('cliente_data_nascimento', 'Data nascimento', 'trim|required');
+            $this->form_validation->set_rules('cliente_cpf', 'CPF', 'trim|required|exact_length[14]|callback_valida_cpf');
+            $this->form_validation->set_rules('cliente_email', 'E-mail', 'trim|required|valid_email|min_length[10]|max_length[100]|callback_valida_email');
 
-          if($cliente_telefone_fixo){
-              $this->form_validation->set_rules('cliente_telefone_fixo', 'Telefone fixo/residencial', 'trim|exact_length[15]|callback_valida_telefone_fixo');
-           }
+            $cliente_telefone_fixo = $this->input->post('cliente_telefone_fixo');
 
-          $this->form_validation->set_rules('cliente_telefone_movel', 'Telefone celular', 'trim|required|callback_valida_telefone_movel');
-          $this->form_validation->set_rules('cliente_cep', 'CEP', 'trim|required');
-          $this->form_validation->set_rules('cliente_endereco', 'Logradouro', 'trim|required');
-          $this->form_validation->set_rules('cliente_numero_endereco', 'Número', 'trim|required');
-          $this->form_validation->set_rules('cliente_bairro', 'Bairro', 'trim|required');
-          $this->form_validation->set_rules('cliente_cidade', 'Cidade', 'trim|required');
-          $this->form_validation->set_rules('cliente_estado', 'Estado', 'trim|required');
-          $this->form_validation->set_rules('cliente_complemento', 'Complemento', 'trim');
+            if ($cliente_telefone_fixo) {
+                $this->form_validation->set_rules('cliente_telefone_fixo', 'Telefone fixo', 'trim|exact_length[14]|callback_valida_telefone_fixo');
+            }
 
-          $this->form_validation->set_rules('password', 'Senha', 'trim|min_length[6]|max_length[200]');
-          $this->form_validation->set_rules('confirma', 'Confirma', 'trim|matches[password]');
+            $this->form_validation->set_rules('cliente_telefone_movel', 'Celular', 'trim|required|min_length[14]|max_length[15]|callback_valida_telefone_movel');
 
-          if($this->form_validation->run()){
-              //Validou
-             $data = elements(
-                 array(
-                     'cliente_nome',
-                     'cliente_sobrenome',
-                     'cliente_data_nascimento',
-                     'cliente_cpf',
-                     'cliente_email',
-                     'cliente_telefone_fixo',
-                     'cliente_telefone_movel',
-                     'cliente_cep',
-                     'cliente_endereco',
-                     'cliente_numero_endereco',
-                     'cliente_bairro',
-                     'cliente_cidade',
-                     'cliente_estado',
-                     'cliente_complemento',
-                 ),$this->input->post()
-             );
 
-             $data = html_escape($data);
+            $this->form_validation->set_rules('cliente_cep', 'CEP', 'trim|required|exact_length[9]');
+            $this->form_validation->set_rules('cliente_endereco', 'Endereço', 'trim|required|min_length[4]|max_length[140]');
+            $this->form_validation->set_rules('cliente_numero_endereco', 'Número', 'trim|max_length[15]');
+            $this->form_validation->set_rules('cliente_bairro', 'Bairro', 'trim|min_length[3]|max_length[40]');
+            $this->form_validation->set_rules('cliente_cidade', 'Cidade', 'trim|min_length[4]|max_length[100]');
+            $this->form_validation->set_rules('cliente_estado', 'Estado', 'trim|required|exact_length[2]');
+            $this->form_validation->set_rules('cliente_complemento', 'Complemento', 'trim|max_length[130]');
 
-             // echo '<pre>';
-             // print_r($data);
-             // exit();
+            $this->form_validation->set_rules('password', 'Senha', 'trim|min_length[6]|max_length[200]');
+            $this->form_validation->set_rules('confirma', 'Confirma', 'trim|matches[password]');
 
-             $this->core_model->insert('clientes', $data, TRUE);
-             $cliente_user_id = $this->session->userdata('last_id');
 
-             //Incio da criação do Usuário
-             $username = $this->input->post('cliente_nome');
-             $password = $this->input->post('password');
-             $email = $this->input->post('cliente_email');
+            if ($this->form_validation->run()) {
 
-             $dados_usuario = array(
-                 'cliente_user_id' => $cliente_user_id,
-                 'first_name' => $this->input->post('cliente_nome'),
-                 'last_name' => $this->input->post('cliente_sobrenome'),
-                 'phone' => $this->input->post('cliente_telefone_movel'),
-                 'active' => 1,
-             );
-             $group = array('2'); // Add ao grupo como cliente.
+                $data = elements(
+                        array(
+                            'cliente_nome',
+                            'cliente_sobrenome',
+                            'cliente_data_nascimento',
+                            'cliente_cpf',
+                            'cliente_email',
+                            'cliente_telefone_movel',
+                            'cliente_telefone_fixo',
+                            'cliente_cep',
+                            'cliente_endereco',
+                            'cliente_numero_endereco',
+                            'cliente_bairro',
+                            'cliente_cidade',
+                            'cliente_estado',
+                            'cliente_complemento',
+                        ), $this->input->post()
+                );
 
-             $this->ion_auth->register($username, $password, $email, $dados_usuario, $group);
 
-             $this->session->set_flashdata('sucesso', 'Cliente Cadastrado');
-             redirect('login');
+                $data = html_escape($data);
 
-          }else{
-              
-              //Erro ao validar
-              $data = array(
-                  'titulo' => 'Cadastrar Cliente',
-                  'styles' => array(
-                      'bundles/datatables/datatables.min.css',
-                      'bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css',
-                   ),
-                   'scripts' => array (
-                      
-                       'mask/jquery.mask.min.js',
-                       'mask/custom.js'   
-                   ),
-                 
-              );
-           
-             // echo '<pre>';
-             // print_r($data['cliente']);
-             // exit();
-      
-              $this->load->view('web/layout/header', $data);
-              $this->load->view('web/perfil');
-              $this->load->view('web/layout/footer');
-          }
+                $this->core_model->insert('clientes', $data, TRUE);
 
-        }else{
+                //Recuperando o último ID inserido
+                $cliente_user_id = $this->session->userdata('last_id');
 
-            //Verifica se o cliente está logado
 
-            if(!$this->ion_auth->logged_in()){
-                $this->session->set_flashdata('erro', 'Cliente não encontrado');
+                ///Início da criação do usuário
+
+                $username = $this->input->post('cliente_nome');
+                $password = $this->input->post('password');
+                $email = $this->input->post('cliente_email');
+
+                $dados_usuario = array(
+                    'cliente_user_id' => $cliente_user_id,
+                    'first_name' => $this->input->post('cliente_nome'),
+                    'last_name' => $this->input->post('cliente_sobrenome'),
+                    'phone' => $this->input->post('cliente_telefone_movel'),
+                    'active' => 1,
+                );
+
+                $group = array('2'); // Grupo de clientes
+
+                $this->ion_auth->register($username, $password, $email, $dados_usuario, $group);
+
                 redirect('login');
+            } else {
 
-            }else{
+                ///Erro de validação
 
-                //Editando o cliente logado
-               
+                $data = array(
+                    'titulo' => 'Cadastrar cliente',
+                    'scripts' => array(
+                        'mask/jquery.mask.min.js',
+                        'mask/custom.js',
+                    ),
+                );
+
+                $this->load->view('web/layout/header', $data);
+                $this->load->view('web/perfil');
+                $this->load->view('web/layout/footer');
+            }
+        } else {
+
+            /*
+             * Se chegou aqui nesse ELSE, significa que já tem cadastro na nossa loja virtual.
+             * Mas para poder editar o seu perfil, temos que garantir que o cliente esteja logado
+             */
+
+            if (!$this->ion_auth->logged_in()) {
+                redirect('login');
+            } else {
+
+                ///Sucesso... Início da edição dos dados
+
+
                 $this->form_validation->set_rules('cliente_nome', 'Nome', 'trim|required|min_length[4]|max_length[40]');
                 $this->form_validation->set_rules('cliente_sobrenome', 'Sobrenome', 'trim|required|min_length[4]|max_length[140]');
-                $this->form_validation->set_rules('cliente_data_nascimento', 'Data de Nascimento', 'trim|required');
-                $this->form_validation->set_rules('cliente_cpf', 'CPF do cliente', 'trim|required|exact_length[14]|callback_valida_cpf');
-                $this->form_validation->set_rules('cliente_email', 'Email', 'trim|required|valid_email|callback_valida_email');
+                $this->form_validation->set_rules('cliente_data_nascimento', 'Data nascimento', 'trim|required');
+                $this->form_validation->set_rules('cliente_cpf', 'CPF', 'trim|required|exact_length[14]|callback_valida_cpf');
+                $this->form_validation->set_rules('cliente_email', 'E-mail', 'trim|required|valid_email|min_length[10]|max_length[100]|callback_valida_email');
 
                 $cliente_telefone_fixo = $this->input->post('cliente_telefone_fixo');
 
-                if($cliente_telefone_fixo){
-                    $this->form_validation->set_rules('cliente_telefone_fixo', 'Telefone fixo/residencial', 'trim|exact_length[15]|callback_valida_telefone_fixo');
-                 }
+                if ($cliente_telefone_fixo) {
+                    $this->form_validation->set_rules('cliente_telefone_fixo', 'Telefone fixo', 'trim|exact_length[14]|callback_valida_telefone_fixo');
+                }
 
-                $this->form_validation->set_rules('cliente_telefone_movel', 'Telefone celular', 'trim|required|callback_valida_telefone_movel');
-                $this->form_validation->set_rules('cliente_cep', 'CEP', 'trim|required');
-                $this->form_validation->set_rules('cliente_endereco', 'Logradouro', 'trim|required');
-                $this->form_validation->set_rules('cliente_numero_endereco', 'Número', 'trim|required');
-                $this->form_validation->set_rules('cliente_bairro', 'Bairro', 'trim|required');
-                $this->form_validation->set_rules('cliente_cidade', 'Cidade', 'trim|required');
-                $this->form_validation->set_rules('cliente_estado', 'Estado', 'trim|required');
-                $this->form_validation->set_rules('cliente_complemento', 'Complemento', 'trim');
+                $this->form_validation->set_rules('cliente_telefone_movel', 'Celular', 'trim|required|min_length[14]|max_length[15]|callback_valida_telefone_movel');
+
+
+                $this->form_validation->set_rules('cliente_cep', 'CEP', 'trim|required|exact_length[9]');
+                $this->form_validation->set_rules('cliente_endereco', 'Endereço', 'trim|required|min_length[4]|max_length[140]');
+                $this->form_validation->set_rules('cliente_numero_endereco', 'Número', 'trim|max_length[15]');
+                $this->form_validation->set_rules('cliente_bairro', 'Bairro', 'trim|min_length[3]|max_length[40]');
+                $this->form_validation->set_rules('cliente_cidade', 'Cidade', 'trim|min_length[4]|max_length[100]');
+                $this->form_validation->set_rules('cliente_estado', 'Estado', 'trim|required|exact_length[2]');
+                $this->form_validation->set_rules('cliente_complemento', 'Complemento', 'trim|max_length[130]');
 
                 $this->form_validation->set_rules('password', 'Senha', 'trim|min_length[6]|max_length[200]');
                 $this->form_validation->set_rules('confirma', 'Confirma', 'trim|matches[password]');
 
-                if($this->form_validation->run()){
-                    //Validou
-                   
-                   $data = elements(
-                       array(
-                           'cliente_nome',
-                           'cliente_sobrenome',
-                           'cliente_data_nascimento',
-                           'cliente_cpf',
-                           'cliente_email',
-                           'cliente_telefone_fixo',
-                           'cliente_telefone_movel',
-                           'cliente_cep',
-                           'cliente_endereco',
-                           'cliente_numero_endereco',
-                           'cliente_bairro',
-                           'cliente_cidade',
-                           'cliente_estado',
-                           'cliente_complemento',
-                       ),$this->input->post()
-                   );
 
-                   $data = html_escape($data);
+                if ($this->form_validation->run()) {
 
-                   // echo '<pre>';
-                   // print_r($data);
-                   // exit();
 
-                   $this->core_model->update('clientes', $data,  array('cliente_id' => $cliente_id));
+                    $data = elements(
+                            array(
+                                'cliente_nome',
+                                'cliente_sobrenome',
+                                'cliente_data_nascimento',
+                                'cliente_cpf',
+                                'cliente_email',
+                                'cliente_telefone_movel',
+                                'cliente_telefone_fixo',
+                                'cliente_cep',
+                                'cliente_endereco',
+                                'cliente_numero_endereco',
+                                'cliente_bairro',
+                                'cliente_cidade',
+                                'cliente_estado',
+                                'cliente_complemento',
+                            ), $this->input->post()
+                    );
 
-                   //Incio da atualização do Usuário
-                  
-                   $dados_usuario = array(
-                       'first_name' => $this->input->post('cliente_nome'),
-                       'last_name' => $this->input->post('cliente_sobrenome'),
-                       'email' => $this->input->post('cliente_email'),
-                   );
 
-                   //Atualiza senha caso seja passada
-                   $password = $this->input->post('password');
-                   if($password){
-                       $dados_usuario['password'] = $password;
-                   }
+                    $data = html_escape($data);
 
-                   $usuario = $this->core_model->get_by_id('users', array('cliente_user_id' => $cliente_id));
+                    $this->core_model->update('clientes', $data, array('cliente_id' => $cliente_id));
 
-                   $dados_usuario = html_escape($dados_usuario);
 
-                   $usuario_id = $usuario->id;
-                   $this->ion_auth->update($usurio_id, $dados_usuario);
+                    ///Início da atualização da tabela de usuários
 
-                   $this->session->set_flashdata('sucesso', 'Cliente Editado');
-                   redirect('perfil');
+                    $dados_usuario = array(
+                        'first_name' => $this->input->post('cliente_nome'),
+                        'last_name' => $this->input->post('cliente_sobrenome'),
+                        'email' => $this->input->post('cliente_email'),
+                    );
 
-                }else{
-                    
-                    //Erro ao validar
+
+                    $password = $this->input->post('password');
+
+                    //Atualiza a senha apenas se a mesma vier no POST
+                    if ($password) {
+                        $dados_usuario['password'] = $password;
+                    }
+
+                    $usuario = $this->core_model->get_by_id('users', array('cliente_user_id' => $cliente_id));
+
+                    $dados_usuario = html_escape($dados_usuario);
+
+                    $user_id = $usuario->id;
+
+                    $this->ion_auth->update($user_id, $dados_usuario);
+
+                    redirect('perfil');
+                } else {
+
+                    ///Erro de validação
+
                     $data = array(
                         'titulo' => 'Atualizar perfil',
-                        'styles' => array(
-                            'bundles/datatables/datatables.min.css',
-                            'bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css',
-                         ),
-                         'scripts' => array (
-                            
-                             'mask/jquery.mask.min.js',
-                             'mask/custom.js',
-                             
-                             
-                         ),
+                        'scripts' => array(
+                            'mask/jquery.mask.min.js',
+                            'mask/custom.js',
+                        ),
                         'cliente' => $cliente,
                     );
-                 
-                  /*   echo '<pre>';
-                    print_r($data['cliente']);
-                    exit(); */
-            
+
+//                    echo '<pre>';
+//                    print_r($data['cliente']);
+//                    exit();
+
+
                     $this->load->view('web/layout/header', $data);
                     $this->load->view('web/perfil');
                     $this->load->view('web/layout/footer');
                 }
             }
         }
-
     }
 
-    public function valida_cpf($cpf)
-    {
+    public function valida_cpf($cpf) {
 
         if ($this->input->post('cliente_id')) {
-            //caso exista um cliente
+
+            //Editando...
+
             $cliente_id = $this->input->post('cliente_id');
 
             if ($this->core_model->get_by_id('clientes', array('cliente_id !=' => $cliente_id, 'cliente_cpf' => $cpf))) {
                 $this->form_validation->set_message('valida_cpf', 'O campo {field} já existe, ele deve ser único');
                 return FALSE;
             }
-        }else{
-            //caso não exista um cliente
+        } else {
+
+            ///Cadastrando...
+
             if ($this->core_model->get_by_id('clientes', array('cliente_cpf' => $cpf))) {
                 $this->form_validation->set_message('valida_cpf', 'O campo {field} já existe, ele deve ser único');
                 return FALSE;
@@ -280,107 +277,103 @@ class Perfil extends CI_Controller
         }
     }
 
-    public function valida_telefone_fixo($cliente_telefone_fixo)
-    {
+    public function valida_telefone_fixo($cliente_telefone_fixo) {
+
+
         $cliente_id = $this->input->post('cliente_id');
 
-        if(!$cliente_id){
-            //Cadastrar
 
-            if($this->core_model->get_by_id('clientes', array('cliente_telefone_fixo' => $cliente_telefone_fixo))){
-                
-                $this->form_validation->set_message('cliente_telefone_fixo', 'Esse número de telefone já está sendo utilizado');
+        if (!$cliente_id) {
 
+            //Cadastro
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_telefone_fixo' => $cliente_telefone_fixo))) {
+
+                $this->form_validation->set_message('valida_telefone_fixo', 'Esse telefone já existe');
                 return FALSE;
-            }else{
+            } else {
+
                 return true;
             }
-            
-        }else{
-            //Editar
-            if($this->core_model->get_by_id('clientes', array('cliente_telefone_fixo' => $cliente_telefone_fixo, 'cliente_id !=' => $cliente_id))){
-                
-                $this->form_validation->set_message('cliente_telefone_fixo', 'Esse número de telefone já está sendo utilizado');
+        } else {
 
+            //Edição
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_telefone_fixo' => $cliente_telefone_fixo, 'cliente_id !=' => $cliente_id))) {
+
+                $this->form_validation->set_message('valida_telefone_fixo', 'Esse telefone já existe');
                 return FALSE;
-            }else{
+            } else {
+
                 return true;
             }
         }
     }
 
-    public function valida_telefone_movel($cliente_telefone_movel)
-    {
+    public function valida_telefone_movel($cliente_telefone_movel) {
+
+
         $cliente_id = $this->input->post('cliente_id');
 
-        if(!$cliente_id){
-            //Cadastrar
 
-            if($this->core_model->get_by_id('clientes', array('cliente_telefone_movel' => $cliente_telefone_movel))){
-                
-                $this->form_validation->set_message('cliente_telefone_movel', 'Esse número de telefone já está sendo utilizado');
+        if (!$cliente_id) {
 
+            //Cadastro
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_telefone_movel' => $cliente_telefone_movel))) {
+
+                $this->form_validation->set_message('valida_telefone_movel', 'Esse telefone já existe');
                 return FALSE;
-            }else{
+            } else {
+
                 return true;
             }
-            
-        }else{
-            //Editar
-            if($this->core_model->get_by_id('clientes', array('cliente_telefone_movel' => $cliente_telefone_movel, 'cliente_id !=' => $cliente_id))){
-                
-                $this->form_validation->set_message('cliente_telefone_movel', 'Esse número de telefone já está sendo utilizado');
+        } else {
 
+            //Edição
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_telefone_movel' => $cliente_telefone_movel, 'cliente_id !=' => $cliente_id))) {
+
+                $this->form_validation->set_message('valida_telefone_movel', 'Esse telefone já existe');
                 return FALSE;
-            }else{
+            } else {
+
                 return true;
             }
         }
     }
 
-    public function valida_email($cliente_email)
-    {
+    public function valida_email($cliente_email) {
+
+
         $cliente_id = $this->input->post('cliente_id');
 
-        if(!$cliente_id){
-            //Cadastrar Usuário
-            if($this->core_model->get_by_id('clientes', array('cliente_email' => $cliente_email))){
-                $this->form_validation->set_message('valida_email', 'Esse e-mail já existe');
-                return false;
-            }else{
+
+        if (!$cliente_id) {
+
+            //Cadastro
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_email' => $cliente_email))) {
+
+                $this->form_validation->set_message('valida_email', 'Esse E-mail já existe');
+                return FALSE;
+            } else {
+
                 return true;
             }
-        }else{
-            //Editar Usuário
-            if($this->core_model->get_by_id('clientes', array('cliente_email' => $cliente_email, 'cliente_id !=' => $cliente_id))){
-                $this->form_validation->set_message('valida_email', 'Esse e-mail já existe');
-                return false;
-            }else{
+        } else {
+
+            //Edição
+
+            if ($this->core_model->get_by_id('clientes', array('cliente_email' => $cliente_email, 'cliente_id !=' => $cliente_id))) {
+
+                $this->form_validation->set_message('valida_email', 'Esse E-mail já existe');
+                return FALSE;
+            } else {
+
                 return true;
             }
         }
     }
 
-   /*  public function delete($cliente_id = NULL)
-    {
-
-        if(!$this->ion_auth->is_admin()){
-            $this->session->set_flashdata('erro', 'Só administrador pode deletar o cliente');
-            redirect('restrita/cliente');
-        }
-
-        if(!$this->core_model->get_by_id('clientes', array('cliente_id' => $cliente_id))){
-            $this->session->set_flashdata('erro', 'Cliente não encontrado');
-            redirect('restrita/cliente');
-        }
-
-        if($this->core_model->get_by_id('users', array('cliente_user_id' => $cliente_id, 'active' => 1))){
-            $this->session->set_flashdata('erro', 'Esse cliente não pode ser excluido (ativo)');
-            redirect('restrita/cliente');
-        }
-
-        $this->core_model->delete('clientes', array('cliente_id' => $cliente_id));
-        $this->session->set_flashdata('sucesso', 'Cliente deletado');
-        redirect('restrita/cliente');
-    } */
 }

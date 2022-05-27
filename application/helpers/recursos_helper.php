@@ -2,46 +2,45 @@
 
 defined('BASEPATH') or exit('Ação não permitida');
 
-//enviando informacoes do sistema para o header e o footer
+//Enviando informações do sistema para o header e o footer
 function info_header_footer() {
-	$CI = & get_instance();
-	
-	$sistema = $CI->core_model->get_by_id('sistema', array('sistema_id' => 1));
-	
-	return $sistema;
+
+    $CI = & get_instance();
+
+    $sistema = $CI->core_model->get_by_id('sistema', array('sistema_id' => 1));
+
+    return $sistema;
 }
 
-//grandes marcas para o navbar
+//Grandes marcas para o navbar
 function grandes_marcas_navbar() {
-	$CI = & get_instance();
-	
-	$grandes_marcas = $CI->loja_model->get_grandes_marcas();
-	
-	return $grandes_marcas;
+
+    $CI = & get_instance();
+
+    $grandes_marcas = $CI->loja_model->get_grandes_marcas();
+
+    return $grandes_marcas;
 }
 
 //Categorias pai navbar
-function categorias_pai_navbar(){
-    
+function categorias_pai_navbar() {
+
     $CI = & get_instance();
-    
+
     $categorias_pai = $CI->loja_model->get_categorias_pai();
-    
+
     return $categorias_pai;
-    
 }
 
 //Recupera as categorias filhas de acordo com a categoria_pai_id como parâmetro
-function categorias_filhas_navbar($categoria_pai_id = NULL){
-    
+function categorias_filhas_navbar($categoria_pai_id = NULL) {
+
     $CI = & get_instance();
-    
+
     $categorias_filhas = $CI->loja_model->get_categorias_filhas($categoria_pai_id);
-    
+
     return $categorias_filhas;
-    
 }
-		
 
 function url_amigavel($string = NULL) {
     $string = remove_acentos($string);
@@ -49,8 +48,8 @@ function url_amigavel($string = NULL) {
 }
 
 function remove_acentos($string = NULL) {
-    $procurar = array('À', 'Á', 'Ã', 'Â', 'É', 'Ê', 'Í', 'Ó', 'Õ', 'Ô', 'Ú', 'Ü', 'Ç', 'à', 'á', 'ã', 'â', 'é', 'ê', 'í', 'ó', 'õ', 'ô', 'ú', 'ü', 'ç', 'ª', 'º');
-    $substituir = array('a', 'a', 'a', 'a', 'e', 'r', 'i', 'o', 'o', 'o', 'u', 'u', 'c', 'a', 'a', 'a', 'a', 'e', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'c', '', '');
+    $procurar = array('À', 'Á', 'Ã', 'Â', 'É', 'Ê', 'Í', 'Ó', 'Õ', 'Ô', 'Ú', 'Ü', 'Ç', 'à', 'á', 'ã', 'â', 'é', 'ê', 'í', 'ó', 'õ', 'ô', 'ú', 'ü', 'ç');
+    $substituir = array('a', 'a', 'a', 'a', 'e', 'r', 'i', 'o', 'o', 'o', 'u', 'u', 'c', 'a', 'a', 'a', 'a', 'e', 'e', 'i', 'o', 'o', 'o', 'u', 'u', 'c');
     return str_replace($procurar, $substituir, $string);
 }
 

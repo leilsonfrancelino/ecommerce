@@ -50,7 +50,7 @@ class Pedidos extends CI_Controller {
         redirect('restrita/pedido');
       }else{
         $data = array(
-            'titulo' => 'Detelhse do Pedido '.$pedido_codigo,           
+            'titulo' => 'Detalhes do Pedido '.$pedido_codigo,           
             'pedido' => $pedido,
         );
         
@@ -62,14 +62,12 @@ class Pedidos extends CI_Controller {
         $this->load->view('restrita/layout/header', $data);
         $this->load->view('restrita/pedidos/imprimir');
         $this->load->view('restrita/layout/footer');
-      }
-       
-        
+      }       
     }
 
     public function diaria(){      
         $data = array(
-            'titulo' => 'Relatório de vendas diárias',            
+            'titulo' => 'Relatório de vendas diárias - ' .date('d/m/Y'),            
         );
 
         if($pedido = $this->pedidos_model->get_vendas_hoje()){
@@ -87,28 +85,18 @@ class Pedidos extends CI_Controller {
         
     }
 
-    public function vendidos()
-    {
-      
+    public function vendidos() {      
         $data = array(
-            'titulo' => 'Relatório de produtos mais vendidos',
-            
+            'titulo' => 'Relatório de produtos mais vendidos',            
         );
 
         if($pedido = $this->pedidos_model->get_produtos_mais_vendidos()){
             $data['pedidos'] = $pedido;
-        }
-
-
-       /*  echo '<pre>';
-        print_r($data['pedidos']);
-        exit();  */
+        }       
        
         $this->load->view('restrita/layout/header', $data);
         $this->load->view('restrita/pedidos/vendidos');
         $this->load->view('restrita/layout/footer');
         
     }
-
-
 }

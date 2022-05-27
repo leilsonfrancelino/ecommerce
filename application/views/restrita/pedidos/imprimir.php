@@ -17,13 +17,13 @@
 
                   <div class="card-body">
                   <h5>Dados do Cliente</h5>
-                  <p class="mt-2"> Cliente :  <?php echo $pedidos->pedido_cliente_nome; ?></p>
-                  <p> CPF :  <?php echo $pedidos->cliente_cpf; ?></p>
-                  <p> Telefone :  <?php echo $pedidos->cliente_telefone_movel; ?></p>
-                  <p> Email :  <?php echo $pedidos->cliente_email ?></p>
+                  <p class="mt-2"> Cliente :  <?php echo $pedido->pedido_cliente_nome; ?></p>
+                  <p> CPF :  <?php echo $pedido->cliente_cpf; ?></p>
+                  <p> Telefone :  <?php echo $pedido->cliente_telefone_movel; ?></p>
+                  <p> Email :  <?php echo $pedido->cliente_email ?></p>
                   <hr>
                   <h5>Dados do Pedido</h5>
-                  <?php  switch($pedidos->pedido_status){
+                  <?php  switch($pedido->pedido_status){
                                                     case 1:
                                                       echo '<div class="badge badge-secondary badge-shadow">Aguardando Pagamento</div>';
                                                       break;
@@ -55,11 +55,11 @@
                                                    ?>
                 <hr>  
                 <h5>Endereço de Entrega</h5>                             
-                <p class="mt-2"> CEP :  <?php echo $pedidos->cliente_cep; ?></p>
-                <p> Rua :  <?php echo $pedidos->cliente_endereco; ?> - Nº: <?php echo $pedidos->cliente_numero_endereco; ?> -   Bairro:  <?php echo $pedidos->cliente_bairro; ?></p>
+                <p class="mt-2"> CEP :  <?php echo $pedido->cliente_cep; ?></p>
+                <p> Rua :  <?php echo $pedido->cliente_endereco; ?> - Nº: <?php echo $pedido->cliente_numero_endereco; ?> -   Bairro:  <?php echo $pedido->cliente_bairro; ?></p>
                
-                <p> Cidade :  <?php echo $pedidos->cliente_cidade ?> - <?php echo $pedidos->cliente_estado; ?></p>
-                <p> Forma de envio :  <?php echo ($pedidos->pedido_forma_envio == 1 ? 'Sedex' : 'PAC'); ?> </p>
+                <p> Cidade :  <?php echo $pedido->cliente_cidade ?> - <?php echo $pedido->cliente_estado; ?></p>
+                <p> Forma de envio :  <?php echo ($pedido->pedido_forma_envio == 1 ? 'Sedex' : 'PAC'); ?> </p>
                 <hr>
                 <h5>Produtos do Pedido</h5>  
                 
@@ -94,13 +94,13 @@
                             <th colspan="3" class="text-right">
                               Valor do Frete: 
                             </th>
-                            <td><?php echo 'R$: '. number_format( $pedidos->pedido_valor_frete, 2) ;  ?></td>
+                            <td><?php echo 'R$: '. number_format( $pedido->pedido_valor_frete, 2) ;  ?></td>
                           </tr>
                           <tr>
                             <th colspan="3" class="text-right">
                               Valor Total: 
                             </th>
-                            <td><?php echo 'R$: '. number_format( $pedidos->pedido_valor_final, 2) ;  ?></td>
+                            <td><?php echo 'R$: '. number_format( $pedido->pedido_valor_final, 2) ;  ?></td>
                           </tr>
                         </tbody>
 
