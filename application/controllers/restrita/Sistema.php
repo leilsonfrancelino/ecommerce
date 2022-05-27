@@ -125,6 +125,7 @@ class Sistema extends CI_Controller {
             $this->load->view('restrita/layout/header', $data);
             $this->load->view('restrita/sistema/correios');
             $this->load->view('restrita/layout/footer');
+<<<<<<< HEAD
         }
     }
     
@@ -138,6 +139,17 @@ class Sistema extends CI_Controller {
 
         if ($this->form_validation->run()) {
 
+=======
+        }       
+    }	
+
+		public function pagseguro() {
+
+        $this->form_validation->set_rules('config_email', 'E-mail de acesso', 'trim|required|valid_email');
+        $this->form_validation->set_rules('config_token', 'Token de acesso', 'trim|required|max_length[100]');        
+
+        if ($this->form_validation->run()) {
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             $data = elements(
                     array(
                         'config_email',
@@ -146,13 +158,20 @@ class Sistema extends CI_Controller {
                     ), $this->input->post()
             );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             $data = html_escape($data);
 
             $this->core_model->update('config_pagseguro', $data, array('config_id' => 1));
             redirect('restrita/sistema/pagseguro');
+<<<<<<< HEAD
         } else {
 
+=======
+        }else{
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             //Erro de validação
 
             $data = array(
@@ -165,5 +184,9 @@ class Sistema extends CI_Controller {
             $this->load->view('restrita/layout/footer');
         }
     }
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
 }

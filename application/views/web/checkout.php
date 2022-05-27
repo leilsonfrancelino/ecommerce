@@ -154,6 +154,7 @@
 
                             <?php if (!$logged_in): ?>
 
+<<<<<<< HEAD
                                 <div class="col-lg-4 col-12 float-left">
 
                                     <div class="checkbox-form">
@@ -173,6 +174,21 @@
                                                     <input type="text" name="cliente_sobrenome" value="<?php set_value('cliente_sobrenome'); ?>" required="">
                                                     <div id="cliente_sobrenome" class="text-danger"></div>
                                                 </div>
+=======
+ 
+                                    <div class="col-md-8">
+                                        <div class="checkout-form-list">
+                                            <label>CEP <span class="required">*</span></label>
+                                            <input id="cliente_cep" name="cliente_cep"  class="cep" value="<?php set_value('cliente_cep'); ?>" placeholder="" type="text">
+                                            <!--<div id="cliente_cep" class="text-danger"></div>-->
+                                            <div id="erro-frete" style="margin-top: 10px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkout-form-list">
+                                            <div class="order-button-payment">
+                                            <button class="btn btn-info" id="btn-busca-cep" style="height:42px; margin:26px -13px 0; font-size:14px;  "  type="button"> Calcular frete</button>
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                                             </div>
 
                                             <div class="col-md-6">
@@ -222,8 +238,33 @@
                                                 </div>
                                             </div>
 
+<<<<<<< HEAD
+=======
+                                <?php if(!$logged_in): ?>
+                                    <div class="col-md-9 endereco d-none mt-20">
+                                        <div class="checkout-form-list ">
+                                            <label>Endereço <span class="required">*</span></label>
+                                            <input name="cliente_endereco" value="<?php set_value('cliente_endereco'); ?>" placeholder="" type="text">
+                                            <div id="cliente_endereco" class="text-danger"></div>
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                                         </div>
 
+<<<<<<< HEAD
+=======
+                                    <div class="col-md-3 endereco d-none mt-20">
+                                        <div class="checkout-form-list ">
+                                            <label>Número <span class="required">*</span></label>
+                                            <input name="cliente_numero_endereco"  value="<?php set_value('cliente_numero_endereco'); ?>" placeholder="" type="text">
+                                            <div id="cliente_numero_endereco" class="text-danger"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 endereco d-none">
+                                        <div class="checkout-form-list ">
+                                            <label>Bairro <span class="required">*</span></label>
+                                            <input name="cliente_bairro" value="<?php set_value('cliente_bairro'); ?>" placeholder="" type="text">
+                                            <div id="cliente_bairro" class="text-danger"></div>
+                                        </div>
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                                     </div>
 
                                 </div>

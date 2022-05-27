@@ -50,7 +50,11 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="<?php echo base_url('restrita/sistema'); ?>">Sistema</a></li> 
 				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>	
+<<<<<<< HEAD
 				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/pagseguro'); ?>">Pagseguro</a></li>
+=======
+				<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/pagseguro'); ?>">Pagseguro</a></li>				
+>>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
               </ul>
             </li>
 			
