@@ -38,8 +38,8 @@
 							 <li>
 						   <?php $cliente_logado = $this->ion_auth->logged_in(); ?>
 
-							<div class="ht-currency-trigger"><span><?php echo (!$cliente_logado ? 'Entrar' : 'Olá, '. $this->session->userdata('cliente_nome')); ?></span></div>
-							<div class="currency ht-currency">
+							 <div class="ht-currency-trigger"><span><?php echo (!$cliente_logado ? 'Entre ou registre-se' : 'Olá, ' . $this->session->userdata('cliente_nome_completo')); ?></span></div>
+                               <div class="currency ht-currency">
 								<ul class="ht-currency-list">
 									<?php if(!$cliente_logado): ?>
 										<li><a href="<?php echo base_url('login'); ?>">Entrar</a> </li>

@@ -17,7 +17,6 @@
 
 
 
-
 <!--Shopping Cart Area Strat-->
 <div class="Shopping-cart-area pt-5 pb-60">
     <div class="container-fluid">
