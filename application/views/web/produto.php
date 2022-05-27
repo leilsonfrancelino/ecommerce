@@ -72,7 +72,6 @@
                                 'class' => 'cart-quantity'
                             );
                             ?>
-<<<<<<< HEAD
 
                             <?php echo form_open('ajax', $atributos); ?>
 
@@ -88,18 +87,6 @@
                             <div class="pt-10 text-info" id="retorno-frete">
                             </div>
 
-=======
-                            
-                            <?php echo form_open('ajax', $atributos); ?>                           
-                                <div class="quantity">
-                                    <label>Calcular frete e prazo</label>
-                                    <div class="" style="min-width: 140px; float: left; margin-right: 10px; position: relative; text-align: left;">
-                                        <input type="text" id="cep" name="cep" class="cart-plus-minus-box cep" placeholder="Digite o CEP">
-                                    </div>
-                                </div>                                        
-                             <button type="button" id="btn_calcula_frete" name="produto_id" data-id="<?php echo $produto->produto_id; ?>" class="add-to-cart bg-info" style="padding: 11px 20px">Calcular</button>
-                            <div id="retorno_frete" class="mt-15 text-info"></div>
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                             <?php echo form_close(); ?>
 
 

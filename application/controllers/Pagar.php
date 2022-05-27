@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 defined('BASEPATH') OR exit('Ação não permitida');
@@ -6,12 +5,6 @@ defined('BASEPATH') OR exit('Ação não permitida');
 class Pagar extends CI_Controller {
 
     public function __construct() {
-=======
-<?php 
-defined('BASEPATH') OR exit('Acao nao permitida');
-class Pagar extends CI_Controller{
-    public function __construct(){
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
         parent::__construct();
 
         $this->load->library('user_agent');
@@ -21,17 +14,11 @@ class Pagar extends CI_Controller{
 
         redirect('/');
     }
-<<<<<<< HEAD
 
     public function pag_seguro_session_id() {
 
         if (!$this->input->is_ajax_request()) {
             exit('Ação não permitida');
-=======
-    public function pag_seguro_session_id(){
-        if(!$this->input->is_ajax_request()){
-            exit('Açao nao permitida');
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
         }
 
 

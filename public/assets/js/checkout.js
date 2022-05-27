@@ -3,16 +3,12 @@ var App_checkout = function () {
 
     var set_session_payment = function () {
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
         $.ajax({
 
             url: BASE_URL + 'pagar/pag_seguro_session_id',
             dataType: 'json',
             success: function (response) {
-<<<<<<< HEAD
 
                 if (response.erro === 0) {
 
@@ -22,25 +18,11 @@ var App_checkout = function () {
                         PagSeguroDirectPayment.setSessionId(session_id);
                     } else {
 
-=======
-
-                if (response.erro === 0) {
-
-                    var session_id = response.session_id;
-                    if (session_id) {
-
-                        PagSeguroDirectPayment.setSessionId(session_id);
-                    }else{
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                         window.location.href = BASE_URL + 'checkout';
                     }
 
 
-<<<<<<< HEAD
                 } else {
-=======
-                }else{
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
 
                     console.log(response.mensagem);
                 }
@@ -119,19 +101,11 @@ var App_checkout = function () {
 
 
     var pagar_boleto = function () {
-<<<<<<< HEAD
 
 
         $('#btn-pagar-boleto').on('click', function () {
 
 
-=======
-
-
-        $('#btn-pagar-boleto').on('click', function () {
-
-
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
             var form = $('.do-payment');
             $.ajax({
@@ -196,17 +170,10 @@ var App_checkout = function () {
 
     var pagar_debito_conta = function () {
 
-<<<<<<< HEAD
 
         $('#btn-debito-conta').on('click', function () {
 
 
-=======
-
-        $('#btn-debito-conta').on('click', function () {
-
-
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
             var form = $('.do-payment');
             $.ajax({
@@ -439,7 +406,6 @@ var App_checkout = function () {
 
                             }
 
-<<<<<<< HEAD
                         });
                     } else {
 
@@ -455,30 +421,11 @@ var App_checkout = function () {
         }
 
 
-=======
-
-                        });
-                    } else {
-
-                        alert('Não foi possível gerar a bandeira do cartão' + response.statusMessage);
-                    }
-
-                },
-                error: function (response) {
-                    alert(response);
-                }
-
-            });
-        }
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
     }
 
     var forma_pagamento = function () {
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
         $('.forma_pagamento').on('change', function () {
 
             var opcao = $(this).val();
@@ -511,18 +458,13 @@ var App_checkout = function () {
             }
         });
     }
-    return {
 
-        init: function () {
 
-<<<<<<< HEAD
 
     return {
 
         init: function () {
 
-=======
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
             set_session_payment();
             calcula_frete();
             forma_pagamento();

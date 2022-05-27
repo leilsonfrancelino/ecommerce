@@ -8,11 +8,7 @@ class Checkout extends CI_Controller {
     }
 
     public function index(){
-<<<<<<< HEAD
          $config_pagseguro = $this->core_model->get_by_id('config_pagseguro', array('config_id'=> 1));
-=======
-         $config_pageseguro = $this->core_model->get_by_id('config_pagseguro', array('config_id'=> 1));
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
 
         if($config_pagseguro->config_ambiente == 1){
             $api_javascript = 'pagseguro.sandbox.directpayment.js'; //sandbox
@@ -126,12 +122,7 @@ class Checkout extends CI_Controller {
                 } else {
                     //sucesso.... valor e prazo gerados
 
-<<<<<<< HEAD
                     $valor_total_produtos = str_replace(',', '', $this->carrinho_compras->get_total());
-=======
-                    $valor_total_produtos =  str_replace('.', '', $this->carrinho_compras->get_total());
-                    $valor_total_produtos =  str_replace(',', '.', $valor_total_produtos);
->>>>>>> 4b63f234828ee6da5842130556e2587cf65097c9
                     $frete_calculado = "";
 
                     foreach ($consulta->cServico as $dados) {
@@ -144,7 +135,7 @@ class Checkout extends CI_Controller {
                         //$frete_calculado .= '<p>' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . '&nbsp;R$&nbsp;' . $valor_calculado . ', <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis<p>';
 
                         $frete_calculado .= '<div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="'. $dados->Codigo .'" name="opcao_frete_carrinho" value="'.$valor_calculado.'|'.$dados->Codigo.'" data-valor_frete="'.$valor_calculado.'" data-valor_final_carrinho="'. number_format($valor_final_carrinho, 2,',', '.') .'">
+                        <input type="radio" class="custom-control-input" id="'. $dados->Codigo .'" name="opcao_frete_carrinho" value="'.$valor_calculado.'|'.$dados->Codigo.'" data-valor_frete="'.$valor_calculado.'" data-valor_final_carrinho="'. number_format($valor_final_carrinho, 2) .'">
                         <label class="custom-control-label" for="'. $dados->Codigo .'">' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') .' &nbsp;R$&nbsp;'.$valor_calculado.'&nbsp;&nbsp; Prazo <span class="badge badge-primary py-0 pt-1">'  . $dados->PrazoEntrega . '</span> dias úteis</label>
                       </div>';
 
