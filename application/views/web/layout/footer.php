@@ -1,5 +1,5 @@
   <!-- Begin Footer Area -->
-  <div class="footer">
+  <div class="footer mt-30">
                 <!-- Begin Footer Static Top Area -->
                 <div class="footer-static-top">
                     <div class="container">
@@ -81,7 +81,7 @@
                                     <ul class="des">
                                         <li>
                                             <span>Endereço: </span><br/>
-                                           <?php echo  $sistema->sistema_endereco . ' ' .$sistema->sistema_numero . ' <br/> '. $sistema->sistema_cidade . ' - ' . $sistema->sistema_estado . '<br/>' . 'CEP: ' . $sistema->sistema_cep   ?>
+                                           <?php echo  $sistema->sistema_endereco . ', ' .$sistema->sistema_numero . ' <br/> '. $sistema->sistema_cidade . ' - ' . $sistema->sistema_estado . '<br/>' . 'CEP: ' . $sistema->sistema_cep   ?>
                                         </li>
                                         <li>
                                             <span>Telefone: </span>
