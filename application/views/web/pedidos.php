@@ -147,20 +147,16 @@
 
             <?php else: ?>
 
-                <div class="col-12 pt-20">
-
-                    <h6 class="mb-30">Você ainda não realizou nenhuma compra</h6>
-
-                    <div class="coupon-all">
-                        <div class="coupon">
-                            <a href="<?php echo base_url('/'); ?>" class="button"><input class="button" value="que tal comprar agora?" style="width: 260px"></a>
-                        </div>
-                    </div>
-                    <div class="container text-center">
-                        <img width="35%" src="<?php echo base_url('public/web/images/sem_pedidos.svg'); ?>" >
-                    </div>
-
-                </div>
+                <div class="col-12 pt-10">
+                        <h4 class="mb-10" style="text-align: center">Você não fez nenhuma compra ainda...</h4>
+                        <div class="coupon-all">
+                      
+                            <div class="coupon" style="float:none; text-align: center">
+                            <a href="<?php echo base_url('/'); ?>" class="button"><input class="button" style="width:260px" value="que tal comprar agora ?" > </a>
+                            </div>
+                                                
+                        </div>                        
+                      </div>
 
             <?php endif; ?>
 

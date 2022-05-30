@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="coupon-all">
-                                    <div class="coupon">
+                                    <div class="coupon" style="text-align: left">
                                         <button class="btn btn-outline-info btn-limpa-carrinho" style="border-radius: 2px; font-weight: 700; cursor: pointer; height: 42px;">Limpar carrinho</button>
                                     </div>
 
@@ -115,19 +115,13 @@
             <?php else: ?>
 
                 <div class="col-12">
-
-                    <h6 class="mb-30">Seu carrinho está vazio</h6>
-
-                    <div class="coupon-all">
-                        <div class="coupon">
-                            <a href="<?php echo base_url('/'); ?>" class="button"><input class="button" value="Continuar comprando" style="width: 240px"></a>
-                        </div>
+                    <h4 class="mb-30" style="text-align: center">Seu carrinho esta vazio</h4>
+						<div class="coupon-all" >                   
+							<div class="coupon" style="float:none; text-align: center">
+							<a href="<?php echo base_url('/'); ?>" class="button"><input class="button" style="width:240px" value="Continuar Comprando" > </a>
+							</div>                                            
+						</div>                    
                     </div>
-                    <div class="container text-center">
-                        <img width="35%" src="<?php echo base_url('public/web/images/carrinho_vazio.svg'); ?>" >
-                    </div>
-
-                </div>
 
 
             <?php endif; ?>
