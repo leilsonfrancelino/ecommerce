@@ -3,13 +3,13 @@
 	<!-- Begin Header Top Area -->
 	<div class="header-top" style="background: #1cd578">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="color: #fff">
 				<!-- Begin Header Top Left Area -->
 				<div class="col-lg-3 col-md-4">
 					<div class="header-top-left">
 						<ul class="phone-wrap" style="width: 274px">
 							<?php $sistema = info_header_footer(); ?>
-							<li><span>Telefones: </span><?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?></li>
+							<li><span style="color: #fff">Telefones: </span><?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel;?></li>
 						</ul>
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 							<!-- Begin Setting Area -->
 							<li>
 								<div class="ht-setting-trigger"><span>Grandes Marcas</span></div>
-								<div class="setting ht-setting">
+								<div class="setting ht-setting" style="border-top: 2px solid #266daf">
 									<ul class="ht-setting-list">
 										<?php $grandes_marcas = grandes_marcas_navbar(); ?>
 
@@ -39,7 +39,7 @@
 						   <?php $cliente_logado = $this->ion_auth->logged_in(); ?>
 
 							 <div class="ht-currency-trigger"><span><?php echo (!$cliente_logado ? 'Entre ou registre-se' : 'Olá, ' . $this->session->userdata('cliente_nome_completo')); ?></span></div>
-                               <div class="currency ht-currency">
+                               <div class="currency ht-currency" style="border-top: 2px solid rgb(38, 109, 175)">
 								<ul class="ht-currency-list">
 									<?php if(!$cliente_logado): ?>
 										<li><a href="<?php echo base_url('login'); ?>">Entrar</a> </li>
