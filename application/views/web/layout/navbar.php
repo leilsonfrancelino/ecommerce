@@ -1,7 +1,7 @@
 <!-- Begin Header Area -->
 <header>
 	<!-- Begin Header Top Area -->
-	<div class="header-top">
+	<div class="header-top" style="background: #1cd578">
 		<div class="container">
 			<div class="row">
 				<!-- Begin Header Top Left Area -->
@@ -63,14 +63,14 @@
 	</div>
 	<!-- Header Top Area End Here -->
 	<!-- Begin Header Middle Area -->
-	<div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
+	<div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0" style="background: #eeeeee; padding: 20px">
 		<div class="container">
 			<div class="row">
 				<!-- Begin Header Logo Area -->
 				<div class="col-lg-3">
-					<div class="logo pb-sm-30 pb-xs-30">
+					<div class="logo pb-sm-30 pb-xs-30" style="text-align: center">
 						<a href="<?php echo base_url('/');?>">
-							<img src="<?php echo base_url('public/web/images/menu/logo/1.jpg'); ?>" alt="">
+							<img src="<?php echo base_url('public/web/images/menu/logo/logo.png'); ?>" alt="">
 						</a>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 					<?php echo form_open('busca', $atributos); ?>                       
 
 						<input type="text" name="busca" placeholder="Qual produto você está procurando?">										
-						<button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+						<button class="li-btn" type="submit" style="background: #266daf"><i class="fa fa-search"></i></button>
 
 						<?php echo form_close(); ?>
 
@@ -98,11 +98,11 @@
 						<ul class="hm-menu">											
 							<!-- Begin Header Mini Cart Area -->
 							<li class="hm-minicart">
-								<div id="top-cart" class="hm-minicart-trigger">
+								<div id="top-cart" class="hm-minicart-trigger" style="background: #17af62">
 									<span class="item-icon"></span>
 									<span class="item-text"><?php echo ($this->carrinho_compras->get_total() > '0,00' ? 'R$&nbsp' .$this->carrinho_compras->get_total() : '0,00' ); ?>
 								<?php if($this->carrinho_compras->get_total_itens() > 0 ): ?>
-									<span class="cart-item-count"><?php echo $this->carrinho_compras->get_total_itens(); ?></span>
+									<span class="cart-item-count" style="background: #266daf"><?php echo $this->carrinho_compras->get_total_itens(); ?></span>
 								<?php endif; ?>
 									</span>
 								</div>
@@ -159,7 +159,7 @@
 	</div>
 	<!-- Header Middle Area End Here -->
 	<!-- Begin Header Bottom Area -->
-	<div class="header-bottom header-sticky d-none d-lg-block d-xl-block mb-0">
+	<div class="header-bottom header-sticky d-none d-lg-block d-xl-block mb-0" style="background: #17af62">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">

@@ -238,19 +238,12 @@ var App_checkout = function () {
 
 
     var pagar_cartao_credito = function () {
-
-
         $('#btn-pagar-cartao').on('click', function () {
-
-
             gerar_token_pagamento();
-
 
             $('[name="hash_pagamento"]').val(PagSeguroDirectPayment.getSenderHash());
 
             var form = $('.do-payment');
-
-
             $.ajax({
                 type: "post",
                 url: BASE_URL + 'pagar/cartao_credito',
@@ -281,8 +274,7 @@ var App_checkout = function () {
 
                         window.location = BASE_URL + 'sucesso';
 
-                    } else {
-
+                    }else{
 
                         if (response.token_pagamento) {
                             $("#opcao_pagar_cartao").html('<span class="text-danger">Verifique os dados do cartão de crédito e tente novamente</span>');
@@ -303,10 +295,7 @@ var App_checkout = function () {
                         $("#cliente_cidade").html(response.cliente_cidade);
                         $("#cliente_senha").html(response.cliente_senha);
                         $("#confirmacao").html(response.confirmacao);
-
-
                     }
-
                 },
                 error: function (error) {
 
@@ -315,29 +304,20 @@ var App_checkout = function () {
 
             });
 
-
-
         });
+
         function gerar_token_pagamento() {
-
-
             var card_titular = $('[name="cliente_nome_titular"]').val();
             if (!card_titular) {
                 $("#cliente_nome_titular").html("Obrigatório");
                 return false;
             }
 
-
-
-
             var card_number = $('[name="numero_cartao"]').val();
             if (!card_number) {
                 $("#numero_cartao").html("Obrigatório");
                 return false;
             }
-
-
-
 
             var card_expire = $('[name="validade_cartao"]').val();
             if (!card_expire) {
@@ -357,14 +337,11 @@ var App_checkout = function () {
                 return false;
             }
 
-
             var bandeira = "";
-
 
             PagSeguroDirectPayment.getBrand({
 
                 cardBin: card_number.replace(" ", ""), //Fazemos um replace no primeiro espaço para ser gerado 'cardBin'
-
 
                 success: function (response) {
 
@@ -458,8 +435,6 @@ var App_checkout = function () {
             }
         });
     }
-
-
 
     return {
 
