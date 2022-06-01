@@ -187,25 +187,25 @@
                                 <!-- Begin Footer Links Area -->
                                 <div class="footer-links">
                                     <ul>
-                                        <li><a href="#">Online Shopping</a></li>
-                                        <li><a href="#">Promotions</a></li>
-                                        <li><a href="#">My Orders</a></li>
-                                        <li><a href="#">Help</a></li>
-                                        <li><a href="#">Customer Service</a></li>
-                                        <li><a href="#">Support</a></li>
-                                        <li><a href="#">Most Populars</a></li>
-                                        <li><a href="#">New Arrivals</a></li>
-                                        <li><a href="#">Special Products</a></li>
-                                        <li><a href="#">Manufacturers</a></li>
-                                        <li><a href="#">Our Stores</a></li>
-                                        <li><a href="#">Shipping</a></li>
-                                        <li><a href="#">Payments</a></li>
-                                        <li><a href="#">Warantee</a></li>
-                                        <li><a href="#">Refunds</a></li>
+                                        <li><a href="#">Compras Online</a></li>
+                                        <li><a href="#">Promoções</a></li>
+                                        <li><a href="#">Meus Pedidos</a></li>
+                                        <li><a href="#">Ajuda</a></li>
+                                        <li><a href="#">Atendimento ao Cliente</a></li>
+                                        <li><a href="#">Suporte</a></li>
+                                        <li><a href="#">Mais Populares</a></li>
+                                        <li><a href="#">Novidades</a></li>
+                                        <li><a href="#">Produtos Especiasi</a></li>
+                                        <li><a href="#">Fabricantes</a></li>
+                                        <li><a href="#">Nossas Lojas</a></li>
+                                        <li><a href="#">Envio</a></li>
+                                        <li><a href="#">Pagamento</a></li>
+                                        <li><a href="#">Garantia</a></li>
+                                        <li><a href="#">Reembolso</a></li>
                                         <li><a href="#">Checkout</a></li>
-                                        <li><a href="#">Discount</a></li>
-                                        <li><a href="#">Refunds</a></li>
-                                        <li><a href="#">Policy Shipping</a></li>
+                                        <li><a href="#">Descontos</a></li>
+                                        <li><a href="#">Devolução</a></li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- Footer Links Area End Here -->
