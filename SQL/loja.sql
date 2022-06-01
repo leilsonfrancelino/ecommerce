@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 27-Maio-2022 às 15:42
+-- Generation Time: 01-Jun-2022 às 00:10
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.1.29
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lojateste`
+-- Database: `loja`
 --
 
 -- --------------------------------------------------------
@@ -136,17 +136,14 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `cliente_complemento` varchar(145) DEFAULT NULL,
   `cliente_data_alteracao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cliente_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `clientes`
 --
 
 INSERT INTO `clientes` (`cliente_id`, `cliente_data_cadastro`, `cliente_nome`, `cliente_sobrenome`, `cliente_data_nascimento`, `cliente_cpf`, `cliente_email`, `cliente_telefone_fixo`, `cliente_telefone_movel`, `cliente_cep`, `cliente_endereco`, `cliente_numero_endereco`, `cliente_bairro`, `cliente_cidade`, `cliente_estado`, `cliente_complemento`, `cliente_data_alteracao`) VALUES
-(1, '2022-04-27 03:00:00', 'Fulano', 'de Tal', '2020-03-10', '071.787.700-07', 'fulano@fulano.com', '(00) 0000-0000', '(00) 00000-0000', '15980-000', 'Rua Monte Alto', '45', 'Centro', 'Santos', 'SP', 'Ao lado da Praça', '2022-04-27 23:53:25'),
-(2, '2022-04-29 01:49:08', 'Cicrano', 'de Tal', '1985-06-01', '303.361.990-82', 'cicrano@cicrano.com', '(00) 0000-0001', '(00) 00000-0000', '15980-000', 'Bernardino de Carvalho', '23', 'Centro', 'Araraquara', 'SP', 'Prefeitura mesma rua', '2022-04-29 01:49:08'),
-(3, '2022-05-26 01:16:30', 'LEILSON', 'FRANCELINO', '1980-10-10', '292.810.628-60', 'leilsonf@gmail.com', NULL, '(16) 98131-4007', '15980-000', 'Bernardino de Carvalho', '23', 'Centro', 'Dobrada', 'SP', NULL, '2022-05-26 01:16:30'),
-(23, '2022-05-26 22:33:15', 'LEILSON', 'FRANCELINO', '1980-10-10', '073.267.338-05', 'lei@gmail.com', NULL, '(16) 98131-4017', '15980-000', 'Bernardino de Carvalho', '23', 'Centro', 'Dobrada', 'SP', NULL, '2022-05-26 22:33:15');
+(27, '2022-05-31 23:57:21', 'Leilson', 'Francelino', '1980-10-10', '292.810.628-60', 'leilsonf@gmail.com', '', '(16) 98131-4007', '15980-000', 'Bernardino de Carvalho', '387', 'Vila Morano', 'Dobrada', 'SP', '', '2022-05-31 23:57:21');
 
 -- --------------------------------------------------------
 
@@ -303,14 +300,14 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `pedido_data_alteracao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`pedido_id`),
   KEY `pedido_cliente_id` (`pedido_cliente_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `pedidos`
 --
 
 INSERT INTO `pedidos` (`pedido_id`, `pedido_codigo`, `pedido_cliente_id`, `pedido_valor_produtos`, `pedido_valor_frete`, `pedido_valor_final`, `pedido_forma_envio`, `pedido_data_cadastro`, `pedido_data_alteracao`) VALUES
-(1, '76052938', 23, '59.00', '24.50', '83.50', 1, '2022-05-26 22:33:21', NULL);
+(5, '27910836', 27, '1500.00', '24.50', '1524.50', 1, '2022-05-31 23:59:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -335,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `pedidos_produtos` (
 --
 
 INSERT INTO `pedidos_produtos` (`pedido_id`, `produto_id`, `produto_nome`, `produto_quantidade`, `produto_valor_unitario`, `produto_valor_total`) VALUES
-(1, 14, 'Switch 8 portas 10/100 Mbps não gerenciável DES-1008C', 1, '59.00', '59.00');
+(5, 4, 'Smartphone Motorola Moto G 3ª Geração Edição Especial Cabernet Dual Chip Desbloqueado Android 5.1 Tela HD 5', 1, '1500.00', '1500.00');
 
 -- --------------------------------------------------------
 
@@ -492,14 +489,14 @@ CREATE TABLE IF NOT EXISTS `transacoes` (
   PRIMARY KEY (`transacao_id`),
   KEY `transacao_pedido_id` (`transacao_pedido_id`,`transacao_cliente_id`),
   KEY `fk_transacao_cliente_id` (`transacao_cliente_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `transacoes`
 --
 
 INSERT INTO `transacoes` (`transacao_id`, `transacao_pedido_id`, `transacao_cliente_id`, `transacao_data`, `transacao_codigo_hash`, `transacao_tipo_metodo_pagamento`, `transacao_codigo_metodo_pagamento`, `transacao_link_pagamento`, `transacao_banco_escolhido`, `transacao_valor_bruto`, `transacao_valor_taxa_pagseguro`, `transacao_valor_liquido`, `transacao_numero_parcelas`, `transacao_valor_parcela`, `transacao_status`, `transacao_data_alteracao`) VALUES
-(1, 1, 23, '2022-05-26 22:33:21', '58FE3AA1-9677-48B7-8C7D-E97004BDBDC7', 2, '202', 'https://sandbox.pagseguro.uol.com.br/checkout/payment/booklet/print.jhtml?c=1ab736c0ad052bbc0959c59095b9f374832d65dfb4417a49e7cf78b463ebeda27990b02ec233b776', NULL, '83.50', '4.57', '78.93', 1, '83.50', 1, NULL);
+(5, 5, 27, '2022-05-31 23:59:08', 'C4827CFB-F6EC-4294-AFA5-FB6A0E1F3899', 2, '202', 'https://sandbox.pagseguro.uol.com.br/checkout/payment/booklet/print.jhtml?c=bbeff50f32eae7a830862d4c29d8005439d2f05a7c80f67efea8ed2d2a095869e329d57ee1ee3d43', NULL, '1524.50', '76.47', '1448.03', 1, '1524.50', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -535,18 +532,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `uc_forgotten_password_selector` (`forgotten_password_selector`),
   UNIQUE KEY `uc_remember_selector` (`remember_selector`),
   KEY `cliente_user_id` (`cliente_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `cliente_user_id`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$68J1neG25LgjkJl.yf5YT.hG1OuQ0GQV71SqsoqJLHRrpOjRqKvHC', 'admin@admin.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1653604454, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(8, '127.0.0.1', 'leilson', '$2y$12$VCSSn6KXnWIxj1eu7JDZTOUx3jGZpMFvzmbB9/rXI67UWjKqlOQAy', 'leilsonf@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1653061494, 1, 'Leilson', 'FRANCELINO', NULL, NULL),
-(9, '', 'fulanodetal', '$2y$10$xrj6p/LQUnIvzZ0SxbmU4euDHjN4a73EEU3kTwfsUS2hGLHC/kY92', 'fulano@fulano.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651185465, 1653528029, 1, 'Fulano', 'de Tal', NULL, NULL),
-(10, '127.0.0.1', 'cicranodetal', '$2y$10$X.7BF9FNaLxGBiByutXMruQhA4yinC9Om/SdGXSdtPTpR9k2CebAi', 'cicrano@cicrano.com', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1651196948, NULL, 1, 'Cicrano', 'de Tal', NULL, '(00) 00000-0000'),
-(30, '127.0.0.1', 'LEILSON', '$2y$10$Ib/HNSSt6lBN01Hn9EUyMOvuyFHroHq693rMMpH7be/eIs9P8Vsqm', 'lei@gmail.com', 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1653604395, NULL, 1, 'LEILSON', 'FRANCELINO', NULL, '(16) 98131-4017');
+(1, '127.0.0.1', 'administrator', '$2y$12$68J1neG25LgjkJl.yf5YT.hG1OuQ0GQV71SqsoqJLHRrpOjRqKvHC', 'admin@admin.com', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1654041620, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(34, '127.0.0.1', 'Leilson', '$2y$10$1o25B0WHAxBZRfy.wHuSJ.O861hMnECYmu2M6lFNN2B31JSLIEita', 'leilsonf@gmail.com', 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1654041441, 1654041753, 1, 'Leilson', 'Francelino', NULL, '(16) 98131-4007');
 
 -- --------------------------------------------------------
 
@@ -563,7 +557,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
   KEY `fk_users_groups_users1_idx` (`user_id`),
   KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `users_groups`
@@ -571,10 +565,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (21, 1, 1),
-(18, 8, 1),
-(22, 9, 2),
-(23, 10, 2),
-(43, 30, 2);
+(50, 34, 2);
 
 --
 -- Constraints for dumped tables
