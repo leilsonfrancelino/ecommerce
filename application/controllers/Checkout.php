@@ -92,7 +92,7 @@ class Checkout extends CI_Controller {
                 $url_correios .= '&nVlAltura=' . $produto['produto_altura'];
                 $url_correios .= '&nVlLargura=' . $produto['produto_largura'];
                 $url_correios .= '&sCdMaoPropria=n';
-                $url_correios .= '&nVlValorDeclarado=' . $config_correios->config_valor_declarado;
+                $url_correios .= '&nVlValorDeclarado=0';
                 $url_correios .= '&sCdAvisoRecebimento=n';
                 $url_correios .= '&nCdServico=' . $config_correios->config_codigo_pac;
                 $url_correios .= '&nCdServico=' . $config_correios->config_codigo_sedex;
