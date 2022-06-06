@@ -1,5 +1,5 @@
   <!-- Begin Footer Area -->
-  <div class="footer mt-30">
+  <div class="footer mt-90">
                 <!-- Begin Footer Static Top Area -->
                 <div class="footer-static-top">
                     <div class="container">
@@ -72,7 +72,7 @@
                                 <!-- Begin Footer Logo Area -->
                                 <div class="col-lg-4 col-md-6">
                                     <div class="footer-logo">
-                                        <img src="<?php echo base_url('public/web/images/menu/logo/1.jpg')?>" alt="Footer Logo">
+                                        <img src="<?php echo base_url('public/web/images/menu/logo/logo.png')?>" alt="Footer Logo">
                                         <p class="info">
                                             We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
                                         </p>

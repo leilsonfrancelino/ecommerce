@@ -71,18 +71,21 @@
                                 <div class="coupon-all">
 
                                     <div class="coupon">
-                                        <input id="cep" class="input-text cep" name="cep" placeholder="CEP" type="text">
+                                       <!-- <input id="cep" class="input-text cep" name="cep" placeholder="CEP" type="text">
 
-                                        <button class="btn btn-info" id="btn-calcula-frete-carrinho" style="padding: 8.1px 17px; border-radius: 1px" type="button">Calcular frete</button>
+                                        <button class="btn btn-info" id="btn-calcula-frete-carrinho" style="padding: 8.1px 17px; border-radius: 1px" type="button">Calcular frete</button> -->
                                     </div>
                                     <div class="clearfix"></div>
 
                                     <div class="pt-10 text-info" id="retorno-frete">
 
                                     </div>
+									<div class="coupon2">
+                                        <a href="<?php echo base_url('checkout'); ?>" class="button"><input class="button" value="Finalizar compra"></a>
+                                    </div>
 
-                                    <div class="coupon2">
-                                        <a href="<?php echo base_url('carrinho'); ?>" class="button"><input class="button" value="Atualizar carrinho"></a>
+                                    <div class="coupon" style="text-align: left">
+                                        <a href="<?php echo base_url('/'); ?>" class="button" style="width:240px"><input class="button" value="Continuar Comprando"></a>
                                     </div>
 
                                 </div>
@@ -90,13 +93,13 @@
                             <div class="col-12">
                                 <div class="coupon-all">
                                     <div class="coupon" style="text-align: left">
-                                        <button class="btn btn-outline-info btn-limpa-carrinho" style="border-radius: 2px; font-weight: 700; cursor: pointer; height: 42px;">Limpar carrinho</button>
-                                    </div>
+                                   <!--     <button class="btn btn-outline-info btn-limpa-carrinho" style="border-radius: 2px; font-weight: 700; cursor: pointer; height: 42px;">Limpar carrinho</button> -->
+                                    </div> 
 
-                                </div>
+                                </div> 
                             </div>
                         </div>
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-md-5 ml-auto">
                                 <div class="cart-page-total">
                                     <h2>Total carrinho</h2>
@@ -107,7 +110,7 @@
                                     </ul>
                                     <a href="<?php echo base_url('checkout'); ?>">Finalizar compra</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>

@@ -265,14 +265,14 @@ class Carrinho extends CI_Controller
 
                     $valor_calculado = number_format($valor_calculado_original = $valor_formatado + $config_correios->config_somar_frete, 2);
 
-                    $valor_final_carrinho = $valor_total_produtos + $valor_calculado_original;
+                    $valor_final_carrinho = $valor_total_produtos + $valor_calculado;
 
 
                     //                    $frete_calculado .= '<p>' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . '&nbsp;R$&nbsp;' . $valor_calculado . ', <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis<p>';
 
                     $frete_calculado .= '<div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="' . $dados->Codigo . '" name="opcao_frete_carrinho" value="' . $valor_calculado . '" data-valor_frete="' . $valor_calculado . '" data-valor_final_carrinho = "' . number_format($valor_final_carrinho, 2) . '">
-                                            <label class="custom-control-label" for="' . $dados->Codigo . '"> ' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . ' &nbsp;R$&nbsp;' . $valor_calculado . '&nbsp;&nbsp;&nbsp; A partir de <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis após confirmação do pagamento</label>
+                                            <label class="custom-control-label" for="' . $dados->Codigo . '"> ' . ($dados->Codigo == '04510' ? 'PAC' : 'Sedex') . ' &nbsp;R$&nbsp;' . $valor_calculado . '&nbsp;-&nbsp; A partir de <span class="badge badge-primary py-0 pt-1">' . $dados->PrazoEntrega . '</span> dias úteis</label>
                                          </div>';
                 }
             }

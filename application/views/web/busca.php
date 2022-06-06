@@ -24,7 +24,7 @@
                 <div class="shop-products-wrapper">
                     <div class="tab-content">
                         <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
-                            <div class="product-area shop-product-area">
+                            <div class="product-area shop-product-area" style="margin-bottom: -120px">
                                 <div class="row">
 
                                     <?php if (isset($produtos)): ?>
@@ -63,7 +63,7 @@
                                                         </div>
                                                         <div class="add-actions">
                                                             <ul class="add-actions-link">
-                                                                <li class="add-cart active" style="text-align: center"><a href="<?php echo base_url('produto/' . $produto->produto_meta_link); ?>">Visualizar</a></li>
+                                                                <li class="add-cart active" style="text-align: center; float: none"><a href="<?php echo base_url('produto/' . $produto->produto_meta_link); ?>">Visualizar</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

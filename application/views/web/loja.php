@@ -105,7 +105,7 @@
 													</div>
 													<div class="add-actions">
 														<ul class="add-actions-link">
-															<li class="add-cart active"><a href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>">Visualizar</a></li>
+															<li class="add-cart active" style="float: none"><a href="<?php echo base_url('produto/'.$produto->produto_meta_link); ?>">Visualizar</a></li>
 														</ul>
 													</div>
 												</div>
