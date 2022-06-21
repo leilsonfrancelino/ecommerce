@@ -229,6 +229,11 @@
             </div>
             <!-- Footer Area End Here -->           
         </div>
+	<!-- Libras -->
+	 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+	  <script>
+		new window.VLibras.Widget('https://vlibras.gov.br/app');
+	  </script>
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
         <script src="<?php echo base_url('public/web/js/vendor/jquery-1.12.4.min.js')?>"></script>
